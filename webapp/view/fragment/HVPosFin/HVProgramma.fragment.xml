@@ -1,0 +1,74 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca Programma" contentHeight="90%">
+		<content>
+            <Table
+                growing="true"
+                selectionChange = "onConfirmSelectionPosFin($event,'Programma')"
+                mode="SingleSelectMaster"
+                growingScrollToLoad="true"
+                items="{path: 'modelPosFin>/formPosFin/programmi/', length: '2000', sorter: [{path: 'Missione', comparator: '.sorterHVDomSStr'},
+                                                                                            {path: 'Programma', comparator: '.sorterHVDomSStr'}]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                updateStarted="onUpdateStartedHVDomSStr"
+                updateFinished="onUpdateFinishedHVDomSStr"
+                busy="{modelPosFin>/busyHelp}"
+                busyIndicatorDelay="500"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="50%">
+                                <customData>
+                                    <c:CustomData key="programma" value="DescEstesaProgramma"/>
+                                    <c:CustomData key="programma" value="Programma"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                     <Column width="8rem">
+                            <Text text="Missione" />
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="Descr. Missione"/>
+                    </Column>
+                    <Column width="8rem">
+                        <Text text="Programma"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="Descr. Programma"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active">
+                        <cells>
+                            <Text text="{modelPosFin>Missione}"/>
+                            <Text text="{modelPosFin>DescEstesaMissione}"/>
+                            <Text text="{modelPosFin>Programma}"/>
+                            <Text text="{modelPosFin>DescEstesaProgramma}"/>
+                        </cells>
+                        <!-- <customData>
+                            <c:CustomData key="{homeModel>VALORE}" value="{homeModel>DESCRIZIONE}" writeToDom="false" />
+                        </customData> -->
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="PROGRAMMA" value="Programma" writeToDom="false" />
+                    <c:CustomData key="selezioni" value="programmi"/>
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+            <!-- <Button text="Seleziona" press="onConfirmSelectionPosFin" type="Emphasized">
+                <customData>
+                    <c:CustomData key="selezioni" value="Programma" writeToDom="false" />
+                </customData>
+            </Button> -->
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

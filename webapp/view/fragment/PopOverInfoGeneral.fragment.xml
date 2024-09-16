@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover title="{i18n>Info}"   xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+		<content>
+			<l:VerticalLayout class="sapUiSmallMargin">
+				<ObjectStatus title="{modelPosFin>/InfoPopoverTitle}" text="{modelPosFin>/InfoPopover}" class="textBold"/>
+			</l:VerticalLayout>
+		</content>
+		<!-- <footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer> -->
+		<!--<Image src="{ProductPicUrl}" width="15em" densityAware="false"/>-->
+	</Popover>
+</core:FragmentDefinition>

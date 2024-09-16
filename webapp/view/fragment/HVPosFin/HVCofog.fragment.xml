@@ -1,0 +1,71 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca C.O.F.O.G" contentHeight="90%" >
+		<content>
+            <Table
+                growing="true"
+                selectionChange = "onConfirmSelectionPosFin($event,'Cofog')"
+                mode="SingleSelectMaster"
+                growingScrollToLoad="true"
+                items="{path: 'modelPosFin>/detailAnagrafica/lista_cofog/', length: '5000', sorter: [{path: 'CofogL1', comparator: '.sorterHVDomSStr'},
+                                                                                                        {path: 'CofogL2', comparator: '.sorterHVDomSStr'},
+                                                                                                        {path: 'CofogL3', comparator: '.sorterHVDomSStr'}]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                updateStarted="onUpdateStartedHVDomSStr"
+                updateFinished="onUpdateFinishedHVDomSStr"
+                busy="{modelPosFin>/busyHelp}"
+                busyIndicatorDelay="500"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="50%" >
+                                <customData>
+                                    <c:CustomData key="cofog" value="Desc"/>
+                                    <c:CustomData key="cofog" value="CofogL3"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column  width="6rem">
+                        <Text text="{i18n>liv1}"/>
+                    </Column>
+                    <Column  width="12rem">
+                        <Text text="{i18n>liv2}"/>
+                    </Column>
+                    <Column  width="6rem">
+                        <Text text="{i18n>liv3}"/>
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>Descrizione}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active">
+                        <cells>          
+                            <Text text="{path: 'modelPosFin>CofogL1', formatter: '.formatZeroes'}"/>
+                            <Text text="{path: 'modelPosFin>CofogL2', formatter: '.formatZeroes'}"/>
+                            <Text text="{path: 'modelPosFin>CofogL3', formatter: '.formatZeroes'}"/>
+                            <Text text="{modelPosFin>Desc}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="selezioni" value="Cofog" writeToDom="false" />
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+            <!-- <Button text="Seleziona" press="onConfirmSelectionPosFin" type="Emphasized">
+                <customData>
+                        <c:CustomData key="selezioni" value="Cofog" writeToDom="false" />
+                </customData>
+            </Button> -->
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

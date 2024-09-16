@@ -1,0 +1,54 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        growing="true"
+        multiSelect="false"
+        noDataText=""
+        rememberSelections="false"
+        showClearButton="false"
+        title="Cerca"
+        items="{modelPosFin>/helpValuePg/}"
+        confirm="onPressChoiceTablePG"
+    >
+        <columns>
+            <Column width="8rem">
+                <Text text="Amm." />
+            </Column>
+            <Column width="12rem">
+                <Text text="Descr. Ammin."/>
+            </Column>
+            <Column  width="8rem">
+                <Text text="PG"/>
+            </Column>
+            <Column  width="12rem">
+                <Text text="Descr. Pg"/>
+            </Column>
+            <Column  width="8rem">
+                <Text text="Capitolo"/>
+            </Column>
+            <Column  width="12rem">
+                <Text text="Descr. Capitolo"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Active">
+                <cells>          
+                    <Text text="{modelPosFin>AMMINISTRAZIONE}"/>
+                    <Text text="{modelPosFin>DESCR_AMMINISTRAZIONE}"/>
+                    <Text text="{modelPosFin>PG}"/>
+                    <Text text="{modelPosFin>DESCR_PG}"/>
+                    <Text text="{modelPosFin>CAPITOLO}"/>
+                    <Text text="{modelPosFin>DESCR_CAPITOLO}"/>
+                </cells>
+                <!-- <customData>
+                    <c:CustomData key="{homeModel>VALORE}" value="{homeModel>DESCRIZIONE}" writeToDom="false" />
+                </customData> -->
+            </ColumnListItem>
+        </items>
+         <customData>
+            <c:CustomData key="PG" value="DESC_PG" writeToDom="false" />
+        </customData>
+    </TableSelectDialog>
+</c:FragmentDefinition>

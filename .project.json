@@ -1,0 +1,13 @@
+{
+  "deploy": {
+    "destination": "S2S",
+    "name": "Z_S4_GPOSFINNV"
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "",
+    "defaultLanguage": "",
+    "defaultI18NPropertyFile": "",
+    "resourceModelName": ""
+  }
+}

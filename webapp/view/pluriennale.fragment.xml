@@ -1,0 +1,75 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:uxap="sap.uxap">
+	<Dialog id="idTablePluri" title="{i18n>pluriennale}" contentWidth="50%" contentHeight="50%">
+		<content>
+			<!-- <VBox class="sapUiSmallMargin">
+				<RadioButton groupName="GroupA" text="Aggiungi singolo anno" selected="{modelPluri>/selectSing}"/>
+				<RadioButton groupName="GroupA" text="Aggiungi periodo" selected="{modelPluri>/selectPluri}"/>
+			</VBox> -->
+			<!-- <VBox class="sapUiSmallMargin" visible="{modelPluri>/selectSing}">
+				<f:SimpleForm id="simpleForm" editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+					adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+					singleContainerFullSize="false">
+					<f:content>
+						<core:Title text=""/>
+						<Label text="{i18n>Inserisci Anno}" required="true" class="boldCss"/>
+						<Input liveChange="liveChangeAnnoPluri($event, 'modelPluri', '4')" maxLength="4" type="Text"
+							value="{ path: 'modelPluri>/annoSing', formatter: '.formatter.formatterNumber' }"/>
+						<core:Title text=""/>
+						<Label text="{i18n>Importo}" required="true" class="boldCss"/>
+						<Input value="{modelPluri>/importo}" type="Text" textAlign="End"
+							change="liveChangeimportiPlur($event, '2', 'modelPluri', 'importo')"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox> -->
+			<VBox class="sapUiSmallMargin" visible="{modelPluri>/selectPluri}">
+				<Table id="idTableHomeFascicolo" inset="false" items="{modelPluri>/NAV_PLUR/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders"
+					growing="true" mode="None">
+					<headerToolbar>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button type="Emphasized" press="onPressAdd" icon="sap-icon://add"/>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="auto">
+							<Label text="" class="boldCss"/>
+						</Column>
+						<Column width="auto">
+							<Label text="Anno Dal" class="boldCss"/>
+						</Column>
+						<Column width="auto">
+							<Label text="Anno Al" class="boldCss"/>
+						</Column>
+						<Column width="auto">
+							<Label text="Ricorre ogni" class="boldCss"/>
+						</Column>
+						<Column width="auto" visible="{modelPluri>/visImporti}">
+							<Label text="Importo" class="boldCss"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Button type="Emphasized" press="onPressRemove" icon="sap-icon://delete"/>
+								<Input value="{ path: 'modelPluri>annoDal', formatter: '.formatter.formatterNumber' }" maxLength="4" type="Text"
+									liveChange="liveChangeAnnoPluri($event, 'modelPluri', '1')"/>
+								<Input liveChange="liveChangeAnnoPluri($event, 'modelPluri', '2')" 
+									value="{ path: 'modelPluri>annoAl', formatter: '.formatter.formatterNumber' }" maxLength="4" type="Text"/>
+								<Input liveChange="liveChangeAnnoPluri($event, 'modelPluri', '3')" maxLength="2" type="Text" 
+									value="{ path: 'modelPluri>ricorrenza', formatter: '.formatter.formatterNumber' }"/>
+								<Input value="{modelPluri>importo}" type="Text" textAlign="End" change="liveChangeimportiPlur($event, '1', 'modelPluri', 'importo')"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</content>
+		<beginButton>
+			<Button press='.onClosePluriennale($event, false)' type="Emphasized" text="{i18n>ok}"></Button>
+		</beginButton>
+		<endButton>
+			<Button press='.onClosePluriennale($event, true)' type="Emphasized" text="{i18n>close}"></Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

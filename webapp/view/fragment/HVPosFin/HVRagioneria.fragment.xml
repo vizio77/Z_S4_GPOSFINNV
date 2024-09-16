@@ -1,0 +1,87 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog
+    contentHeight="90%" 
+    draggable="false"
+    escapeHandler=""
+    horizontalScrolling="true"
+    icon=""
+    resizable="false"
+    showHeader="true"
+    state="None"
+    stretch="false"
+    title="Cerca Ragioneria"
+    type="Standard"
+    verticalScrolling="true"
+>
+    <content>
+     <Table
+                growing="true"
+                selectionChange = "onConfirmSelectionPosFin($event,'Ragioneria')"
+                mode="SingleSelectMaster"
+                growingScrollToLoad="true"
+                items="{path: 'modelPosFin>/formPosFin/ragionerie/', length: '5000', sorter: [{path: 'Prctr', comparator: '.sorterAmmByNumericCode'},
+                                                                                            {path: 'Ragioneria', comparator: '.sorterHVDomSStr'}
+                                                                                            ]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                updateStarted="onUpdateStartedHVDomSStr"
+                updateFinished="onUpdateFinishedHVDomSStr"
+                busy="{modelPosFin>/busyHelp}"
+                busyIndicatorDelay="500"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="50%">
+                                <customData>
+                                    <c:CustomData key="ragioneria" value="DescrEstesaRagioneria"/>
+                                    <c:CustomData key="ragioneria" value="Ragioneria"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column  width="6rem">
+                        <Text text="Amm."/>
+                    </Column>
+                    <Column  width="12rem">
+                        <Text text="Descr. Ammin."/>
+                    </Column>
+                    <Column  width="8rem">
+                        <Text text="Ragioneria"/>
+                    </Column>
+                    <Column  width="12rem">
+                        <Text text="Descr. Ragioneria"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active">
+                        <cells>
+                            <Text text="{modelPosFin>Prctr}"/>
+                            <Text text="{modelPosFin>DescrEstesaAmmin}"/>
+                            <Text text="{modelPosFin>Ragioneria}"/>
+                            <Text text="{modelPosFin>DescrEstesaRagioneria}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="AZIONE" value="Azione" writeToDom="false" />
+                    <c:CustomData key="selezioni" value="azioni" writeToDom="false" />
+                </customData>
+            </Table>
+    </content>
+    <customHeader>
+    </customHeader>
+    <buttons>
+        <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+        <!-- <Button text="Seleziona" press="onConfirmSelectionPosFin" type="Emphasized">
+            <customData>
+                <c:CustomData key="selezioni" value="Ragioneria" writeToDom="false" />
+            </customData>
+        </Button> -->
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

@@ -1,0 +1,88 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca C.E. 3" contentHeight="90%" >
+		<content>
+            <Table
+                growing="true"
+                selectionChange = "onConfirmSelectionPosFin($event,'Ce3')"
+                mode="SingleSelectMaster"
+                growingScrollToLoad="true"
+                items="{path: 'modelPosFin>/formPosFin/ce3/', length: '1000', sorter: [{path: 'Titolo', comparator: '.sorterHVDomSStr'},
+                                                                                                        {path: 'Categoria', comparator: '.sorterHVDomSStr'},
+                                                                                                        {path: 'Ce2', comparator: '.sorterHVDomSStr'},
+                                                                                                        {path: 'Ce3', comparator: '.sorterHVDomSStr'}]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                updateStarted="onUpdateStartedHVDomSStr"
+                updateFinished="onUpdateFinishedHVDomSStr"
+                busy="{modelPosFin>/busyHelp}"
+                busyIndicatorDelay="500"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="50%" >
+                                <customData>
+                                    <c:CustomData key="ce3" value="DescEstesaCe3"/>
+                                    <c:CustomData key="ce3" value="Ce3"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column  width="6rem">
+                        <Text text="{i18n>dom_titolo}"/>
+                    </Column>
+                    <Column  width="12rem">
+                        <Text text="{i18n>descr_titolo}"/>
+                    </Column>
+                    <Column  width="6rem">
+                        <Text text="{i18n>categoria}"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="{i18n>descrCategoria}"/>
+                    </Column>
+                    <Column width="6rem">
+                        <Text text="{i18n>ce}"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="{i18n>descrCe}"/>
+                    </Column>
+                    <Column width="4rem">
+                        <Text text="{i18n>ce3}" />
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="{i18n>descrCe3}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active">
+                        <cells>          
+                            <Text text="{modelPosFin>Titolo}"/>
+                            <Text text="{modelPosFin>DescEstesaTitolo}"/>
+                            <Text text="{modelPosFin>Categoria}"/>
+                            <Text text="{modelPosFin>DescEstesaCategoria}"/>
+                            <Text text="{modelPosFin>Ce2}"/>
+                            <Text text="{modelPosFin>DescEstesaCe2}"/>
+                            <Text text="{modelPosFin>Ce3}"/>
+                            <Text text="{modelPosFin>DescEstesaCe3}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="selezioni" value="economica3" writeToDom="false" />
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+            <!-- <Button text="{i18n>conf}" press="onConfirmSelectionPosFin" type="Emphasized">
+                <customData>
+                        <c:CustomData key="selezioni" value="Ce3" writeToDom="false" />
+                </customData>
+            </Button> -->
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

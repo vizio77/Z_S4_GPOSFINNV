@@ -1,0 +1,71 @@
+<mvc:View
+    controllerName="zsap.com.r3.cobi.s4.gestposfinnv.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:TooltipAutorizzazione="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+>
+    <Shell id="shell" appWidthLimited="false">
+        <App id="app">
+            <pages>
+                <Page id="page" showHeader="false">
+                    <content>
+                        <VBox class="sapUiSmallMargin" height="auto">
+                            <f:SimpleForm id="SimpleFormToolbar"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                labelSpanXL="4"
+                                labelSpanL="3"
+                                labelSpanM="4"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="4"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="2"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false"
+                                ariaLabelledBy="Title1"
+                                >
+                                <f:toolbar>
+                                    <Toolbar id="TB1">
+                                        <Title id="Title1" text="Scegli il Sottostrumento"/>
+                                        <ToolbarSpacer />
+                                        <!-- <Button icon="sap-icon://search" text="Avvio" type="Emphasized"/>
+                                        <Button icon="sap-icon://reset" text="Resetta"  type="Emphasized"/> -->
+                                    </Toolbar>
+                                </f:toolbar>
+                                <f:content>
+                                    <Label text=""/>
+                                    <Label text="Esercizio" />
+                                    <Text text="{modelHome>/formSottostrumento/esercizio}"/>
+                                    <Label text="Processo" />
+                                    <Text text="{modelHome>/formSottostrumento/processo}"/>
+                                    <Label text="Macro Fase" />
+                                    <Text text="{modelHome>/formSottostrumento/macroFase}"/>
+                                    <Label text="Strumento"/>
+									<Input value="{modelHome>/CodSTR}" showValueHelp="true" valueHelpRequest="onHelpValueStrumento"/>
+                                    <Label text="Sottostrumento"  />
+                                    <Input value="{modelHome>/Sottostrumento}" id="idSstr" showValueHelp="true" valueHelpRequest="onHelpValueSottoStrumento"/>
+                                    <!-- <Label text="Autorizzazione"  id="labelAuth" visible="{modelFilterHome>/visibleAuth}"/>
+                                    <Input value="{Street}" id="inputAuth" visible="{modelFilterHome>/visibleAuth}" showValueHelp="true" >
+                                    </Input> -->
+                                </f:content>
+                            </f:SimpleForm>
+                            <OverflowToolbar id="ddj" design="Transparent" >
+                                <ToolbarSpacer />
+                                <Button icon="sap-icon://reset" text="Resetta"  type="Emphasized" press="onResetSStr"/>
+                                <Button icon="sap-icon://search" text="{i18n>Avvio}" type="Emphasized" press="onNavigate"/>
+                            </OverflowToolbar>
+                        </VBox>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

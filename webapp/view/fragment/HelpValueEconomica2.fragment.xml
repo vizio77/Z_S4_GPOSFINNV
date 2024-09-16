@@ -1,0 +1,81 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca C.E. 2" contentHeight="90%" >
+		<content>
+            <Table
+                growing="true"
+                mode="MultiSelect"
+                growingScrollToLoad="true"
+                items="{path: 'modelHome>/formSottostrumento/economica2_set/', length: '1000', sorter: [{path: 'Titolo', comparator: '.sorterHVDomSStr'},
+                                                                                                        {path: 'Categoria', comparator: '.sorterHVDomSStr'},
+                                                                                                        {path: 'Ce2', comparator: '.sorterHVDomSStr'}]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                updateStarted="onUpdateStartedHVDomSStr"
+                updateFinished="onUpdateFinishedHVDomSStr"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchHVDomSStr" width="50%" >
+                                <customData>
+                                    <c:CustomData key="ce2" value="DescEstesaCe2"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <infoToolbar>
+                    <OverflowToolbar visible="{= ${modelHome>/formSottostrumento/economica2}.length > 0}">
+                        <Text text="{= 'Selezionati: ' + ${modelHome>/formSottostrumento/economica2}.length }" />
+                    </OverflowToolbar>
+                </infoToolbar>
+                <columns>
+                    <Column  width="6rem">
+                        <Text text="{i18n>dom_titolo}"/>
+                    </Column>
+                    <Column  width="12rem">
+                        <Text text="{i18n>descr_titolo}"/>
+                    </Column>
+                    <Column  width="6rem">
+                        <Text text="{i18n>categoria}"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="{i18n>descrCategoria}"/>
+                    </Column>
+                    <Column width="6rem">
+                        <Text text="{i18n>ce}"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="{i18n>descrCe}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active" selected="{ parts: [
+                                                {path: 'modelHome>Titolo'},
+                                                    {path:'modelHome>Categoria'},
+                                                    {path:'modelHome>Ce2'}
+                                                ], formatter: '.setSelectedCE2' 
+                                                }">
+                        <cells>          
+                            <Text text="{modelHome>Titolo}"/>
+                            <Text text="{modelHome>DescEstesaTitolo}"/>
+                            <Text text="{modelHome>Categoria}"/>
+                            <Text text="{modelHome>DescEstesaCategoria}"/>
+                            <Text text="{modelHome>Ce2}"/>
+                            <Text text="{modelHome>DescEstesaCe2}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="selezioni" value="economica2" writeToDom="false" />
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVDomSStr" type="Emphasized"/>
+            <Button text="{i18n>conf}" press="onConfirmSelectionDomSStr" type="Emphasized"/>
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

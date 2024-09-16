@@ -1,0 +1,130 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover  title="{modelTitle>/Title}" contentWidth="70%" class="sapUiContentPadding" placement="Auto"
+		xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+		<content>
+		<OverflowToolbar class="sapUiSmallMarginBottom" style="Clear">
+									<ToolbarSpacer/>
+									<!-- <Button text="{i18n>associaNuovaAuth}" type="Emphasized" press=".onNuovaAuth"/> -->
+									<!-- <Button text="{i18n>Esporta}" type="Emphasized" press="onExportQC(${modelTitle>/Title})"/> -->
+									<Button text="{i18n>Esporta}" type="Emphasized" press="exportExcelQuadro(${modelTitle>/Title}, ${modelTitle>/Type})"/>
+								
+								</OverflowToolbar>
+			<Table  inset="false" items="{modelTableQuadro>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+				<columns>
+					<Column width="40rem">
+						<Text text="" class="boldCss"/>
+					</Column>
+					<Column width="10rem" hAlign="Right">
+						<Text text="Competenza {labelQuadro>/annoCp1}" class="boldCss"/>
+					</Column>
+					<Column width="10rem" hAlign="Right">
+						<Text text="Competenza {labelQuadro>/annoCp2}" class="boldCss"/>
+					</Column>
+					<Column width="10rem" hAlign="Right">
+						<Text text="Competenza {labelQuadro>/annoCp3}" class="boldCss"/>
+					</Column>
+					<Column width="10rem" hAlign="Right" visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}">
+						<Text text="Cassa {labelQuadro>/annoCp1}" class="boldCss"/>
+					</Column>
+					<Column width="10rem" hAlign="Right">
+						<Text text="Cassa {labelQuadro>/annoCp2}" visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}" class="boldCss"/>
+					</Column>
+					<Column width="10rem" hAlign="Right">
+						<Text text="Cassa {labelQuadro>/annoCp3}" visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}" class="boldCss"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem ><!-- id="idColumnListItemsYearQuadro" -->
+						<cells>
+							<!-- 						 
+							<Text text="{modelTableQuadro>ViewLabel}"  class="{= ${modelTableQuadro>FlagGriglia} === 'BOLD' ? 'boldCss' : ''}{= ${modelTableQuadro>FlagGriglia} === 'ALIGNR_RIGHT' ? 'sapUiMediumMarginBegin' : ''}">
+														
+													</Text> -->
+							<VBox>
+								<Text text="{modelTableQuadro>ViewLabel}" visible="{= ${modelTableQuadro>FlagGriglia} === 'BOLD' ? true : false}" class="boldCss"></Text>
+								<Text text="{modelTableQuadro>ViewLabel}" visible="{= ${modelTableQuadro>FlagGriglia} === 'ALIGNR_RIGHT' ? true : false}"
+									class="sapUiMediumMarginBegin"/>
+								<Text text="{modelTableQuadro>ViewLabel}" visible="{= ${modelTableQuadro>FlagGriglia} === 'CHILD' ? true : false}" class="sapUiLargeMarginBegin boldAndSmallCss"/>
+								<Text text="{modelTableQuadro>ViewLabel}" visible="{= ${modelTableQuadro>FlagGriglia} === '' ? true : false}"/>
+								<!-- <Text text="{modelTableCassa>ViewLabel}"  class="{= ${modelTableCassa>FlagGriglia} === 'BOLD' ? boldCss' : ''}{= ${modelTableCassa>FlagGriglia} === 'ALIGNR_RIGHT' ? 'sapUiMediumMarginBegin' : ''}"> -->
+								<!-- </Text> -->
+							</VBox>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno001}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno002}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno003}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno001}"  visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno002}"  visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno003}"  visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}"></Text>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			<Table items="{path:'modelTableQuadroDal>/', filters: [{path:'RecordType',operator: 'EQ',value1:'CP'}]}">
+				<headerToolbar>
+					<OverflowToolbar>
+						<content>
+							<Title text="{i18n>StanzPluriComp}" level="H4"/>
+							<ToolbarSpacer />
+						</content>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="19%" hAlign="Right">
+						<Label text="{i18n>AnnoDa}" design="Bold"/>
+					</Column>
+					<Column width="19%" hAlign="Right">
+						<Label text="{i18n>AnnoAL}" design="Bold"/>
+					</Column>
+					<Column width="22%" hAlign="Right">
+						<Label text="" design="Bold"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem >
+						<cells>
+							<Text text="{modelTableQuadroDal>YearLow}"/>
+							<Text text="{modelTableQuadroDal>YearHigh}"/>
+							<Text text="{modelTableQuadroDal>Importo}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			<Table items="{path:'modelTableQuadroDalCs>/', filters: [{path:'RecordType',operator: 'EQ',value1:'CS'}]}" visible="{modelTitle>/DalAlCs}">
+				<headerToolbar>
+					<OverflowToolbar>
+						<content>
+							<Title text="{i18n>StanzPluriCassa}" level="H4"/>
+							<ToolbarSpacer />
+						</content>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="19%" hAlign="Right">
+						<Label text="{i18n>AnnoDa}" design="Bold"/>
+					</Column>
+					<Column width="19%" hAlign="Right">
+						<Label text="{i18n>AnnoAL}" design="Bold"/>
+					</Column>
+					<Column width="22%" hAlign="Right">
+						<Label text="" design="Bold"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem >
+						<cells>
+							<Text text="{modelTableQuadroDalCs>YearLow}"/>
+							<Text text="{modelTableQuadroDalCs>YearHigh}"/>
+							<Text text="{modelTableQuadroDalCs>Importo}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer>
+		<!--<Image src="{ProductPicUrl}" width="15em" densityAware="false"/>-->
+	</Popover>
+</core:FragmentDefinition>

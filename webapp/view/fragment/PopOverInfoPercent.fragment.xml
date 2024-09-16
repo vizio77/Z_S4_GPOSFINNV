@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" >
+	<Popover showHeader="false" class="sapUiContentPadding" placement="Left" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" busy="{modelStabilizzate>/busy}" busyIndicatorDelay="100">
+		<content>
+			<Text text="Percentuale S/E"></Text>
+		</content>
+	</Popover>
+</core:FragmentDefinition>

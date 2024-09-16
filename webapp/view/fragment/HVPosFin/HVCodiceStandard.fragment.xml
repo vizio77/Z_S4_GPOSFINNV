@@ -1,0 +1,67 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca Codice Standard" contentHeight="90%">
+		<content>
+            <Table
+                growing="true"
+                selectionChange = "onConfirmSelectionPosFin($event,'null')"
+                mode="SingleSelectMaster"
+                growingScrollToLoad="true"
+                items="{path: 'modelPosFin>/formPosFin/codiceStandard/', length: '5000', sorter: [
+                                                                                            {path: 'CodiceStd', comparator: '.sorterHVDomSStr'}
+                                                                                            ]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="50%">
+                                <customData>
+                                    <c:CustomData key="codestd" value="DescEstesa"/>
+                                    <c:CustomData key="codestd" value="CodiceStd"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column  width="6rem">
+                        <Text text="Codice Standard"/>
+                    </Column>
+                    <Column  width="12rem">
+                        <Text text="Denominazione Ridotta"/>
+                    </Column>
+                    <Column  width="12rem">
+                        <Text text="Denominazione Integrale"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active">
+                        <cells>
+                            <Text text="{modelPosFin>CodiceStd}"/>
+                            <Text text="{modelPosFin>DescBreve}"/>
+                            <Text text="{modelPosFin>DescEstesa}"/>
+                        </cells>
+                        <!-- <customData>
+                            <c:CustomData key="{homeModel>VALORE}" value="{homeModel>DESCRIZIONE}" writeToDom="false" />
+                        </customData> -->
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="AZIONE" value="Azione" writeToDom="false" />
+                    <c:CustomData key="selezioni" value="azioni" writeToDom="false" />
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+            <!-- <Button text="Seleziona" press="onConfirmSelectionPosFin" type="Emphasized">
+                <customData>
+                    <c:CustomData key="selezioni" value="{modelPosFin>/CodStd_HV}" writeToDom="false" />
+                </customData>
+            </Button> -->
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

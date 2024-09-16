@@ -1,0 +1,326 @@
+/* Enter your custom styles here */
+.textBold>.sapMObjStatusTitle {
+    padding-right: .25rem !important;
+    font-weight: bold !important;
+}
+
+/* Enter your custom styles here */
+
+.textBold>.sapMObjStatusTitle {
+    padding-right: .25rem !important;
+    font-weight: bold !important;
+}
+
+.noMarginTest>.sapMPanelContent {
+    padding: 0rem;
+    box-sizing: border-box;
+    overflow: auto;
+    white-space: normal;
+}
+
+.inLineLink {
+    color: #0070b1;
+    text-decoration: none;
+    display: revert;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.PageCss.sapUiContentPadding>section {
+    padding: 0rem;
+    box-sizing: border-box;
+}
+
+[data-colour="coloreTestoRed"] {
+    font-size: 0.875rem !important;
+    ;
+    font-weight: bold !important;
+    /*color: #a01616 !important;*/
+    /*font-weight: normal !important;*/
+    ;
+}
+
+[data-colour="coloreTestoDefault"] {
+    font-size: 0.875rem !important;
+    ;
+    color: #333333 !important;
+    font-weight: normal !important;
+    ;
+}
+
+tr[data-background="Disponibilità Amministrazione"] {
+    background-color: #e5e5e5 !Important;
+}
+
+tr[data-backgroundCassa="Disponibilità Amministrazione"] {
+    background-color: #e5e5e5 !Important;
+}
+
+.colorIconBlue {
+    color: #2668ab;
+}
+
+.cell_Color {
+    background-color: #e3effa;
+}
+
+.sapUxAPObjectPageHeaderContent .sapUiHLayoutChildWrapper,
+.textInLine>.sapUxAPObjectPageHeaderSeparatorContainer .sapUiHLayoutChildWrapper,
+.sapUxAPObjectPageHeaderContent>.sapUxAPObjectPageHeaderWidthContainer .sapUiHLayoutChildWrapper {
+    min-height: 0rem !important;
+    min-width: 0rem !important;
+}
+
+.showTextAll .sapMITBText {
+    display: inline;
+    max-height: 3rem;
+    max-width: 4rem;
+    overflow: initial !Important;
+    text-align: left;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: normal;
+    width: auto;
+    color: #333333;
+    text-shadow: 0 0 0.125rem #ffffff;
+}
+
+.boldCss {
+    font-weight: bold !important;
+    color: #32363B;
+}
+
+
+/*.iconColorYellow {*/
+
+
+/*    background-color: yellow;*/
+
+
+/*}*/
+
+.iconColorYellow {
+    /*color: crimson;*/
+    color: burlywood;
+}
+
+.icon-favorite{
+	color:burlywood;
+}
+
+
+.sapUiMedia-Std-Desktop .sapUxAPObjectPageHeaderContent.noMarginLeftUxap {
+    padding-left: 1rem;
+}
+
+.sapFDynamicPageContent, .sapFDynamicPageContentFitContainer {
+    position: relative;
+    padding: 0rem 0rem 0rem 0rem !important;
+}
+
+
+/* Enter your custom styles here */
+
+.textBold>.sapMObjStatusTitle {
+    padding-right: .25rem !important;
+    font-weight: bold !important;
+}
+
+.noMarginTest>.sapMPanelContent {
+    padding: 0rem;
+    box-sizing: border-box;
+    overflow: auto;
+    white-space: normal;
+}
+
+.inLineLink {
+    color: #0070b1;
+    text-decoration: none;
+    display: revert;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.PageCss.sapUiContentPadding>section {
+    padding: 0rem;
+    box-sizing: border-box;
+}
+
+[data-colour="coloreTestoRed"] {
+    font-size: 0.875rem !important;
+    ;
+    font-weight: bold !important;
+    /*color: #a01616 !important;*/
+    /*font-weight: normal !important;*/
+    ;
+}
+
+[data-colour="coloreTestoDefault"] {
+    font-size: 0.875rem !important;
+    ;
+    color: #333333 !important;
+    font-weight: normal !important;
+    ;
+}
+
+tr[data-background="Disponibilità Amministrazione"] {
+    background-color: #e5e5e5 !Important;
+}
+
+tr[data-backgroundCassa="Disponibilità Amministrazione"] {
+    background-color: #e5e5e5 !Important;
+}
+
+.colorIconBlue {
+    color: #2668ab;
+}
+
+.cell_Color {
+    background-color: #e3effa;
+}
+
+.sapUxAPObjectPageHeaderContent .sapUiHLayoutChildWrapper,
+.textInLine>.sapUxAPObjectPageHeaderSeparatorContainer .sapUiHLayoutChildWrapper,
+.sapUxAPObjectPageHeaderContent>.sapUxAPObjectPageHeaderWidthContainer .sapUiHLayoutChildWrapper {
+    min-height: 0rem !important;
+    min-width: 0rem !important;
+}
+
+.showTextAll .sapMITBText {
+    display: inline;
+    max-height: 3rem;
+    max-width: 4rem;
+    overflow: initial !Important;
+    text-align: left;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: normal;
+    width: auto;
+    color: #333333;
+    text-shadow: 0 0 0.125rem #ffffff;
+}
+
+.boldCss {
+    font-weight: bold !important;
+}
+.boldAndSmallCss {
+    font-weight: bold !important;
+    font-size: 12px !important;
+}
+
+
+/*.iconColorYellow {*/
+
+
+/*    background-color: yellow;*/
+
+
+/*}*/
+
+.iconColorYellow {
+    /*color: crimson;*/
+    color: burlywood;
+}
+
+.icon-favorite{
+	color:burlywood;
+}
+
+
+.sapUiMedia-Std-Desktop .sapUxAPObjectPageHeaderContent.noMarginLeftUxap {
+    padding-left: 1rem;
+}
+
+.esercizioClass {
+    width: 5rem !important;
+}
+
+/* div[id=__container5--Grid] .sapUiRespGridMedia-Std-LargeDesktop.sapUiRespGridHSpace0>.sapUiRespGridSpanXL2{
+    width: 0% !important;
+}
+
+div[id=__container5--Grid] > div.sapUiRespGridSpanInvisible{
+    width: 0% !important;
+}
+div[id=__container6--Grid] > div.sapUiRespGridSpanInvisible{
+    width: 0% !important;
+} */
+
+/* div[id=__layout11] > div:first-child {
+    flex-basis: 1rem !important; 
+    max-width: 6rem !important;
+} */
+
+.sapMITBFilter .sapMITBText {
+    width: auto !important;
+}
+.stileEsercizio > div:first-child > div:first-child > div:first-child {
+	flex-basis: 1rem !important;
+    max-width: 6rem !important;
+}
+.marginHeaderSStr > header {
+    margin-left: 11.5rem !important;
+}
+
+.textBold>.sapMObjStatusTitle {
+    padding-right: .25rem !important;
+    font-weight: bold !important;
+}
+  
+h6[data-required="true"]::before { 
+    content: "*" !important;
+    color: #ce3b3b !important;
+    font-family: "72","72full",Arial,Helvetica,sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    position: relative !important;
+    vertical-align: middle !important;
+    line-height: 0 !important;
+}
+div[data-requiredSpan="true"]>span::before {
+    content: "*" !important;
+    color: #ce3b3b !important;
+    font-family: "72","72full",Arial,Helvetica,sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    position: relative !important;
+    vertical-align: middle !important;
+    line-height: 0 !important;
+}
+
+.descrPrimaColonna {
+    font-weight: bold !important;
+}
+
+span[data-asterisco="true"]::before  {
+    content: "*" !important;
+    color: #ce3b3b !important;
+    font-family: "72","72full",Arial,Helvetica,sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: bold !important;
+    position: relative !important;
+    vertical-align: middle !important;
+    line-height: 0 !important;
+}
+
+div[data-percentuale="Spesa"] > div:nth-child(2) > span::after  {
+    content: "%" !important;
+    color: black !important;
+    position: relative !important;
+    vertical-align: middle !important;
+    line-height: 0 !important;
+}
+
+div[data-bold="anno"] > div:nth-child(2) > span {
+    font-weight: bold !important;
+}

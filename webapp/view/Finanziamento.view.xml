@@ -1,0 +1,113 @@
+<mvc:View controllerName="zsap.com.r3.cobi.s4.gestposfinnv.controller.Finanziamento" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:semantic="sap.f.semantic" xmlns:layout="sap.ui.layout" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form"
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:card="sap.f.cards"
+	xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	xmlns:commons="sap.suite.ui.commons" busyIndicatorDelay="0">
+	<App id="app">
+		<f:DynamicPage id="dynamicPageId" showFooter="true" preserveHeaderStateOnScroll="true">
+			<!-- <f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title> -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true" >
+					<f:content>
+						<FlexBox alignItems="Start" justifyContent="SpaceBetween" >
+							<FlexBox >
+								<items>
+									<VBox visible="true" class="sapUiTinyMarginBegin">
+										<HBox >
+											<Text text="{i18n>Esercizio}" class="boldCss"/>
+											<Text text="{modelPosFin>/infoSottoStrumento/AnnoSstr}" class="sapUiTinyMarginBegin"/>
+										</HBox>
+										<HBox>
+											<Text text="{i18n>Sottostrumento}" class="boldCss"/>
+											<Link text="{modelPosFin>/Sottostrumento}" press="onExpandPopOverSottostrumento" class="sapUiTinyMarginBegin"/>
+										</HBox>
+									</VBox>
+									<VBox visible="true" class="sapUiTinyMarginBegin">
+										<HBox >
+											<Text text="{i18n>MacroFase}" class="boldCss"/>
+											<Text text="{globalModel>/STAT_FASE}" class="sapUiTinyMarginBegin"/>
+										</HBox>
+										<HBox visible="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} !== '7'}">
+											<Text text="{i18n>dettStruttAmmCentr}"  class="boldCss"/>
+											<Link text="{modelPosFin>/strutturaAmminCentrale/Codifica_rep_sar}" press="onExpandPopOverDettStruttCentr" class="sapUiTinyMarginBegin"/>
+										</HBox>
+									</VBox>
+								</items>
+							</FlexBox>
+							<FlexBox >
+								<items>
+									<Button text="{i18n>pulsanteHome}" press="onNavToHome" type="Emphasized"/>
+								</items>
+							</FlexBox>
+						</FlexBox>
+				<f:GridContainer class="sapUiSmallMarginTop" width="100%">
+									<f:layout>
+										<f:GridContainerSettings rowSize="60px" columnSize="66px" gap="6px"/>
+									</f:layout>
+									<f:layoutXS>
+										<f:GridContainerSettings rowSize="60px" columnSize="66px" gap="6px"/>
+									</f:layoutXS>
+									<VBox class="sapUiSmallMarginBegin">
+										<Label text="Autorizzazione:" labelFor="idAuthComp" required="true"/>
+										<Input value="{modelPosFin>/Finanziamento/Amministrazione/DescrizioneAmministrazioneLunga}" showValueHelp="true" valueHelpRequest=".onPressRicercaAuth" id="idAuthComp"
+											valueHelpOnly="true"></Input>
+										<layoutData>
+											<f:GridContainerItemLayoutData minRows="1" columns="8"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<HBox >
+											<VBox  class="sapUiNoMarginTop">
+												<Label text="" />
+												<TooltipAutorizzazioneBtn:TooltipAutorizzazioneBtn class="sapUiTinyMarginBegin" icon="sap-icon://hint" type="Emphasized" id="InputAutorizzazioniBtn"
+													Fincode="{modelPosFin>/Finanziamento/Amministrazione/Fincode}" Fikrs="S001"/>
+											</VBox>
+											<layoutData>
+												<f:GridContainerItemLayoutData minRows="1" columns="1"/>
+											</layoutData>
+										</HBox>
+									</VBox>
+									<VBox visible="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} !== '7'}"  class="sapUiTinyMarginBegin">
+										<Label required="true" text="{i18n>PosFinShort}" labelFor="idAuthAssComp"/>
+										<Input value="{modelPosFin>/posFinHelp/posFin/CodificaRepPf}" showValueHelp="true" valueHelpRequest=".onValueHelpPosFinList"
+											id="idAuthAssComp" valueHelpOnly="true" enabled="{= ${modelPosFin>/Finanziamento/Amministrazione/DescrizioneAmministrazioneLunga}.length > 0 }"></Input>
+										<layoutData>
+											<f:GridContainerItemLayoutData minRows="1" columns="8"/>
+										</layoutData>
+									</VBox>
+									<VBox visible="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} !== '7'}">
+										<HBox>
+											<VBox  class="sapUiNoMarginTop">
+												<Label text="" />
+												<Button icon="sap-icon://hint" type="Emphasized" tooltip="{i18n>visGruppoStab}" press="onExpandPopOverPosFin"/>
+											</VBox>
+											<layoutData>
+												<f:GridContainerItemLayoutData minRows="1" columns="1"/>
+											</layoutData>
+										</HBox>
+									</VBox>
+									<VBox>
+										<HBox>
+											<VBox  class="sapUiNoMarginTop">
+												<Label text="" />
+												<HBox>
+													<Button text="{i18n>resetta}" enabled="{= ${modelPosFin>/Finanziamento/Amministrazione/DescrizioneAmministrazioneLunga}.length > 0 }" press="onPressResetForm" type="Emphasized" class="sapUiSmallMarginEnd"/>
+													<Button text="{i18n>Avvia}" enabled="{= ${modelPosFin>/posFinHelp/posFin/Fipex}.length > 0 || (${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '7' &amp;&amp; ${modelPosFin>/Finanziamento/Amministrazione/DescrizioneAmministrazioneLunga}.lenght > 0) }" press="onPressNavToDetailPosFinFinanziamento" type="Emphasized"/>		
+												</HBox>
+											</VBox>
+											</HBox>	
+									</VBox>
+								</f:GridContainer>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+			</f:content>
+		</f:DynamicPage>
+	</App>
+</mvc:View>

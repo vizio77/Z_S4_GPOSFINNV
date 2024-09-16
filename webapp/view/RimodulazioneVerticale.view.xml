@@ -1,0 +1,155 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:m="sap.m" xmlns="sap.uxap" xmlns:l="sap.ui.layout"
+	xmlns:TooltipAutorizzazione="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	controllerName="zsap.com.r3.cobi.s4.gestposfinnv.controller.RimodulazioneVerticale" xmlns:html="http://www.w3.org/1999/xhtml">
+	<ObjectPageLayout id="idPageCreaRimodulazioneVerticale" upperCaseAnchorBar="false" useIconTabBar="true" headerContentPinnable="true"
+		showFooter="true">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<expandedHeading>
+					<m:Title text="{i18n>rimodulazioniVert}"/>
+				</expandedHeading>
+				<snappedHeading>
+						<l:HorizontalLayout class="sapUiSmallMarginBeginEnd">									
+									<m:Label class="sapUiTinyMarginBeginEnd" text="{i18n>Sottostrumento}:"/>
+									<m:Link text="{modelPosFin>/Sottostrumento}" press="onExpandPopOverSottostrumento"/>
+									<m:Label class="sapUiTinyMarginBeginEnd" text="{i18n>Anno}:"/>
+									<m:Input  editable="false" type="Number" value="{modelRimVerticali>/Anno}" required="true" liveChange="onSetAnnoRimVert"></m:Input>
+						</l:HorizontalLayout>
+					</snappedHeading>
+					<expandedContent></expandedContent>
+					<snappedTitleOnMobile>
+						<m:Title text="{i18n>title} > {i18n>Cassa}"/>
+					</snappedTitleOnMobile>
+					<actions>
+					</actions>
+				</ObjectPageDynamicHeaderTitle>
+			</headerTitle>
+			<headerContent>
+				<m:HBox class="sapUiTinyMarginTopBottom">
+					<l:VerticalLayout width="20em" >
+						<m:HBox>
+							<m:VBox class="sapUiTinyMarginEnd">
+								<m:Label text="{i18n>Sottostrumento}:"/>
+								<!-- <m:Input value="{modelPosFin>/Sottostrumento}" width="12em" editable="false" required="true" /> -->
+								<m:Link text="{modelPosFin>/Sottostrumento}" press="onExpandPopOverSottostrumento"/>
+
+							</m:VBox>
+						</m:HBox>
+					</l:VerticalLayout>
+					<l:VerticalLayout width="8em" class="sapUiSmallMarginEnd" visible="true">
+						<m:HBox>
+							<m:VBox>
+								<m:Label text="{i18n>Anno}:"/>
+								<m:Input id="idAnnoCreaRV" editable="true" type="Number" value="{modelRimVerticali>/Anno}"
+									required="true" liveChange="onSetAnnoRimVert"></m:Input>
+							</m:VBox>
+						</m:HBox>
+					</l:VerticalLayout>
+					<l:VerticalLayout width="14em" class="sapUiSmallMarginEnd">
+						<m:Label text=""/>
+						<m:Button id="idBtnScegliPosFin" text="{i18n>ScegliPosFin}" enabled="{= ${modelRimVerticali>/visibleRiceCede} === true &amp;&amp; ${modelRimVerticali>/disableModificaRicerca} === false }" type="Emphasized" press="onPressScegliCedRic"/>
+					</l:VerticalLayout>
+					<!-- <m:VBox width="20em" class="sapUiMediumMarginEnd sapUiNoMarginTopBottom"></m:VBox>
+					<m:VBox class="sapUiTinyMarginEnd sapUiTinyMarginTopBottom">
+						<m:IconTabBar applyContentPadding="true" id="iconTabBar5" class="sapUiResponsiveContentPadding" headerBackgroundDesign="Transparent"
+							expanded="false" tabDensityMode="Inherit">
+							<m:items>
+								<m:IconTabFilter key="info" text="{i18n>RV}" icon="sap-icon://hint" tooltip="{i18n>RimodVertEsistente}"
+									iconColor="{= ${modelTableRV>/Stato}.toUpperCase() === 'CHIUSA' ? 'Negative' : 'Positive'}">
+									<m:Text id="idRimodVertEsistenteIcon" text="{= ${modelTableRV>/Stato}.toUpperCase() === 'NO' ? ${modelTableRV>/Stato}.toUpperCase() : 'SI'}"/>
+								</m:IconTabFilter>
+								<m:IconTabSeparator icon=""/>
+								<m:IconTabFilter key="Anni" icon="sap-icon://calendar" text="{i18n>Anni}" iconColor="Default" tooltip="{i18n>DettAnniRV}"
+									count="{= ${modelTableRV>/Plurianno} === '' ? 0 : ${modelTableRV>/NumAnni}}">
+									<m:Text text="{= ${modelTableRV>/Plurianno} === '' ? 'Non sono coinvolti più anni.' : ${modelTableRV>/Plurianno}}" wrapping="true"/>
+								</m:IconTabFilter>
+							</m:items>
+						</m:IconTabBar>
+					</m:VBox> -->
+				</m:HBox>
+				<m:VBox class="sapUiTinyMarginTopBottom">
+					<m:Table id="idTableCreaRV" inset="false" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" growing="true" growingThreshold="10"
+						visible="true" items="{modelRimVerticali>/tablePosFinRicCed/}">
+						<m:columns>
+							<m:Column id="colSA" width="auto" demandPopin="true" vAlign="Middle" >
+								<m:Text text="{i18n>struttAmmCentr}"  class="boldCss"/>
+							</m:Column>
+							<m:Column id="colPF" width="auto" demandPopin="true" vAlign="Middle" >
+								<m:Text text="{i18n>posFin}"  class="boldCss"/>
+							</m:Column>
+							<m:Column id="colAut" visible="true" width="auto" demandPopin="true" vAlign="Middle">
+								<m:Text text="{i18n>Autorizzazione}"  class="boldCss"/>
+							</m:Column>
+							<m:Column id="colCedRic" visible="true" width="auto" demandPopin="true" vAlign="Middle">
+								<m:Text text="{i18n>CedenteRicevente}"  class="boldCss"/>
+							</m:Column>
+							<!-- <m:Column id="colElimina" width="auto" demandPopin="true" vAlign="Middle">
+								<m:Text text="" tooltip=""  class="boldCss"/>
+							</m:Column> -->
+						</m:columns>
+						<m:items>
+							<m:ColumnListItem>
+								<m:cells>
+										<m:Link text="{modelRimVerticali>StrAmmResp/Codifica_rep_sar}" press="onExpandPopOverDettStruttCentr"/>
+											<m:FlexBox width="65%" alignItems="Center" justifyContent="SpaceBetween">
+												<m:items>
+													<m:Link text="{modelRimVerticali>CodificaRepPf}" press="onExpandPopOverPosFin"/>
+														<m:Button icon="sap-icon://inspection" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>capitolo}"  press="openquadroCont('CAP',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},'' )" visible="true" >
+                              <m:customData>
+                                <core:CustomData key="from" value="capitolo" writeToDom="true"/>
+                              </m:customData>
+                            </m:Button>
+                            <m:Button icon="sap-icon://detail-view" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>posFin}"  press="openquadroCont('PF',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},'')" visible="true">
+                              <m:customData>
+                                <core:CustomData key="from" value="posfin" writeToDom="true"/>
+                                  </m:customData>
+                            </m:Button>
+												</m:items>
+											</m:FlexBox>
+											<m:FlexBox  width="80%" alignItems="Center" justifyContent="SpaceBetween"> 
+                        <m:items><!-- class="sapUiSmallMarginEnd" -->
+													<TooltipAutorizzazione:TooltipAutorizzazione  text="{= ${modelRimVerticali>ZzdescrEstesaFm} ? ${modelRimVerticali>ZzdescrEstesaFm} : 'NULL'}"
+													Fincode="{modelRimVerticali>IdAutorizzazione}" Fikrs="S001" espDescrizione=""/>
+													<m:Button icon="sap-icon://approvals" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>codingBlock}" press="openquadroCont('FN',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},${modelRimVerticali>IdAutorizzazione})" visible="true">
+														<m:customData>
+																<core:CustomData key="from" value="autorizzazione" writeToDom="true"/>
+														</m:customData>
+													</m:Button>
+											</m:items>
+										</m:FlexBox>
+										<m:Text text="{modelRimVerticali>CedeRice}"/>
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+					</m:Table>
+				</m:VBox>
+				<m:OverflowToolbar style="Clear" class="sapUiTinyMargin">
+					<m:ToolbarSpacer/>
+					<m:Button id="idBtnResetta" type="Emphasized" text="{i18n>Resetta}" press="onPressResetta"/>
+					<m:ToggleButton id="idBtnOnOffTable" visible="false" pressed="true" type="Emphasized" text="{i18n>OnOffTable}" press="onPressOnOffTable"/>
+					<m:Button id="idBtnAvvio" type="Emphasized" text="{i18n>Avvio}" press="onPressAvvioSac"/>
+				</m:OverflowToolbar>
+			</headerContent>
+			<sections>
+				<ObjectPageSection titleUppercase="true" title="" showTitle="false">
+					<subSections>
+						
+						<ObjectPageSubSection class="sapUxAPObjectPageSubSectionFitContainer">
+							<blocks>
+								<core:Fragment fragmentName="zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.IconTab.RimVerticaliBody" type="XML"/>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+			</sections>
+			<!-- <footer>
+				<m:OverflowToolbar>
+				<m:ToolbarSpacer/>
+				<m:Button id="idBtnGestisciIdRV" type="Emphasized" text="{i18n>Crea} {i18n>Proposta}" press="onPressNavToCreaId"/>
+				<m:Button type="Emphasized" text="{i18n>Indietro}" press="onNavBack"/>
+				<m:Button type="Emphasized" text="{i18n>Home}" press="onPressNavToHome"/>
+			</m:OverflowToolbar>
+		</footer> -->
+			
+		</ObjectPageLayout>
+</mvc:View>

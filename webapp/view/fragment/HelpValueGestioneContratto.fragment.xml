@@ -1,0 +1,35 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <SelectDialog
+        contentWidth=""
+        contentHeight="60%"
+        noDataText=""
+        rememberSelections="false"
+        showClearButton="false"
+        title="Cerca"
+        cancel="onCancelFragment"
+        items="{modelPosFin>/helpValueGestioneContratto/}"
+        confirm="onPressChoiceStandardlist"
+    >
+        <items>
+            <StandardListItem
+                activeIcon=""
+                adaptTitleSize="true"
+                description="{modelPosFin>DESCRIZIONE}"
+                icon=""
+                iconDensityAware="true"
+                iconInset="true"
+                info=""
+                infoState="None"
+                infoTextDirection="Inherit"
+                title="{modelPosFin>VALORE}"
+                titleTextDirection="Inherit"
+            />
+        </items>
+        <customData>
+            <c:CustomData key="GEST_CONTRATTO" value="DESCRIZIONE_GEST_CONTRATTO" writeToDom="false" />
+        </customData>
+    </SelectDialog>
+</c:FragmentDefinition>

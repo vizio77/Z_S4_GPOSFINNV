@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZSS4_COBI_ALV_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Gest_PosFin_SH_Tipologia" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="StatFase"/>
+                    <PropertyRef Name="TipoSstr"/>
+                </Key>
+                <Property Name="StatFase" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoSstr" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NomeTipoSstr" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Gest_fasi_fasi" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Anno"/>
+                    <PropertyRef Name="Fase"/>
+                    <PropertyRef Name="StatFase"/>
+                </Key>
+                <Property Name="Anno" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Anno" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fase" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatFase" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescFase" Type="Edm.String" MaxLength="250" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DataDal" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DataAl" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Date" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagStatus" Type="Edm.Byte" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagPrimaApertura" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Gest_fasi_fasi_amm" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Anno"/>
+                    <PropertyRef Name="Fase"/>
+                    <PropertyRef Name="Amministrazione"/>
+                    <PropertyRef Name="AmmEseAnnoEse"/>
+                </Key>
+                <Property Name="Anno" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Anno" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fase" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Amministrazione" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Profit Center" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AmmEseAnnoEse" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescBreve" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescEstesa" Type="Edm.String" MaxLength="250" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagLegVig01" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagPropAmm01" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagPropUcb01" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagPropIgb01" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagRevIgb01" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagSezione101" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Gest_fasi_updfasi" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Anno"/>
+                    <PropertyRef Name="Fase"/>
+                    <PropertyRef Name="StatFase"/>
+                </Key>
+                <Property Name="Anno" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Anno" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fase" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StatFase" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagApritutte" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FlagChiuditutte" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Gest_PosFin_Sottostrumento" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="IdSstr"/>
+                    <PropertyRef Name="Fase"/>
+                    <PropertyRef Name="Dateto"/>
+                    <PropertyRef Name="Scenario"/>
+                    <PropertyRef Name="Configurazione"/>
+                </Key>
+                <Property Name="IdSstr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Fase" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Dateto" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Valid to" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Scenario" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="CAN: Data Element Scenario" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Configurazione" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Data Element Conf" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Datefrom" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Valid From" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="FkEseStrAnnoEse" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="FkStrAttNumeTipo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="FkStrNumeNum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="EseAnnoEse" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Fiscal Year" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="AttNumeTipo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="NumeNum" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="StatStatus" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="StatEsposizione" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="IdSstrOrigine" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DatetoOrigine" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Valid to" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ScenarioOrigine" Type="Edm.String" Nullable="false" MaxLength="15" sap:unicode="false" sap:label="CAN: Data Element Scenario" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Stato" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="CAN: Data Element Stato" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="TestoTipoStr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="TestoTipo" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DescrEstesa" Type="Edm.String" Nullable="false" MaxLength="1333" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="Gest_PosFin_SH_Amministrazioni" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Fikrs"/>
+                    <PropertyRef Name="Anno"/>
+                    <PropertyRef Name="Fase"/>
+                    <PropertyRef Name="Reale"/>
+                    <PropertyRef Name="Versione"/>
+                    <PropertyRef Name="Prctr"/>
+                    <PropertyRef Name="Datbis"/>
+                </Key>
+                <Property Name="Fikrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Anno" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Anno" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Fase" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Reale" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Versione" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Prctr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Datbis" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescrBreve" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DescrEstesa" Type="Edm.String" MaxLength="250" sap:unicode="false" sap:creatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZSS4_COBI_ALV_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Gest_PosFin_SH_TipologiaSet" EntityType="ZSS4_COBI_ALV_SRV.Gest_PosFin_SH_Tipologia" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Gest_fasi_fasiSet" EntityType="ZSS4_COBI_ALV_SRV.Gest_fasi_fasi" sap:creatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Gest_fasi_fasi_ammSet" EntityType="ZSS4_COBI_ALV_SRV.Gest_fasi_fasi_amm" sap:creatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Gest_fasi_updfasiSet" EntityType="ZSS4_COBI_ALV_SRV.Gest_fasi_updfasi" sap:creatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Gest_PosFin_SottostrumentoSet" EntityType="ZSS4_COBI_ALV_SRV.Gest_PosFin_Sottostrumento" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Gest_PosFin_SH_AmministrazioniSet" EntityType="ZSS4_COBI_ALV_SRV.Gest_PosFin_SH_Amministrazioni" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="http://l2vs2slass01.mef.gov.it:8000/sap/opu/odata/sap/ZSS4_COBI_ALV_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://l2vs2slass01.mef.gov.it:8000/sap/opu/odata/sap/ZSS4_COBI_ALV_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

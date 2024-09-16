@@ -1,0 +1,127 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+	<Popover  resizable="true" title="{i18n>auth}" class="sapUiContentPadding"
+		placement="Bottom" modal="false" contentWidth="80%">
+		<content>
+			<l:VerticalLayout width="100%" class="sapUiTinyMargin">
+                <HBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Tipo}:" labelFor="idTipoPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/Tipo}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Numero}:" labelFor="idNumeroPopUp" />
+                        <Input value="{modelRimVerticali>/infoAuth/Numero}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Anno}:" labelFor="idAnnoPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/FinCodeAnno}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Articolo}:" labelFor="idArticoloPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/Articolo}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>SubArticolo}:" labelFor="idSubArticoloPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/DescSubArticolo}" editable="false"/>
+                    </VBox>
+                     <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Comma}:" labelFor="idCommaPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/Comma}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>SubComma}:" labelFor="idSubCommaPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/DescSubComma}" editable="false"/>
+                    </VBox>
+                </HBox>
+            </l:VerticalLayout>
+            <l:VerticalLayout width="100%" class="sapUiTinyMargin">
+                <HBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Lettera}:" labelFor="idPuntoPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/Punto}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Sublett}:" labelFor="idSubPuntoPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/DescSubPunto}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>NumeroLettera}:" labelFor="idPuntoPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/NumeroLettera}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>NumeroSubLettera}:" labelFor="idSubPuntoPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/DescSubLettera}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Classificaz}:" labelFor="idClassificazPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/DescClassificazione}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Nickname}:" labelFor="idClassificazPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/DescNickname}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>TipoAut}:" labelFor="idTipoAutPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/Tipologia}" editable="false"/>
+                    </VBox>
+                </HBox>
+            </l:VerticalLayout>
+            <l:VerticalLayout width="100%" class="sapUiTinyMargin">
+                <Label design="Bold" text="{i18n>Descrizione}:" labelFor="idDescrizionePopUp"/>
+                <TextArea value="{= ${modelRimVerticali>/infoAuth/DescEstesa} ? ${modelRimVerticali>/infoAuth/DescEstesa} : ${modelRimVerticali>/infoAuth/DescrizioneCompatta}}" width="90%" editable="false"/>
+            </l:VerticalLayout>
+            <l:VerticalLayout width="100%" class="sapUiTinyMargin">
+                <HBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Attivazione}:" labelFor="idAttivazionePopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/Attivazione}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>Scadenza}:" labelFor="idScadenzaPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/Scadenza}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>TutteLeAmmin}:" labelFor="idTutteLeAmminPopUp"/>
+                        <CheckBox selected="{modelRimVerticali>/infoAuth/AllPrctr}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>AmmPertinenza}:" labelFor="idAmmPertinenzaPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/AmminCompetenza}" editable="false"/>
+                    </VBox>
+                </HBox>
+            </l:VerticalLayout>
+            <l:VerticalLayout width="100%" class="sapUiTinyMargin">
+                <HBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>TipoNaturaSpesa}:" labelFor="idTipoNaturaSpesaPopUp"/>
+                        <Input value="{modelRimVerticali>/infoAuth/DescNaturaSpesaAuth}" editable="false"/>
+                    </VBox>
+                </HBox>
+            </l:VerticalLayout>
+            <l:VerticalLayout width="100%" class="sapUiTinyMargin">
+                <HBox>
+                    <VBox class="sapUiTinyMarginEnd">
+                        <Label design="Bold" text="{i18n>SpesaPluriennale}:" labelFor="idSpesaPluriennalePopUp"/>
+                        <CheckBox  editable="false" selected="{modelRimVerticali>/infoAuth/IndicatoreSpesaPlur}"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label design="Bold" text="{i18n>SpesaPermanente}:" labelFor="idSpesaPermanentePopUp"/>
+                        <CheckBox selected="{modelRimVerticali>/infoAuth/ZzflagPermanente}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label design="Bold" text="{i18n>IndicatoreAPS}:" labelFor="idSpesaPermanentePopUp"/>
+                        <CheckBox selected="{modelRimVerticali>/infoAuth/IndicatoreAPS}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label design="Bold" text="{i18n>finalizzata}:" labelFor="idSpesaPermanentePopUp"/>
+                        <CheckBox selected="{modelRimVerticali>/infoAuth/IndFinalizzata}" editable="false"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label design="Bold" text="{i18n>stabilizzata}:" labelFor="idSpesaPermanentePopUp"/>
+                        <CheckBox selected="{modelRimVerticali>/infoAuth/IndStabilizzata}" editable="false"/>
+                    </VBox>
+                </HBox>
+            </l:VerticalLayout>
+		</content>
+	</Popover>
+</core:FragmentDefinition>

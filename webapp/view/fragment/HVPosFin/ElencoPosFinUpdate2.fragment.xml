@@ -1,0 +1,33 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog
+    draggable="true"
+    escapeHandler=""
+    horizontalScrolling="true"
+    icon="sap-icon://message-warning"
+    resizable="false"
+    showHeader="true"
+    state="Warning"
+    stretch="false"
+    title="Attenzione"
+    type="Message"
+    verticalScrolling="true"
+>   
+    <Title text="{modelPosFin>/messageToSave}" class="sapUiMediumMarginBottom"/>
+    <List visible="{modelPosFin>/listViewVisible}"
+		id="posFinUpdate"
+		items="{modelPosFin>/posFinUpdate/}">
+		<items>
+			<CustomListItem class="sapUiTinyMarginBottom">
+                <Text text="{modelPosFin>CODIFICA_REP_PF}"/>
+            </CustomListItem>
+		</items>
+	</List>
+    <buttons>
+        <Button text="Annulla" press="onAnnullaFromUtente" type="Emphasized" visible="{modelPosFin>/AnnullaVisible}"/>
+        <Button text="Ok" press="onOkFromUtente" type="Emphasized"/>
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

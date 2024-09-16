@@ -1,0 +1,489 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="zsap.com.r3.cobi.s4.gestposfinnv.controller.HomePosFin" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:semantic="sap.f.semantic"
+	xmlns:layout="sap.ui.layout" xmlns:f="sap.f" xmlns:fb="sap.ui.comp.filterbar" xmlns:ui="sap.ui.table"
+	xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls">
+	<!-- <App id="app"> -->
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" showFooter="true" preserveHeaderStateOnScroll="true" >
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					<FlexBox > 
+						<items>
+							<Text text="{i18n>Esercizio}" class="boldCss"/>
+							<Text text="{modelPosFin>/esercizio}" class="sapUiTinyMarginBeginEnd"/>
+							<Text text="{i18n>Processo}" class="boldCss"/>
+							<Text text="{globalModel>/DDTEXT}" class="sapUiTinyMarginBeginEnd"/>
+							<Text text="{i18n>MacroFase}" class="boldCss"/>
+							<Text text="{globalModel>/STAT_FASE}" class="sapUiTinyMarginBeginEnd"/>
+							<Text text="{i18n>Sottostrumento}" class="boldCss"/>
+							<Link text="{modelPosFin>/Sottostrumento}" press="onExpandPopOverSottostrumento" class="sapUiTinyMarginBeginEnd"/>
+							
+						</items>
+					</FlexBox> 
+					<FlexBox justifyContent="End">
+						<items>
+							<Button text="{i18n>pulsanteHome}" press="onNavToHome" type="Emphasized"/>
+						</items>
+					</FlexBox>
+					<fb:FilterBar  id="filterbar" reset="onReset" search="onPressAvvio($oEvent, false)" useToolbar="false" filtersDialogBeforeOpen="onAdattaFiltriOpened"
+						 showFilterConfiguration="true"  showRestoreButton="true" showClearButton="true" showClearOnFB="true" clear="onReset">
+						<fb:filterGroupItems >
+						<!-- Visibili all'init -->
+							<!-- <fb:FilterGroupItem groupName="Essential" name="A" groupTitle="{i18n>Essential}" partOfCurrentVariant="true" label="{i18n>Esercizio}"
+							visibleInFilterBar="true">
+								<fb:control>
+									<Input class="esercizioClass" width="20%" id="idEserGestione" value="{modelPosFin>/esercizio}" editable="false" textAlign="Center"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem mandatory="true" groupName="Essential" groupTitle="{i18n>Essential}" id="filtroSottostrumento" name="A1" label="{i18n>Sottostrumento}"
+								visibleInFilterBar="true">
+								<fb:control>
+									<Input value="{modelPosFin>/Sottostrumento}" width="50%" showValueHelp="false" required="false"  editable="false" />
+								</fb:control>
+							</fb:FilterGroupItem> -->
+							<fb:FilterGroupItem mandatory="false" groupName="Essential" groupTitle="{i18n>ricercaStru}" id="filtrofilterBarPosFin" name="test" label="{i18n>posFin}"
+								visibleInFilterBar="true">
+								<fb:control>
+									<!-- <zcontrol:InputPosizioneFinanziaria id="filterBarPosFin" width="50%" semanticObject="ESAMINAMODIFICA" maxSuggestionWidth="60%"/> -->
+									<Input value="{modelPosFin>/posFinHelp/posFin/CodificaRepPf}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onPosFin"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Adatta Filtri -->
+							<!-- Amministrazione -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" name="A" label="{i18n>Amministrazione}" partOfCurrentVariant="true" visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idAmmFraa" value="{modelPosFin>/adatta_filtri/AmministrazioneDesc}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVAmmin" />
+											<core:CustomData key="Prctr" value="{modelPosFin>/adatta_filtri/Prctr}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Capitolo -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroCapitolo" name="B" label="{i18n>Capitolo}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idCapitolo" value="{modelPosFin>/adatta_filtri/CapitoloDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVCapitolo" />
+											<core:CustomData key="Capitolo" value="{modelPosFin>/adatta_filtri/Capitolo}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- PG -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroPg" name="C" label="{i18n>Pg}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idPg" value="{modelPosFin>/adatta_filtri/PgDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVPgChoice" />
+											<core:CustomData key="Pg" value="{modelPosFin>/adatta_filtri/Pg}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- CdR -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroCdR" name="E" label="{i18n>Cdr}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idCdR" value="{modelPosFin>/adatta_filtri/CdrDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVCdr" />
+											<core:CustomData key="Cdr" value="{modelPosFin>/adatta_filtri/Cdr}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Ragioneria -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroRagioneria" name="F" label="{i18n>ragioneria}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idRagioneria" value="{modelPosFin>/adatta_filtri/RagioneriaDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVRagioneria" />
+											<core:CustomData key="Cdr" value="{modelPosFin>/adatta_filtri/Ragioneria}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Missione -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroMissione" name="G" label="{i18n>mission}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idMissione" value="{modelPosFin>/adatta_filtri/MissioneDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVMissione" />
+											<core:CustomData key="Missione" value="{modelPosFin>/adatta_filtri/Missione}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Programma -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroProgramma" name="H" label="{i18n>programma}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idProgramma" value="{modelPosFin>/adatta_filtri/ProgrammaDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVProgramma" />
+											<core:CustomData key="Missione" value="{modelPosFin>/adatta_filtri/Programma}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Azione -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroAzione" name="I" label="{i18n>azione}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idAzione" value="{modelPosFin>/adatta_filtri/AzioneDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVAzione" />
+											<core:CustomData key="Missione" value="{modelPosFin>/adatta_filtri/Azione}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Titolo -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroTitolo" name="L" label="{i18n>dom_titolo}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idTitolo" value="{modelPosFin>/adatta_filtri/TitoloDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVTitolo" />
+											<core:CustomData key="Titolo" value="{modelPosFin>/adatta_filtri/Titolo}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Categoria -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroCategoria" name="M" label="{i18n>categoria}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idCategoria" value="{modelPosFin>/adatta_filtri/CategoriaDesc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVCategoria" />
+											<core:CustomData key="Categoria" value="{modelPosFin>/adatta_filtri/Categoria}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- CE2 -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroCE2" name="N" label="{i18n>ce}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idCE2" value="{modelPosFin>/adatta_filtri/Ce2Desc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVCe2" />
+											<core:CustomData key="Ce2" value="{modelPosFin>/adatta_filtri/Ce2}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- CE3 -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroCE3" name="O" label="{i18n>ce3}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idCE3" value="{modelPosFin>/adatta_filtri/Ce3Desc}" width="50%" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVAdattaFiltri">
+										<customData>
+											<core:CustomData key="adatta_filtri" value="HVCe3" />
+											<core:CustomData key="Ce3" value="{modelPosFin>/adatta_filtri/Ce3}"/>
+										</customData>
+									</Input>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Tipo spesa del capitolo -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroTipoSpesaCap" name="P" label="{i18n>tipoSpesaCap}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Select width="auto" selectedKey="{modelPosFin>/adatta_filtri/tipoSpesaCapitolo}" 
+											items="{path: 'sapHanaS2>/TipoSpesaSet/', filters: [{ path: 'CapitoloPg', operator: 'EQ', value1: 'C' }]}">
+										<core:Item key="{sapHanaS2>CodiceTipoSpesa}" text="{sapHanaS2>DescTipoSpesa}" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Capitolo per Memoria -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroCapitoloPerMemoria" name="Q" label="{i18n>capitoloPerMemoria}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<!-- <Input id="idCapitoloPerMemoria" value="{modelFilterHome>/CapitoloPerMemoria}" width="50%"/> -->
+									<CheckBox selected="{modelPosFin>/adatta_filtri/Memoria}" editable="true"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Cedolino unico -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroCedolinoUnicoSiNo" name="R" label="{i18n>CedolinoUnicoSiNo}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<!-- <Input id="idCedolinoUnicoSiNo" value="{modelFilterHome>/CedolinoUnicoSiNo}" width="50%"/> -->
+									<Select width="auto" selectedKey="{modelPosFin>/adatta_filtri/CedolinoUnicoSiNo}">
+										<core:Item key="" text="" />
+										<core:Item key="0" text="No" />
+										<core:Item key="1" text="Sì" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- IRAP SI/NO -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroIRAPSINO" name="S" label="{i18n>irapSiNo}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<!-- <Input id="idIrapSiNo" value="{modelFilterHome>/IrapSiNo}" width="50%"/> -->
+									<Select width="auto" selectedKey="{modelPosFin>/adatta_filtri/IrapSiNo}">
+										<core:Item key="" text="" />
+										<core:Item key="0" text="No" />
+										<core:Item key="2" text="Sì" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Tcr lettera C -->
+							<!-- <fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroTcrC" name="T" label="{i18n>TcrC}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idTcrC" value="{modelFilterHome>/TcrC}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroTcrF" name="U" label="{i18n>TcrF}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idTcrF" value="{modelFilterHome>/TcrF}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem> -->
+							<!-- Denominazione del capitolo -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroDenCapitolo" name="V" label="{i18n>DenCapitolo}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idDenCapitolo" value="{modelPosFin>/adatta_filtri/DenCapitolo}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- COFOG -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroCOFOG" name="Z" label="{i18n>COFOG}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idCOFOG" value="{modelFilterHome>/COFOG}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Tipo spesa del pg -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtrotipoSpesaPG" name="AA" label="{i18n>tipoSpesaPG}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Select width="auto" selectedKey="{modelPosFin>/adatta_filtri/TipoSpesaPg}"
+											items="{path: 'sapHanaS2>/TipoSpesaSet/', filters: [{ path: 'CapitoloPg', operator: 'EQ', value1: 'P' }]}">
+										<core:Item key="{sapHanaS2>CodiceTipoSpesa}" text="{sapHanaS2>DescTipoSpesa}" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Denominazione del pg -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroDenPG" name="AB" label="{i18n>DenPG}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idDenPG" value="{modelPosFin>/adatta_filtri/DenPG}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- FO-FP -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroFOFP" name="AC" label="{i18n>FOFP}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idFOFP" value="{modelPosFin>/adatta_filtri/FOFP}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- APS -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroAPS" name="AD" label="{i18n>APS}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idAPS" value="{modelFilterHome>/APS}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Bilancio di genere -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroBilancioDiGenere" name="AE" label="{i18n>BilancioDiGenere}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idBilancioDiGenere" value="{modelFilterHome>/BilancioDiGenere}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Ecobilancio -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroEcobilancio" name="AF" label="{i18n>Ecobilancio}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<Input id="idEcobilancio" value="{modelFilterHome>/Ecobilancio}" width="50%"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<!-- Tipo Fondo  -->
+							<fb:FilterGroupItem groupName="posFin" groupTitle="{i18n>labelPosFin}" id="filtroTipoFondo" name="AG" label="{i18n>TipoFondo}"  partOfCurrentVariant="true"
+								visibleInFilterBar="false">
+								<fb:control>
+									<!-- <Input id="idTipoFondo" value="{modelFilterHome>/TipoFondo}" width="50%"/> -->
+									<Select width="auto" selectedKey="{modelPosFin>/adatta_filtri/TipoSpesaPg}" forceSelection="false"
+											items="{path: 'sapHanaS2>/TipoFondoSet/'}">
+										<core:Item key="{sapHanaS2>CodiceTipoFondo}" text="{sapHanaS2>DescEstesa}" />
+									</Select>
+								</fb:control>
+							</fb:FilterGroupItem>
+						</fb:filterGroupItems>
+					</fb:FilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+		<VBox height="92%">
+			<OverflowToolbar class="sapUiSmallMargin">
+				<content>
+					<ToolbarSpacer/>					
+					<Button icon="sap-icon://excel-attachment" press="exportListaPosFinExcel" text="Esporta" type="Emphasized"/>
+					<!-- <Button text="{i18n>gestisciPosFin}" icon="sap-icon://display" type="Emphasized" press="navToDetail"/> -->
+				</content>
+			</OverflowToolbar>
+			<ScrollContainer
+							height="100%"
+							width="100%"
+							vertical="true"
+							horizontal="true"
+							focusable="false">
+				<Table id="idTableRisultatiRicerca" updateFinished="onUpdateFinished" inset="false" items="{path: 'modelHomePosFin>/tablePosFin/', sorter: [{path: 'Ammin', comparator: '.sorterHVDomSStr'},
+																		 												  {path: 'Capitolo', comparator: '.sorterHVDomSStr'},
+																														  {path: 'Pg', comparator: '.sorterHVDomSStr'}
+																														 ]}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders"
+					growingThreshold="10" itemPress="navToDetail" growing="true">
+					<headerToolbar>
+						<!-- <OverflowToolbar>
+							<content>
+								<ToolbarSpacer/>
+								
+								<Button text="{i18n>gestisciPosFin}" icon="sap-icon://display" type="Emphasized" press="navToDetail"/>
+							</content>
+						</OverflowToolbar> -->
+					</headerToolbar>
+					<columns>
+						<Column  width="20em" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>labelPosFin}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="8rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>Amministrazione}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="15rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>descAmm}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>mission}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="12rem">
+							<header>
+								<Text text="{i18n>descrMissione}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="8rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>programma}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="12rem">
+							<header>
+								<Text text="{i18n>descrProgramma}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>azione}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="12rem">
+							<header>
+								<Text text="{i18n>descrAzione}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>Capitolo}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="20rem">
+							<header>
+								<Text text="{i18n>descrCapitolo}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>Pg}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="12rem">
+							<header>
+								<Text text="{i18n>descrPg}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="5rem">
+							<header>
+								<Text text="{i18n>categoria}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="12rem">
+							<header>
+								<Text text="{i18n>descrCategoria}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>ce}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="12rem">
+							<header>
+								<Text text="{i18n>descrCe}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>ce3}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="12rem">
+							<header>
+								<Text text="{i18n>descrCe3}" class="boldCss"/>
+							</header>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle" type="Active">
+							<cells>
+									<Text text="{modelHomePosFin>CodificaRepPf}"/>
+									<Text text="{modelHomePosFin>Prctr}"/>
+									<Text text="{modelHomePosFin>DescAmmin}"/>
+									<Text text="{modelHomePosFin>Missione}"/>
+									<Text text="{modelHomePosFin>DescMissione}"/>
+									<Text text="{modelHomePosFin>Programma}"/>
+									<Text text="{modelHomePosFin>DescProgramma}"/>
+									<Text text="{modelHomePosFin>Azione}"/>
+									<Text text="{modelHomePosFin>DescAzione}"/>
+									<Text text="{modelHomePosFin>Capitolo}"/>
+									<Text text="{modelHomePosFin>DescCapitolo}"/>
+									<Text text="{modelHomePosFin>Pg}"/>
+									<Text text="{modelHomePosFin>DescPg}"/>
+									<Text text="{modelHomePosFin>Categoria}"/>
+									<Text text="{modelHomePosFin>DescCategoria}"/>
+									<Text text="{modelHomePosFin>Ce2}"/>
+									<Text text="{modelHomePosFin>DescCe2}"/>
+									<Text text="{modelHomePosFin>Ce3}"/>
+									<Text text="{modelHomePosFin>DescCe3}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				</ScrollContainer>
+			</VBox>
+		</f:content>
+		<f:footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button text="{i18n>rimodulazioniVert}" type="Emphasized" visible="{= ${modelPosFin>/infoSottoStrumento/StatEsposizione} === '8'}"/>
+				<!-- <Button text="{i18n>creaPosFin}" press="onCreaPosFin" type="Emphasized"/> -->
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+<!-- </App> -->
+</mvc:View>

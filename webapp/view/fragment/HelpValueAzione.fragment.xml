@@ -1,0 +1,95 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca Azione" contentHeight="90%">
+		<content>
+            <Table
+                growing="true"
+                mode="MultiSelect"
+                growingScrollToLoad="true"
+                items="{path: 'modelHome>/formSottostrumento/azione_set/', length: '1000', sorter: [{path: 'Prctr', comparator: '.sorterAmmByNumericCode'},
+                                                                                                    {path: 'Missione', comparator: '.sorterHVDomSStr'},
+                                                                                                    {path: 'Programma', comparator: '.sorterHVDomSStr'},
+                                                                                                    {path: 'Azione', comparator: '.sorterHVDomSStr'}]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                updateStarted="onUpdateStartedHVDomSStr"
+                updateFinished="onUpdateFinishedHVDomSStr"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchHVDomSStr" width="65%">
+                                <customData>
+                                    <c:CustomData key="azione" value="DescEstesaAzione"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <infoToolbar>
+                    <OverflowToolbar visible="{= ${modelHome>/formSottostrumento/azioni}.length > 0}">
+                        <Text text="{= 'Selezionati: ' + ${modelHome>/formSottostrumento/azioni}.length }" />
+                    </OverflowToolbar>
+                </infoToolbar>
+                <columns>
+                    <Column  width="6rem">
+                        <Text text="Amm."/>
+                    </Column>
+                    <Column  width="12rem">
+                        <Text text="Descr. Ammin."/>
+                    </Column>
+                    <Column  width="6rem">
+                        <Text text="Missione"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="Desc. Missione"/>
+                    </Column>
+                    <Column  width="6rem">
+                        <Text text="Programma"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="Desc. Programma"/>
+                    </Column>
+                    <Column width="4rem">
+                        <Text text="Azione" />
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="Descr. Azione"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active" selected="{ parts: [
+                                                {path: 'modelHome>Azione'},
+                                                    {path:'modelHome>Prctr'},
+                                                    {path:'modelHome>Missione'}, 
+                                                {path:'modelHome>Programma'}
+                                                ], formatter: '.setSelectedAzioni' 
+                                                }">
+                        <cells>
+                            <Text text="{modelHome>Prctr}"/>
+                            <Text text="{modelHome>DescEstesaPrctr}"/>
+                            <Text text="{modelHome>Missione}"/>
+                            <Text text="{modelHome>DescEstesaMissione}"/>
+                            <Text text="{modelHome>Programma}"/>
+                            <Text text="{modelHome>DescEstesaProgramma}"/>
+                            <Text text="{modelHome>Azione}"/>
+                            <Text text="{modelHome>DescEstesaAzione}"/>
+                        </cells>
+                        <!-- <customData>
+                            <c:CustomData key="{homeModel>VALORE}" value="{homeModel>DESCRIZIONE}" writeToDom="false" />
+                        </customData> -->
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="AZIONE" value="Azione" writeToDom="false" />
+                    <c:CustomData key="selezioni" value="azioni" writeToDom="false" />
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVDomSStr" type="Emphasized"/>
+            <Button text="{i18n>conf}" press="onConfirmSelectionDomSStr" type="Emphasized"/>
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover title="{modelPosFin>/Sottostrumento}" class="sapUiContentPadding" placement="Bottom" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+		<content>
+			<l:VerticalLayout class="sapUiSmallMargin">
+				<ObjectStatus title="{i18n>TipoSottoStr}" text="{modelPosFin>/infoSottoStrumento/DescTipoSstr}" class="textBold"/>
+				<ObjectStatus title="{i18n>Sottostrumento}" text="{modelPosFin>/infoSottoStrumento/NumeroSstr}" class="textBold"/>
+				<ObjectStatus title="{i18n>AnnoFaseSottoStr}" text="{modelPosFin>/infoSottoStrumento/AnnoSstr}" class="textBold"/>
+				<ObjectStatus title="{i18n>DescrSottostrumento}" text="{modelPosFin>/infoSottoStrumento/DescEstesa}" class="textBold"/>
+				<ObjectStatus title="{i18n>Stato}" text="{= ${modelPosFin>/infoSottoStrumento/StatoSstr} === '1' ? 'Aperto' : 'Chiuso'}" class="textBold"/>
+				<ObjectStatus title="{i18n>Visibilita}" text="{= ${modelPosFin>/infoSottoStrumento/Reale} === 'R' ? 'Bilancio' : 'Simulato'}" class="textBold"/>
+				<ObjectStatus title="{i18n>EspContabile}" text="{modelPosFin>/infoSottoStrumento/DescTipoEsposizione}"  class="textBold"/>
+			</l:VerticalLayout>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer>
+		<!--<Image src="{ProductPicUrl}" width="15em" densityAware="false"/>-->
+	</Popover>
+</core:FragmentDefinition>

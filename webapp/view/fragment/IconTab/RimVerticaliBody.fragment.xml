@@ -1,0 +1,83 @@
+<core:FragmentDefinition
+xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+<ScrollContainer vertical="true" height="100%">
+<Panel visible="{modelVisibility>/panel}">
+  <headerToolbar>
+    <Toolbar>
+      <Title level="H2" text="Importo Totale:" />
+      <core:Icon width="auto" src="{= ${modelRimVert>/CheckDiff} === true ? 'sap-icon://sys-enter-2' : 'sap-icon://circle-task-2'}"
+							color="{= ${modelRimVert>/CheckDiff} === true ? '#6dad2f' : '#f20c0c'}" tooltip="Status" class="sapUiNoMarginBottom"/>
+      <!-- <core:Icon width="auto" src="{= ${interventoTableModel>DATA/to_PosizioniDettaglio/results}.length !== 0 ? 'sap-icon://sys-enter-2' : '' }"
+							color="{= ${interventoTableModel>DATA/to_PosizioniDettaglio/results}.length !== 0 ? '#427cac' : '' }" tooltip="Dettagli"/> -->
+      <Title level="H3" text="{modelRimVert>/DiffFormatted}" />
+      
+    </Toolbar>
+  </headerToolbar>  
+  <Table  inset="false" items="{modelRimVert>/Cedente}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" class="sapUiLargeMarginTopBottom">
+    <columns>
+      <Column width="40rem">
+        <Text text="Posizione Finanziaria" class="boldCss"/>
+      </Column>
+      <Column width="40rem">
+        <Text text="Autorizzazione" class="boldCss"/>
+      </Column>
+      <Column width="10rem">
+        <Text text="Cedente" class="boldCss"/>
+      </Column>
+      <Column hAlign="End" width="auto">
+        <Text text="" class="boldCss"/>
+      </Column>
+    </columns>
+    <items>
+      <ColumnListItem>
+        <cells>
+          <Text text="{modelRimVert>CodificaRepPf}" class="boldCss"></Text>
+          <Text text="{modelRimVert>ZzdescrEstesaFm}" class="sapUiMediumMarginBegin"/>
+          <Input value="{modelRimVert>ValCedente}"  class="sapUiMediumMarginBegin" textAlign="End" change=".liveChangeimportiVert($event ,'modelRimVert', 'ValCedente', '')"/>
+          <Button icon="sap-icon://delete" tooltip="Resetta i Valori" type="Emphasized" press=".resetValue($event, 'modelRimVert', 'ValCedente')" />
+        </cells>
+      </ColumnListItem>
+    </items>
+  </Table>
+  <Table  inset="false" items="{modelRimVert>/Riceventi}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" class="sapUiLargeMarginTopBottom">
+    <columns>
+      <Column width="40rem">
+        <Text text="Posizione Finanziaria" class="boldCss"/>
+      </Column>
+      <Column width="40rem">
+        <Text text="Autorizzazione" class="boldCss"/>
+      </Column>
+      <Column width="10rem">
+        <Text text="Ricevente" class="boldCss"/>
+      </Column>
+      <Column hAlign="End" width="auto">
+        <Text text="" class="boldCss"/>
+      </Column>
+    </columns>
+    <items>
+      <ColumnListItem >
+        <cells>
+          <Text text="{modelRimVert>CodificaRepPf}" class="boldCss" ></Text>
+          <Text text="{modelRimVert>ZzdescrEstesaFm}" class="sapUiMediumMarginBegin"/>
+          <Input value="{modelRimVert>ValRicevente}"    class="sapUiMediumMarginBegin" textAlign="End" change=".liveChangeimportiVert($event, 'modelRimVert', 'ValRicevente', '')"/>
+          <Button icon="sap-icon://delete" tooltip="Resetta i Valori" type="Emphasized" press=".resetValue($event, 'modelRimVert', 'ValRicevente')" />
+        </cells>
+      </ColumnListItem>
+    </items>
+  </Table>
+  <FlexBox 
+    height="100px"
+    alignItems="Center"
+    justifyContent="Center">
+    <items>
+      <CheckBox text="Allinea Cassa" selected="{modelRimVert>/AllineaCassa}" enabled="{modelRimVert>/CanSave}"></CheckBox>
+      <Button text="Propagazione Importi"    type="Emphasized" class="sapUiSmallMarginBeginEnd" icon="sap-icon://action" press=".onPressPluriennali($event, false)" enabled="{modelRimVert>/CanSave}"/>
+      <!-- <Button text="Mostra Anni valorizzati" type="Emphasized" class="sapUiSmallMarginBeginEnd" icon="sap-icon://display" press="onPoMovAnno"/> -->
+      <Button text="Salva" type="Emphasized" class="sapUiSmallMarginBeginEnd" press="onSaveVertical" enabled="{modelRimVert>/CanSave}"/>
+    </items>
+  </FlexBox>
+</Panel>
+</ScrollContainer>  
+</core:FragmentDefinition>

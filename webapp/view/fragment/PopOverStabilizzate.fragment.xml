@@ -1,0 +1,152 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:TooltipAutorizzazione="zsap.com.r3.cobi.s4.z_s4_auth_tooltip">
+	<Popover title="{i18n>visGruppoStab}: {modelStabilizzate>/DescrGruppo}" class="sapUiContentPadding" placement="Bottom" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" busy="{modelStabilizzate>/busy}" busyIndicatorDelay="100">
+		<content>
+			<Table items="{path: 'modelStabilizzate>/triennioCurrent'}" alternateRowColors="true">
+				<headerToolbar>
+					<OverflowToolbar design="Transparent">
+						<content>
+							<ToolbarSpacer/>
+							<Text text="{i18n>selezPeri}"/>
+							<Select change="setPeriodStabilizzate" selectedKey="{modelStabilizzate>/selPeriodo}" items="{modelStabilizzate>/selezionePeriodi/}">
+								<core:Item key="{modelStabilizzate>value}" text="{modelStabilizzate>text}"/>
+							</Select>
+							
+						</content>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="5rem">
+						<Text text="" class="boldCss"/>
+					</Column>
+					<Column width="2rem" hAlign="End">
+						<Text text="" />
+					</Column>
+					<Column width="18rem">
+						<Text text="" class="boldCss"/>
+					</Column>
+					<Column width="3rem">
+						<Text text="" class="boldCss"/>
+					</Column>
+					<Column width="6rem">
+						<HBox> 
+							<Button icon="sap-icon://close-command-field" press="onPressChangeArrow" type="Emphasized" class="sapUiSmallMarginEnd" enabled="{modelStabilizzate>/enableBack}">
+								<customData>
+									<core:CustomData key="Arrow" value="Initial" writeToDom="true"/>
+								</customData>
+							</Button>
+							<Button icon="sap-icon://navigation-left-arrow" press="onPressChangeArrow" type="Emphasized" enabled="{modelStabilizzate>/enableBack}">
+								<customData>
+									<core:CustomData key="Arrow" value="Sx" writeToDom="true"/>
+								</customData>
+							</Button>
+						</HBox>
+					</Column>
+					<Column width="8rem" hAlign="End">
+						<Text text="{i18n>CP} {modelStabilizzate>/colonneAnni/primoAnno}" class="boldCss"/>
+					</Column>                                        
+					<Column width="8rem" hAlign="End">
+						<Text text="{i18n>CP} {modelStabilizzate>/colonneAnni/secondoAnno}" class="boldCss"/>
+					</Column>
+					<Column width="8rem" hAlign="End">
+						<Text text="{i18n>CP} {modelStabilizzate>/colonneAnni/terzoAnno}" class="boldCss"/>
+					</Column>
+					<!-- <Column width="8rem" hAlign="End" visible="{quadroModel>/VisualizzaCassa}">
+						<Text text="{i18n>CS} {modelStabilizzate>/colonneAnni/primoAnno}" class="boldCss"/>
+					</Column>
+					<Column width="8rem" hAlign="End" visible="{quadroModel>/VisualizzaCassa}">
+						<Text text="{i18n>CS} {modelStabilizzate>/colonneAnni/secondoAnno}" class="boldCss"/>
+					</Column>                                      
+					<Column width="8rem" hAlign="End" visible="{quadroModel>/VisualizzaCassa}">
+						<Text text="{i18n>CS} {modelStabilizzate>/colonneAnni/terzoAnno}" class="boldCss"/>
+					</Column>   -->
+					<Column width="2rem">
+							<Button icon="sap-icon://navigation-right-arrow" press="onPressChangeArrow" type="Emphasized" enabled="{modelStabilizzate>/enableForth}">
+								<customData>
+									<core:CustomData key="Arrow" value="Dx" writeToDom="true"/>
+								</customData>
+							</Button>
+					</Column>                                   
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>    
+							<HBox >
+								<Text text="{modelStabilizzate>primaColonnaDescr}"  class="descrPrimaColonna"/>							
+								
+							</HBox>
+							<Button icon="sap-icon://hint" type="Emphasized" press="onExpandInfoPercent" visible="{= ${modelStabilizzate>secondaColonnaDescr} === 'Percentuali'}" ></Button>
+							<VBox >
+								<HBox >
+									<Text text="" visible="true">
+										<customData>
+											<core:CustomData key="asterisco" value="{modelStabilizzate>fincodeSelected}" writeToDom="true"/>
+											</customData>
+										</Text> 
+									<TooltipAutorizzazione:TooltipAutorizzazione text="{modelStabilizzate>secondaColonnaDescr}" Fincode="{modelStabilizzate>fincode}" Fikrs="S001"
+										placement="Top"  visible="{modelStabilizzate>isAuth}"/>
+								</HBox>
+								
+								<Text text="{modelStabilizzate>secondaColonnaDescr}" visible="{= !${modelStabilizzate>isAuth}}"/>
+								
+							</VBox>
+							<ObjectIdentifier text="{modelStabilizzate>detailAdmin}" />
+							<ObjectIdentifier />
+													
+								<ObjectIdentifier text="{path:'modelStabilizzate>primoAnnoCP'}">
+									<customData>
+										<core:CustomData key="percentuale" value="{modelStabilizzate>primaColonnaDescr}" writeToDom="true"/>
+										<core:CustomData key="bold" value="{modelStabilizzate>annoVers}" writeToDom="true"/>
+									</customData>
+								</ObjectIdentifier>
+							
+
+							<ObjectIdentifier text="{path: 'modelStabilizzate>secondoAnnoCP'}">
+								<customData>
+									<core:CustomData key="percentuale" value="{modelStabilizzate>primaColonnaDescr}" writeToDom="true"/>
+									<core:CustomData key="bold" value="{modelStabilizzate>annoVers}" writeToDom="true"/>
+								</customData>
+							</ObjectIdentifier>
+							<ObjectIdentifier text="{path: 'modelStabilizzate>terzoAnnoCP'}" >
+								<customData>
+									<core:CustomData key="percentuale" value="{modelStabilizzate>primaColonnaDescr}" writeToDom="true"/>
+									<core:CustomData key="bold" value="{modelStabilizzate>annoVers}" writeToDom="true"/>
+								</customData>
+							</ObjectIdentifier>
+							<!-- <ObjectIdentifier text="{path:'modelStabilizzate>primoAnnoCS', type: 'sap.ui.model.type.Float', formatOptions: {
+								maxFractionDigits: 2,
+								roundingMode: 'away_from_zero',
+								preserveDecimals: false
+							  }}">
+								<customData>
+									<core:CustomData key="percentuale" value="{modelStabilizzate>primaColonnaDescr}" writeToDom="true"/>
+								</customData>
+							</ObjectIdentifier>
+							<ObjectIdentifier text="{path:'modelStabilizzate>secondoAnnoCS', type: 'sap.ui.model.type.Float', formatOptions: {
+								maxFractionDigits: 2,
+								roundingMode: 'away_from_zero',
+								preserveDecimals: false
+							  }}">
+								<customData>
+									<core:CustomData key="percentuale" value="{modelStabilizzate>primaColonnaDescr}" writeToDom="true"/>
+								</customData>
+							</ObjectIdentifier>
+							<ObjectIdentifier text="{path:'modelStabilizzate>terzoAnnoCS', type: 'sap.ui.model.type.Float', formatOptions: {
+								maxFractionDigits: 2,
+								roundingMode: 'away_from_zero',
+								preserveDecimals: false
+							  }}">
+								<customData>
+									<core:CustomData key="percentuale" value="{modelStabilizzate>primaColonnaDescr}" writeToDom="true"/>
+								</customData>
+							</ObjectIdentifier> -->
+							<ObjectIdentifier />                                          
+							</cells>
+							<customData>
+							<!-- <core:CustomData key="pad" value="{quadroModel>pad}" writeToDom="true"/> -->
+						</customData>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Popover>
+</core:FragmentDefinition>

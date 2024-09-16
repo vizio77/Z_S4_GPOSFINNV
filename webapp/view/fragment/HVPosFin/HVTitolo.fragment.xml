@@ -1,0 +1,64 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog
+    contentHeight="90%" 
+    draggable="false"
+    escapeHandler=""
+    horizontalScrolling="true"
+    icon=""
+    resizable="false"
+    showHeader="true"
+    state="None"
+    stretch="false"
+    title="Cerca Titolo"
+    type="Standard"
+    verticalScrolling="true"
+>
+    <content>
+        <List
+        selectionChange = "onConfirmSelectionPosFin($event,'Titolo')"
+        mode="SingleSelectMaster"
+		items="{
+			path: 'modelPosFin>/formPosFin/titoli', sorter: [{path: 'Titolo', comparator: '.sorterHVDomSStr'}]
+		}" 
+        busy="{modelPosFin>/busyHelp}"
+        busyIndicatorDelay="500"
+        >
+        <headerToolbar>
+            <!-- <OverflowToolbar>
+                <content> -->
+                <Toolbar width="100%">
+                    <SearchField class="sapUiMarginEnd sapUiMarginBegin" search=".onSearchDescr" width="65%">
+                        <customData>
+                            <c:CustomData key="titolo" value="DescEstesaTitolo"/>
+                            <c:CustomData key="titolo" value="Titolo"/>
+                        </customData>
+                    </SearchField>
+                </Toolbar>
+                <!-- </content>
+            </OverflowToolbar> -->
+        </headerToolbar>
+		<StandardListItem
+			title="{modelPosFin>Titolo}"
+			description="{modelPosFin>DescEstesaTitolo}"
+			iconDensityAware="false"
+			iconInset="false"/>
+        <customData>
+            <c:CustomData key="selezioni" value="titoli" writeToDom="false" />
+        </customData>
+	</List>
+    </content>
+    <customHeader>
+    </customHeader>
+    <buttons>
+        <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+        <!-- <Button text="Seleziona" press="onConfirmSelectionPosFin" type="Emphasized">
+            <customData>
+                    <c:CustomData key="selezioni" value="Titolo" writeToDom="false" />
+            </customData>
+        </Button> -->
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

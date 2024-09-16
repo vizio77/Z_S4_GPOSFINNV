@@ -1,0 +1,56 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog
+    contentHeight="90%" 
+    draggable="false"
+    escapeHandler=""
+    horizontalScrolling="true"
+    icon=""
+    resizable="false"
+    showHeader="true"
+    state="None"
+    stretch="false"
+    title="Cerca Mac"
+    type="Standard"
+    verticalScrolling="true"
+>
+    <content>
+        <List
+        selectionChange = "onConfirmSelectionPosFin($event,'Mac')"
+        mode="SingleSelectMaster"
+		items="{
+			path: 'modelPosFin>/formPosFin/mac', sorter: [{path: 'NumeCodDett', comparator: '.sorterHVDomSStr'}]
+		}" >
+        <headerToolbar>
+            <OverflowToolbar>
+                <content>
+                    <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="65%" >
+                        <customData>
+                            <c:CustomData key="mac" value="DescEstesa"/>
+                            <c:CustomData key="mac" value="NumeCodDett"/>
+                        </customData>
+                    </SearchField>
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+		<StandardListItem
+			title="{modelPosFin>NumeCodDett}"
+			description="{modelPosFin>DescEstesa}"
+			iconDensityAware="false"
+			iconInset="false"/>
+	</List>
+    </content>
+    <customHeader>
+    </customHeader>
+    <buttons>
+        <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+        <!-- <Button text="Seleziona" press="onConfirmSelectionPosFin" type="Emphasized">
+            <customData>
+                <c:CustomData key="selezioni" value="Mac" writeToDom="false" />
+            </customData>
+        </Button> -->
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

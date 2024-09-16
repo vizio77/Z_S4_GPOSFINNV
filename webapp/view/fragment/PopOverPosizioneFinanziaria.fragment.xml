@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover title="{modelPosFin>/CodificaRepPf}" class="sapUiContentPadding" placement="Bottom" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+		<content>
+			<l:VerticalLayout class="sapUiSmallMargin">
+                <ObjectStatus title="Amministrazione" text="{modelPosFin>/PosFin/Prctr}" class="textBold"/>
+                <ObjectStatus title="Capitolo" text="{modelPosFin>/PosFin/Capitolo}" class="textBold"/>
+                <ObjectStatus title="PG" text="{modelPosFin>/PosFin/Pg}" class="textBold"/>
+                <ObjectStatus title="Missione" text="{modelPosFin>/PosFin/Missione}" class="textBold"/>
+                <ObjectStatus title="Programma" text="{modelPosFin>/PosFin/Programma}" class="textBold"/>
+                <ObjectStatus title="Azione" text="{modelPosFin>/PosFin/Azione}" class="textBold"/>
+                <ObjectStatus title="Titolo" text="{modelPosFin>/PosFin/Titolo}" class="textBold"/>
+                <ObjectStatus title="Categoria" text="{modelPosFin>/PosFin/Categoria}" class="textBold"/>
+                <ObjectStatus title="C.E.2" text="{modelPosFin>/PosFin/Ce2}" class="textBold"/>
+				<ObjectStatus title="C.E.3" text="{modelPosFin>/PosFin/Ce3}" class="textBold"/>
+			</l:VerticalLayout>
+			<l:VerticalLayout class="sapUiSmallMargin">
+                <ObjectStatus title="Desc. Amm" text="{modelPosFin>/PosFin/DescAmmin}" class="textBold"/>
+                <ObjectStatus title="Desc. Capitolo" text="{modelPosFin>/PosFin/DescCapitolo}"  class="textBold"/>
+                <ObjectStatus title="Desc. PG" text="{modelPosFin>/PosFin/DescPg}" class="textBold"/>
+                <ObjectStatus title="Desc. Missione" text="{modelPosFin>/PosFin/DescMissione}" class="textBold"/>
+                <ObjectStatus title="Desc. Programma" text="{modelPosFin>/PosFin/DescProgramma}"  class="textBold"/>
+                <ObjectStatus title="Desc. Azione" text="{modelPosFin>/PosFin/DescAzione}" class="textBold"/>
+                <ObjectStatus title="Desc. Titolo" text="{modelPosFin>/PosFin/DescTitolo}" class="textBold"/>
+                <ObjectStatus title="Desc. Categoria" text="{modelPosFin>/PosFin/DescCategoria}" class="textBold"/>
+                <ObjectStatus title="Desc. Ce2" text="{modelPosFin>/PosFin/DescCe2}" class="textBold"/>
+				<ObjectStatus title="Desc. Ce3" text="{modelPosFin>/PosFin/DescCe3}" class="textBold"/>
+			</l:VerticalLayout>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

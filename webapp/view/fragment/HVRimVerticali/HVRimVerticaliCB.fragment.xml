@@ -1,0 +1,31 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+>
+<Dialog  title="{i18n>ScegliPosFin}" contentWidth="auto" contentHeight="auto">
+    <content>
+       <f:SimpleForm  editable="true" singleContainerFullSize="false" adjustLabelSpan="false"
+            layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" emptySpanXL="2" emptySpanL="0" emptySpanM="2"
+            emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1">
+            <f:content>
+                <Label text="{i18n>CedenteRicevente}"/>
+                <RadioButtonGroup >
+                    <RadioButton id="cedente" text="Cedente" editable="{= ${modelRimVerticali>/formCedenteRicevente/CedeRiceEdit} === true}" selected="{modelRimVerticali>/formCedenteRicevente/Cedente}"/>
+                    <RadioButton id="ricevente" text="Ricevente" editable="{= ${modelRimVerticali>/formCedenteRicevente/CedeRiceEdit} === false }" selected="{modelRimVerticali>/formCedenteRicevente/Ricevente}"/>
+                </RadioButtonGroup>
+                <Label text="{i18n>posFin}"/>
+                <Input value="{modelRimVerticali>/formCedenteRicevente/Fipex}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onPosFin"/>
+                <Label text="{i18n>auth}"/>
+                <Input id="idAuthCompVert" value="{modelRimVerticali>/formCedenteRicevente/DescrInputAuthAssociata}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onAuth" enabled="{= !!${modelRimVerticali>/formCedenteRicevente/Fipex} }"/>
+            </f:content>
+       </f:SimpleForm>
+    </content>
+    <buttons>
+        <Button press="onClose" type="Emphasized" text="Chiudi"/>
+        <Button press="onInsertCodingBlock" type="Emphasized" text="Ok">
+        </Button>
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

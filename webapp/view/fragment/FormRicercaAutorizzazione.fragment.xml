@@ -1,0 +1,178 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+>
+<Dialog  title="{i18n>cercaAutorizzazione}" contentWidth="80%" contentHeight="auto">
+    <content>
+        <f:SimpleForm  editable="true" singleContainerFullSize="false" adjustLabelSpan="false"
+            layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" emptySpanXL="2" emptySpanL="0" emptySpanM="2"
+            emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1">
+            <f:content>
+                <Label text="{i18n>descrCompatta}"/>
+                <Input value="{modelPosFin>/formAutorizzazione/Item/DescCompatta}"/>
+                
+                <Label text="{i18n>Tipo}" />
+				<Input  value="{modelPosFin>/formAutorizzazione/Item/Tipo}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVTipo"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Tipo_results"/>
+                        <c:CustomData key="Dialog"      value="dialogAuthTipo"/>
+                        <!-- <c:CustomData key="Entity"      value="/ZES_LEGGI_SET"/> -->
+                        <c:CustomData key="Entity"      value="/ZES_ATTI_LEG_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>Numero}"/>
+                <Input  value="{modelPosFin>/formAutorizzazione/Item/Numero}"  showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVNumero"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Numero_results"/>
+                        <c:CustomData key="Dialog"      value="dialogNumero"/>
+                        <c:CustomData key="Entity"      value="/ZES_LEGGI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>Anno}"/>
+				<Input value="{modelPosFin>/formAutorizzazione/Item/Anno}"  showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVAnno"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Anno_results"/>
+                        <c:CustomData key="Dialog"      value="dialogAnno"/>
+                        <c:CustomData key="Entity"      value="/ZES_LEGGI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>Articolo}" />
+				<Input  value="{modelPosFin>/formAutorizzazione/Item/Articolo}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVArticolo"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Articolo_results"/>
+                        <c:CustomData key="Dialog"      value="dialogArticoloTipo"/>
+                        <c:CustomData key="Entity"      value="/ZES_AUTORIZZAZIONI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>SubArticolo}"/>
+				<Input  value="{modelPosFin>/formAutorizzazione/Item/Subarticolo}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVSubarticolo"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Subarticolo_results"/>
+                        <c:CustomData key="Dialog"      value="dialogSubarticolo"/>
+                        <c:CustomData key="Entity"      value="/ZES_AUTORIZZAZIONI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>Comma}"/>
+                <Input  value="{modelPosFin>/formAutorizzazione/Item/Comma}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVComma"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Comma_results"/>
+                        <c:CustomData key="Dialog"      value="dialogComma"/>
+                        <c:CustomData key="Entity"      value="/ZES_AUTORIZZAZIONI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>SubComma}"/>
+                <Input  value="{modelPosFin>/formAutorizzazione/Item/Subcomma}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVSubcomma"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Subcomma_results"/>
+                        <c:CustomData key="Dialog"      value="dialogSubcomma"/>
+                        <c:CustomData key="Entity"      value="/ZES_AUTORIZZAZIONI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>Lettera}"/>
+                <Input  value="{modelPosFin>/formAutorizzazione/Item/Lettera}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVLettera"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Lettera_results"/>
+                        <c:CustomData key="Dialog"      value="dialogLettera"/>
+                        <c:CustomData key="Entity"      value="/ZES_AUTORIZZAZIONI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>Sublett}"/>
+                <Input value="{modelPosFin>/formAutorizzazione/Item/Sublettera}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVSublettera"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Sublettera_results"/>
+                        <c:CustomData key="Dialog"      value="dialogSublettera"/>
+                        <c:CustomData key="Entity"      value="/ZES_AUTORIZZAZIONI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>NumeroLettera}"/>
+                <Input editable="false" value="{modelPosFin>/formAutorizzazione/Item/NumeroLettera}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo" >
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVNumeroLettera"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/NumeroLettera_results"/>
+                        <c:CustomData key="Dialog"      value="dialogNumeroLettera"/>
+                        <c:CustomData key="Entity"      value="/ZES_AUTORIZZAZIONI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>NumeroSubLettera}"/>
+                <Input editable="false" value="{modelPosFin>/formAutorizzazione/Item/NumeroSubLettera}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo" >
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVNumeroSubLettera"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/NumeroSubLettera_results"/>
+                        <c:CustomData key="Dialog"      value="dialogNumeroSubLettera"/>
+                        <c:CustomData key="Entity"      value="/ZES_AUTORIZZAZIONI_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>Classificaz}"/>
+                <Select selectedKey="{modelPosFin>/formAutorizzazione/Item/Classificazione}" items="{
+                    path:'sapHanaS2>/DominioClassificazioneSet/', filters: [{path: 'Classificazione', operator: 'NE', value1: 'E'}]}" forceSelection="false" >
+                    <c:Item key="{sapHanaS2>Classificazione}" text="{sapHanaS2>DescClassificazione}" />
+                </Select>
+
+                <Label text="{i18n>nicknameNorma}"/>
+                <Input  value="{modelPosFin>/formAutorizzazione/Item/Nickname}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVTipo">
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVNickname"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Nickname_results"/>
+                        <c:CustomData key="Dialog"      value="dialogNicknameTipo"/>
+                        <c:CustomData key="Entity"      value="/ZES_NICKNAMEL_SET"/>
+                    </customData>
+                </Input>
+
+                <Label text="{i18n>Attivazione}"/>
+                <DatePicker value="{path: 'modelPosFin>/formAutorizzazione/Item/Attivazione' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy'}}" displayFormat="yyyy" />
+
+                <Label text="{i18n>Scadenza}"/>
+                <DatePicker value="{path: 'modelPosFin>/formAutorizzazione/Item/Scadenza' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'yyyy'}}" displayFormat="yyyy"/>
+
+                <Label text="{i18n>TipoAut}"/>
+                <!-- <Input value="{modelPosFin>/formAutorizzazione/Item/TipoAut}" showValueHelp="true" valueHelpOnly="true" >
+                    <customData>
+                        <c:CustomData key="Fragment"    value="HVTipo"/>
+                        <c:CustomData key="PathResults" value="/formAutorizzazione/Tipo_results"/>
+                        <c:CustomData key="Dialog"      value="dialogAuthTipo"/>
+                        <c:CustomData key="Entity"      value="/ZES_ATTI_LEG_SET"/>
+                    </customData>
+                </Input> -->
+                <Select selectedKey="{modelPosFin>/formAutorizzazione/Item/TipoAut}" items="{
+                    path:'sapHanaS2>/HVTipoAutorizzazioneSet/'}" forceSelection="false" >
+                    <c:Item key="{sapHanaS2>Tipo}" text="{sapHanaS2>DescTipoAuth}" />
+                </Select>
+                <Label text="{i18n>monitoraggio}"/>
+                <!-- <CheckBox selected="{modelPosFin>/formAutorizzazione/Item/Monitoraggio}"/> -->
+                <Select selectedKey="{modelPosFin>/formAutorizzazione/Item/Monitoraggio}"  forceSelection="false" >
+                    <c:Item key="" text="" />
+                    <c:Item key="Mon" text="Sì" />
+                    <c:Item key="NoMon" text="No" />
+                </Select>
+            </f:content>
+        </f:SimpleForm>
+    </content>
+    <buttons>
+        <Button press="onClose" type="Emphasized" text="{i18n>close}"/>
+        <Button press="onResetRicercaAuth" type="Emphasized" text="{i18n>Resetta}"/>
+        <Button press="onPressRicercaAuth" type="Emphasized" text="{i18n>Cerca}"/>
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

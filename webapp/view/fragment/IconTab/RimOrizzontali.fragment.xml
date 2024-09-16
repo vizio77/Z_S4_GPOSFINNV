@@ -1,0 +1,109 @@
+<core:FragmentDefinition
+xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+
+								
+							<VBox class="sapUiSmallMargin" visible="{modelVisQuadri>/quadroVisible}" >								
+								<Table id="RimidTableyear" inset="false" items="{modelTable>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" >
+									<columns>
+										<Column width="40%">
+											<Text text="" class="boldCss"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem id="RimidColumnListItemsYear">
+											<cells>
+												<VBox>
+													<Text text="{modelTable>ViewLabel}" visible="{= ${modelTable>FlagGriglia} === 'BOLD' ? true : false}" class="boldCss">
+													</Text>
+													<Text text="{modelTable>ViewLabel}" visible="{= ${modelTable>FlagGriglia} === 'ALIGNR_RIGHT' ? true : false}" class="sapUiMediumMarginBegin"/>
+													<Text text="{modelTable>ViewLabel}" visible="{= ${modelTable>FlagGriglia} === 'CHILD' ? true : false}" class="sapUiLargeMarginBegin boldAndSmallCss"/>
+													<Text text="{modelTable>ViewLabel}" visible="{= ${modelTable>FlagGriglia} === '' ? true : false}"/>
+												</VBox>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+								<!--</ScrollContainer>-->
+							</VBox>
+							
+							<VBox visible="{modelVisQuadri>/quadroVisible}">
+								<Table id="RimtableSac" inset="false" items="{modelTableSac>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" visible="{modelVisQuadri>/Attivo}">
+									
+									<columns>
+										<Column width="40%">
+											<Text text="" class="boldCss"/>
+										</Column>
+										<Column width="10rem" hAlign="End">
+											<Label text="{mdColumnVariazioni>/ANNO1}" design="Bold"/>
+										</Column>
+									<Column width="10rem" hAlign="End">
+											<Label text="{mdColumnVariazioni>/ANNO2}" design="Bold"/>
+										</Column>
+										<Column width="10rem" hAlign="End">
+											<Label text="{mdColumnVariazioni>/ANNO3}" design="Bold"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<!--<VBox>-->
+												<Text text="{modelTableSac>LABEL}"/>
+												<Input value="{modelTableSac>VAL_ANNO1}" type="Text" textAlign="End" change="liveChangeimporti('modelTableSac', 'VAL_ANNO1', '')"/>
+												<Input value="{modelTableSac>VAL_ANNO2}" type="Text" textAlign="End" change="liveChangeimporti( 'modelTableSac', 'VAL_ANNO2', '')"/>
+												<Input value="{modelTableSac>VAL_ANNO3}" type="Text" textAlign="End" change="liveChangeimporti( 'modelTableSac', 'VAL_ANNO3', '')"/>
+												<!--</VBox>-->
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</VBox>
+							<VBox class="sapUiSmallMargin" visible="{modelVisQuadri>/quadroVisible}">
+								<Table items="{modelTableComp>/}" >
+									<headerToolbar>
+										<OverflowToolbar visible="{modelVisQuadri>/Attivo}">
+											<!--<Select id="RimselectAnnicassa" width="auto" selectedKey="{modelAnnoTriennio>/keyAnno}" items="{modelAnno>/}" editable="true"-->
+											<!--	change="onChangeColumns">-->
+											<!--	<core:Item key="" text=""/>-->
+											<!--	<core:Item key="{modelAnno>keyAnno}" text="{modelAnno>textAnno}"/>-->
+											<!--</Select>-->
+											<ToolbarSpacer/>
+											<Label text="Allinea Cassa"/>
+											<CheckBox selected="{modelTableSac>/0/FLAG_ALLINEA_CS}"/>
+											<!-- <Label text="A Decorrere"/>
+											<CheckBox selected="{modelTableSac>/0/FLAG_A_DECORRERE}"/> -->
+											<Button icon="sap-icon://delete" press="onDeleteValueRimodulazioniOri" type="Emphasized"/>
+											<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennali"/>
+											<Button press="onSavePluriennale" type="Emphasized" text="Salva"/>
+										</OverflowToolbar>
+									</headerToolbar>
+									<columns>
+										<Column width="19%" hAlign="Right">
+											<Label text="{i18n>AnnoDa}" design="Bold"/>
+										</Column>
+										<Column width="19%" hAlign="Right">
+											<Label text="{i18n>AnnoAL}" design="Bold"/>
+										</Column>
+										<Column width="22%" hAlign="Right">
+											<Label text="{i18n>Compentenza}" design="Bold"/>
+										</Column>
+										<Column width="40%">
+											<Label text="" design="Bold"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem >
+											<cells>
+												<Text text="{modelTableComp>YearLow}"/>
+												<Text text="{modelTableComp>YearHigh}"/>
+												<Text text="{modelTableComp>Importo}"/>
+												<Text text=""/>
+												<!--<Text text=""/>-->
+												<!--<Text text=""/>-->
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</VBox>
+</core:FragmentDefinition>

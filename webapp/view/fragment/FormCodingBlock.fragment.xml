@@ -1,0 +1,156 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+>
+<Dialog  title="{modelPosFin>/formCodingBlock/title}" contentWidth="80%" contentHeight="auto">
+    <content>
+       <f:SimpleForm  editable="true" singleContainerFullSize="false" adjustLabelSpan="false"
+            layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" emptySpanXL="2" emptySpanL="0" emptySpanM="2"
+            emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1">
+            <f:content>
+                <Label text="Posizione Finanziaria"/>
+                <Text text="{modelPosFin>/posFin}" />
+
+                <Label text="Autorizzazione"/>
+                <Input editable="{= ${modelPosFin>/formCodingBlock/nuovaAuth} === true }"  value="{modelPosFin>/formCodingBlock/DescrInputAuth}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onOpenFormRicercaAuth"/>
+
+                <Label text="Classificazione"/>
+                <Text text="{modelPosFin>/formCodingBlock/Auth/DescClassificazione}"/>
+
+                <!-- <Label text="FO/FP"/>
+                <RadioButtonGroup select="onChangeFOP" editable="{parts: [
+                                                                            {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                            {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                            {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                            {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                            {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                            {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                            {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                            {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                            {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'},
+                                                                             {path: 'modelPosFin>/infoSottoStrumento/TipoEsposizione'}
+                                                                            ], formatter: '.checkEnableSalvaCB'}">
+                    <buttons>
+                        <RadioButton text="Fondo Progetti ai sensi del D.Lgs 229/2011 articolo 10 comma 2" selected="{= ${modelPosFin>/formCodingBlock/FOP} === 'FP'}"/>
+                        <RadioButton text="Fondo Opere ai sensi del D.Lgs 229/2011 articolo 10 comma 2" selected="{= ${modelPosFin>/formCodingBlock/FOP} === 'FO'}"/>
+                    </buttons>
+                </RadioButtonGroup> -->
+
+                <!-- <Label text="APS"/>
+                <HBox width="8rem">
+                    <CheckBox selected="{modelPosFin>/formCodingBlock/checkedPercentAps}" editable="{parts: [
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/TipoEsposizione'}
+                                                                                                    ], formatter: '.checkEnableSalvaCB'}"/>
+                    <Input value="{path: 'modelPosFin>/formCodingBlock/APS'}" maxLength="6" liveChange="onCheckPercentuali" width="5rem" editable="{parts: [
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/TipoEsposizione'},
+                                                                                                    {value: 'aps', model:'modelPosFin'}
+                                                                                                    ], formatter: '.checkEnableSalvaCB'}"/>
+                    <Label text="{= ${modelPosFin>/formCodingBlock/checkedPercentAps} === true ? '%' : ' '}" visible="true" class="sapUiTinyMarginTop sapUiTinyMarginBegin"/>
+                </HBox> -->
+
+                <Label text="{i18n>TcrC}"/>
+                <Input value="{path: 'modelPosFin>/formCodingBlock/Tcrc'}" type="Number" width="10%" editable="{parts: [
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/TipoEsposizione'}
+                                                                                                    ], formatter: '.checkEnableSalvaCB'}"/>
+
+                <Label text="{i18n>TcrF}"/>
+                <Input value="{path: 'modelPosFin>/formCodingBlock/Tcrf'}" type="Number" width="10%" editable="{parts: [
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/TipoEsposizione'}
+                                                                                                    ], formatter: '.checkEnableSalvaCB'}"/>
+                
+                <Label text="{i18n>percentQuotaAggredibilita}"/>
+                <Input value="{path: 'modelPosFin>/formCodingBlock/percentQuotaAggredibilita'}"  maxLength="6" liveChange="onCheckPercentuali" width="10%" editable="{parts: [
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/TipoEsposizione'}
+                                                                                                    ], formatter: '.checkEnableSalvaCB'}"/>
+            </f:content>
+       </f:SimpleForm>
+    </content>
+    <buttons>
+
+        <Button press="onDeleteCodingBlock" type="Emphasized" text="{i18n>deleteCB}" visible="{= ${modelPosFin>/formCodingBlock/nuovaAuth} === false }" enabled="{parts: [
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'}
+                                                                                                    ], formatter: '.checkEnableDeleteCB'}"/>
+        <Button press="onClose" type="Emphasized" text="{i18n>close}"/>
+        <Button press="resetFiltriCodingBlock" type="Emphasized" text="{i18n>Resetta}" enabled="{parts: [
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/TipoEsposizione'}
+                                                                                                    ], formatter: '.checkEnableSalvaCB'}">
+        </Button>
+        <Button press="onSaveCodingBlock" type="Emphasized" text="{i18n>salva}" enabled="{parts: [
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/nuovaAuth'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/Fikrs'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceStrumentoOri'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/formCodingBlock/Auth/CodiceSottostrumento'},
+                                                                                                    {path: 'modelPosFin>/infoSottoStrumento/TipoEsposizione'}
+                                                                                                    ], formatter: '.checkEnableSalvaCB'}"/>
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

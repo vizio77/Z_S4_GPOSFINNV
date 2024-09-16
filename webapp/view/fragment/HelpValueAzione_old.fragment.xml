@@ -1,0 +1,69 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        growing="true"
+        multiSelect="true"
+        noDataText=""
+        rememberSelections="false"
+        showClearButton="false"
+        title="Cerca"
+        items="{path: 'modelHome>/formSottostrumento/azione_set/', length: '1000'}"
+        confirm="onConfirmAzioniDomSStr"
+        search="onSearchHVAzioni"
+    >
+        <columns>
+            <Column width="4rem">
+                <Text text="Azione" />
+            </Column>
+            <Column width="12rem">
+                <Text text="Descr. Azione"/>
+            </Column>
+            <Column  width="6rem">
+                <Text text="Amm."/>
+            </Column>
+            <Column  width="12rem">
+                <Text text="Descr. Ammin."/>
+            </Column>
+            <Column  width="6rem">
+                <Text text="Missione"/>
+            </Column>
+            <Column width="12rem">
+                <Text text="Desc. Missione"/>
+            </Column>
+            <Column  width="6rem">
+                <Text text="Programma"/>
+            </Column>
+            <Column width="12rem">
+                <Text text="Desc. Programma"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Active" selected="{ parts: [
+                                        {path: 'modelHome>CODICE_AZIONE'},
+                                         {path:'modelHome>PRCTR'},
+                                         {path:'modelHome>CODICE_MISSIONE'}, 
+                                        {path:'modelHome>CODICE_PROGRAMMA'}
+                                        ], formatter: '.setSelectedAzioni' 
+                                        }">
+                <cells>          
+                    <Text text="{modelHome>CODICE_AZIONE}"/>
+                    <Text text="{modelHome>DESC_BREVE}"/>
+                    <Text text="{modelHome>PRCTR}"/>
+                    <Text text="{modelHome>DESCR_AMMINISTRAZIONE}"/>
+                    <Text text="{modelHome>CODICE_MISSIONE}"/>
+                    <Text text="{modelHome>DESCR_MISSIONE}"/>
+                    <Text text="{modelHome>CODICE_PROGRAMMA}"/>
+                    <Text text="{modelHome>DESCR_PROGRAMMA}"/>
+                </cells>
+                <customData>
+                    <c:CustomData key="selezioni" value="azioni" writeToDom="false" />
+                </customData>
+            </ColumnListItem>
+        </items>
+         <customData>
+            <c:CustomData key="AZIONE" value="CODICE_AZIONE" writeToDom="false" />
+        </customData>
+    </TableSelectDialog>
+</c:FragmentDefinition>

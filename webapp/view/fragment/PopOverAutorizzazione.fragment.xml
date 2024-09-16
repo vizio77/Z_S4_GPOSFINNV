@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover title="{i18n>auth}" class="sapUiContentPadding" placement="Bottom" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+		<content>
+			<l:VerticalLayout class="sapUiSmallMargin">
+                <ObjectStatus title="Descrizione compatta" text="{= ${modelPosFin>/Finanziamento/Amministrazione/ZzdescrEstesaFm} ? ${modelPosFin>/Finanziamento/Amministrazione/ZzdescrEstesaFm} : ''}" class="textBold"/>
+                <ObjectStatus title="Nickname" text="{modelPosFin>/Finanziamento/Amministrazione/DescNickname}" class="textBold" />
+                <ObjectStatus title="Attivazione" text="{modelPosFin>/Finanziamento/Amministrazione/AnnoAttivazione}" class="textBold" />
+                <ObjectStatus title="Scadenza" text="{modelPosFin>/Finanziamento/Amministrazione/AnnoScadenza}" class="textBold" />
+                <ObjectStatus title="Classificazione" text="{modelPosFin>/Finanziamento/Amministrazione/DescClassificazione}" class="textBold" />
+                <ObjectStatus title="{i18n>Tipo}" text="{modelPosFin>/Finanziamento/Amministrazione/Type}" class="textBold" />
+                <ObjectStatus title="{i18n>Numero}" text="{modelPosFin>/Finanziamento/Amministrazione/Numero}" class="textBold" />
+                <ObjectStatus title="{i18n>Anno}" text="{modelPosFin>/Finanziamento/Amministrazione/Anno}" class="textBold" />
+                <ObjectStatus title="{i18n>Articolo}" text="{modelPosFin>/Finanziamento/Amministrazione/Articolo}" class="textBold" />
+                <ObjectStatus title="{i18n>SubArticolo}" text="{modelPosFin>/Finanziamento/Amministrazione/DescSubarticolo}" class="textBold" />
+                <ObjectStatus title="{i18n>Comma}" text="{modelPosFin>/Finanziamento/Amministrazione/Comma}" class="textBold" />
+                <ObjectStatus title="{i18n>SubComma}" text="{modelPosFin>/Finanziamento/Amministrazione/DescSubcomma}" class="textBold" />
+                <ObjectStatus title="{i18n>Lettera}" text="{modelPosFin>/Finanziamento/Amministrazione/Punto}" class="textBold" />
+                <ObjectStatus title="{i18n>Sublett}" text="{modelPosFin>/Finanziamento/Amministrazione/DescSubpunto}" class="textBold" />
+                <ObjectStatus title="{i18n>NumeroLettera}" text="{modelPosFin>/Finanziamento/Amministrazione/NumeroLettera}" class="textBold" />
+                <ObjectStatus title="{i18n>NumeroSubLettera}" text="{modelPosFin>/Finanziamento/Amministrazione/DescNumSublettera}" class="textBold" />
+                <ObjectStatus title="{i18n>TipoAut}" text="{modelPosFin>/Finanziamento/Amministrazione/DescTipo}" class="textBold" />
+                <ObjectStatus title="{i18n>monitoraggio}" text="{modelPosFin>/Finanziamento/Amministrazione/IndicatMonit}" class="textBold" />
+            </l:VerticalLayout>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

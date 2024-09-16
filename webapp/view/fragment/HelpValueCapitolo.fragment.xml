@@ -1,0 +1,46 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        growing="true"
+        multiSelect="false"
+        noDataText=""
+        rememberSelections="false"
+        showClearButton="false"
+        title="Cerca"
+        items="{modelPosFin>/helpValueCapitoli/}"
+        confirm="onPressChoiceTableCapitolo"
+    >
+        <columns>
+            <Column width="8rem">
+                <Text text="AMMINISTRAZIONE" />
+            </Column>
+            <Column width="12rem">
+                <Text text="DESCR_AMMINISTRAZIONE"/>
+            </Column>
+            <Column  width="8rem">
+                <Text text="CAPITOLO"/>
+            </Column>
+            <Column  width="12rem">
+                <Text text="DESCR_CAPITOLO"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Active">
+                <cells>          
+                    <Text text="{modelPosFin>AMMINISTRAZIONE}"/>
+                    <Text text="{modelPosFin>DESCR_AMMINISTRAZIONE}"/>
+                    <Text text="{modelPosFin>CAPITOLO}"/>
+                    <Text text="{modelPosFin>DESCR_CAPITOLO}"/>
+                </cells>
+                <!-- <customData>
+                    <c:CustomData key="{homeModel>VALORE}" value="{homeModel>DESCRIZIONE}" writeToDom="false" />
+                </customData> -->
+            </ColumnListItem>
+        </items>
+         <customData>
+            <c:CustomData key="CAPITOLO" value="DESC_CAPITOLO" writeToDom="false" />
+        </customData>
+    </TableSelectDialog>
+</c:FragmentDefinition>

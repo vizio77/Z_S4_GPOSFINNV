@@ -1,0 +1,65 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:uxap="sap.uxap">
+	<Dialog id="idTableSStr" title="{i18n>Sottostrumento}" contentWidth="100%" contentHeight="90%">
+		<content>
+			<l:VerticalLayout width="100%">
+				<l:content>
+					<Table id="idTableSottostrumento2" inset="false" items="{path: 'modelHome>/sottostrumenti/', length: '5000'}" mode="None" selectionChange="onScegliSottostrumento"
+                        sticky="ColumnHeaders,HeaderToolbar,InfoToolbar"  busy="{modelHome>/tableSStrBusy}" updateFinished="onUpdateFinished">
+						<columns>
+                            <Column width="8%">
+								<Text text="{i18n>TipoSottoStr}" class="boldCss"/>
+							</Column>
+							<Column width="7%">
+								<Text text="{i18n>Numero}" class="boldCss"/>
+							</Column>
+                            <Column width="10%">
+								<Text text="{i18n>AnnoFaseSottoStr}" class="boldCss"/>
+							</Column>
+							<Column width="35%">
+								<Text text="{i18n>DescrSottostrumento}" class="boldCss"/>
+							</Column>
+							<Column width="7%">
+								<Text text="{i18n>Stato}" class="boldCss"/>
+							</Column>
+							<Column width="10%">
+								<Text text="{i18n>Visibilita}" class="boldCss"/>
+							</Column>
+							<Column width="auto">
+								<Text text="{i18n>EspContabile}" class="boldCss"/>
+							</Column>
+							<Column width="auto">
+								<Text text="{i18n>authgiust}" class="boldCss"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem vAlign="Middle" press="onPressConfermaSottostrumento" type="Active">
+								<cells>
+                  <Text text="{modelHome>DescTipoSstr}"/>
+									<Text text="{modelHome>NumeroSstr}"/>
+									<Text text="{modelHome>AnnoSstr}"/>
+									<Text text="{modelHome>DescEstesa}"/>
+									<Text text="{= ${modelHome>StatoSstr} === '1' ? 'Aperto' : 'Chiuso'}"/>
+									<Text text="{= ${modelHome>Reale} === 'R' ? 'Bilancio' : 'Simulato'}"/>
+									<Text text="{modelHome>DescTipoEsposizione}"/>
+									<Text text="{modelHome>GiustTx}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</l:content>
+			</l:VerticalLayout>
+		</content>
+		<!-- <endButton>
+			<Button press="onPressConfermaSottostrumento" type="Emphasized" text="{i18n>conf}"></Button>
+		</endButton> -->
+		<beginButton>
+			<Button press="onClose"  type="Emphasized" text="{i18n>close}">
+				<customData>
+					<core:CustomData key="HVSottostrumento" value="_oDialog"/>
+					<core:CustomData key="TableSStr" value="chiusura"/>
+				</customData>
+			</Button>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

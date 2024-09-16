@@ -1,0 +1,77 @@
+<core:FragmentDefinition
+xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<f:GridContainer class="sapUiTinyMarginBegin sapUiNoMarginBottom" width="100%">
+									<f:layout>
+										<f:GridContainerSettings rowSize="60px" columnSize="70px" gap="6px"/>
+									</f:layout>
+									<f:layoutXS>
+										<f:GridContainerSettings rowSize="60px" columnSize="70px" gap="6px"/>
+									</f:layoutXS>
+									<VBox>
+										<Label text="Autorizzazione:" labelFor="idAuthComp" required="true"/>
+										<Input value="{modelPosFin>/CompetenzaAuth/DescrInputAuth}" showValueHelp="true" valueHelpRequest=".onAuth" id="idAuthComp"
+											valueHelpOnly="true"></Input>
+										<layoutData>
+											<f:GridContainerItemLayoutData minRows="1" columns="8"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<HBox >
+											<VBox>
+												<Label text="" labelFor="InputAutorizzazioniBtn" required="false"/>
+												<TooltipAutorizzazioneBtn:TooltipAutorizzazioneBtn id="InputAutorizzazioniBtn" icon="sap-icon://hint" type="Emphasized"
+													Fincode="{modelPosFin>/CompetenzaAuth/Auth/IdAutorizzazione}" Fikrs="S001" />										
+											</VBox>
+											<VBox visible="{= !!${modelPosFin>/CompetenzaAuth/Auth/IndStabilizzata}}" class="sapUiNoMarginTop">
+												<Label text="" visible="{= !!${modelPosFin>/CompetenzaAuth/Auth/IndStabilizzata}}"/>
+												<Button icon="sap-icon://approvals" type="Emphasized" tooltip="{i18n>visGruppoStab}" press="onExpandStabilizzata"
+													visible="{= !!${modelPosFin>/CompetenzaAuth/Auth/IndStabilizzata}}"/>
+											</VBox>
+											<layoutData>
+												<f:GridContainerItemLayoutData minRows="1" columns="1"/>
+											</layoutData>
+										</HBox>
+									</VBox>
+									<VBox  class="sapUiTinyMarginBegin">
+										<Label text="Autorizzazione Collegata:" labelFor="idAuthAssComp"/>
+										<Input value="{modelPosFin>/CompetenzaAuth/DescrInputAuthAssociata}" showValueHelp="true" valueHelpRequest=".onAuthCollegata"
+											id="idAuthAssComp" valueHelpOnly="true" enabled="{= !!${modelPosFin>/CompetenzaAuth/Auth} }"></Input>
+										<layoutData>
+											<f:GridContainerItemLayoutData minRows="1" columns="8"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<Label text="" labelFor="InputAutorizzazioniBtn2" required="false"/>
+										<TooltipAutorizzazioneBtn:TooltipAutorizzazioneBtn id="InputAutorizzazioniBtn2" icon="sap-icon://hint" type="Emphasized"
+											Fincode="{modelPosFin>/CompetenzaAuth/AuthAssociata/SeqFondoLe}" Fikrs="S001" />										
+										<layoutData>
+											<f:GridContainerItemLayoutData minRows="1" columns="1"/>
+										</layoutData>
+									</VBox>
+								</f:GridContainer>
+								<OverflowToolbar id="autorizzazioniCompButton" class="sapUiSmallMarginBottom" style="Clear">
+									<ToolbarSpacer/>
+									<Button text="{i18n>gestCondingBlock}" type="Emphasized" enabled="{= !!${modelPosFin>/CompetenzaAuth/Auth}  &amp;&amp; ${modelPosFin>/PosFin/StatusPg} !== '3' &amp;&amp; ${modelLocked>/LOCKED} === 'X' ? false : true }" press=".onGestisciCodingBlock"/>
+									<Button text="{i18n>associaNuovaAuth}" enabled="{= (${modelPosFin>/PosFin/StatusPg} === '3' || ${modelPosFin>/PosFin/CodiFofpSpe} !== '' ? false : true ) &amp;&amp; ${modelLocked>/LOCKED} === 'X' ? false : true }" type="Emphasized" press=".onNuovaAuth"/>
+									<Button text="{i18n>resetta}" type="Emphasized" press="onResetAuth"/>
+									<!-- <Button text="{i18n>avvia}" type="Emphasized" press="onPressSearch" enabled="{= !!${modelPosFin>/CompetenzaAuth/Auth} }"/> -->
+										<Button text="{i18n>avvioN}" type="Emphasized" press="showCompetenzaSAC($event,false)" enabled="{= !!${modelPosFin>/CompetenzaAuth/Auth} }"/>
+								</OverflowToolbar>
+								<OverflowToolbar id="toolbarQuadro" visible="{modelVisQuadri>/quadroVisible}" class="sapUiSmallMarginBottom" style="Clear">
+									<ToolbarSpacer/>
+									<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event)"/>
+									<Button text="{i18n>QCCAPF}" type="Emphasized" press="openquadroCont('PF',$event)"/>
+								</OverflowToolbar>
+
+							<OverflowToolbar id="autorizzazioniCompButtonComp" class="sapUiSmallMarginBottom" style="Clear">
+								<!-- <Select id="selectAnnicassa" width="auto" selectedKey="{modelFilter>/keyAnno}" items="{modelAnno>/}" editable="true"
+									change="onSelectTriennio">
+									<core:Item key="{modelAnno>keyAnno}" text="{modelAnno>textAnno}"/>
+								</Select> -->
+								<ToolbarSpacer/>
+								<!-- <Button text="{i18n>resetta}" type="Emphasized" press="onResetDati"/>
+								<Button text="{i18n>avvia}" type="Emphasized" press="onPressSearch" enabled="true"/> -->
+							</OverflowToolbar> 
+</core:FragmentDefinition>

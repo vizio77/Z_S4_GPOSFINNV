@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover title="{i18n>dettStruttAmmCentr}" class="sapUiContentPadding" placement="Bottom" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+		<content>
+			<l:VerticalLayout class="sapUiSmallMargin">
+                <ObjectStatus title="Amministrazione" text="{modelPosFin>/strutturaAmminCentrale/Prctr}" class="textBold"/>
+                <ObjectStatus title="Centro di Responsabilità" text="{modelPosFin>/strutturaAmminCentrale/CodiceCdr}" class="textBold"/>
+                <ObjectStatus title="Ragioneria" text="{modelPosFin>/strutturaAmminCentrale/CodiceRagioneria}" class="textBold"/>
+			</l:VerticalLayout>
+			<l:VerticalLayout class="sapUiSmallMargin">
+                <ObjectStatus title="Desc. Amm" text="{modelPosFin>/strutturaAmminCentrale/DescEstesaAmmin}" class="textBold"/>
+                <ObjectStatus title="Desc. CdR" text="{modelPosFin>/strutturaAmminCentrale/DescEstesaCdR}"  class="textBold"/>
+                <ObjectStatus title="Desc. Ragioneria" text="{modelPosFin>/strutturaAmminCentrale/DescEstesaRagioneria}" class="textBold"/>
+			</l:VerticalLayout>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

@@ -1,0 +1,180 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.f" xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip" xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form">
+	<Table visible="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '9' ? true : false}" inset="false" items="{modelTableRes>/}"
+		sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="{i18n>SituazioneConsunt}" level="H4"/>
+					<ToolbarSpacer/>
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="40%" hAlign="Right">
+				<Text text="{i18n>PosizioneFinanziaria}" class="boldCss"/>
+			</Column>
+			<Column width="40%" hAlign="Right">
+				<Text text="{i18n>EsercizioProvenienza}" class="boldCss"/>
+			</Column>
+			<Column width="40%" hAlign="Right">
+				<Text text="{i18n>importoDaReiscrivere}" class="boldCss"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem >
+				<cells>
+					<Text text="{modelTableRes>PosFinOut}" class="boldCss"/>
+					<Text text="{modelTableRes>AnnoProvenienza}"/>
+					<Text text="{modelTableRes>ImportoDaReiscrivere}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<Table visible="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '9' ? true : false}" inset="false" items="{modelTableRes2>/}"
+		sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+		<columns>
+			<Column width="40%">
+				<Text text="" class="boldCss"/>
+			</Column>
+			<Column width="40%" hAlign="Right">
+				<Text text="" class="boldCss"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem >
+				<cells>
+					<Text text="{modelTableRes2>Label}"/>
+					<Text text="{modelTableRes2>Importo}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<Table id="idTableyearRes" class="sapUiTinyMarginBottom"
+		visible="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '9' ? true : false}" inset="false" items="{modelTableRes3>/}"
+		sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+		<columns>
+			<Column width="40%">
+				<Text text="" class="boldCss"/>
+			</Column>
+			<Column width="40%" hAlign="Right">
+				<Text text="{modelYearRes>/anno1}" class="boldCss"/>
+			</Column>
+			<Column width="40%" hAlign="Right">
+				<Text text="{modelYearRes>/anno2}" class="boldCss"/>
+			</Column>
+			<Column width="40%" hAlign="Right">
+				<Text text="{modelYearRes>/anno3}" class="boldCss"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem id="idColumnListItemsYearRes">
+				<cells>
+					<VBox>
+						<Text text="{modelTableRes3>Voice}"></Text>
+					</VBox>
+					<VBox>
+						<Text
+							text="{path:'modelTableRes3>ImportoAnno1', type:'sap.ui.model.odata.type.Double', formatOptions:{decimals: 2, groupingSeparator:'.', decimalSeparator:',', preserveDecimals: true}}"
+							visible="{modelTableRes3>Text}" class="sapUiTinyMarginEnd"/>
+						<!--<Input value="{path:'modelTableRes3>ImportoAnno1', type:'sap.ui.model.odata.type.Double', formatOptions:{decimals: 2, groupingSeparator:'.', decimalSeparator:',', preserveDecimals: true}}" -->
+						<!--	visible="{modelTableRes3>Input}" textAlign="End" change=".liveChangeimportiReiscrizioni($event, 'modelTableRes3', 'ImportoAnno1')"/>-->
+						<Input value="{modelTableRes3>ImportoAnno1}" visible="{modelTableRes3>Input}" textAlign="End"
+							change=".liveChangeimportiReiscrizioni($event, 'modelTableRes3', 'ImportoAnno1')"/>
+					</VBox>
+					<VBox>
+						<Text
+							text="{path:'modelTableRes3>ImportoAnno2', type:'sap.ui.model.odata.type.Double', formatOptions:{decimals: 2, groupingSeparator:'.', decimalSeparator:',', preserveDecimals: true}}"
+							visible="{modelTableRes3>Text}" class="sapUiTinyMarginEnd"/>
+						<!--<Input value="{path:'modelTableRes3>ImportoAnno2', type:'sap.ui.model.odata.type.Double', formatOptions:{decimals: 2, groupingSeparator:'.', decimalSeparator:',', preserveDecimals: true}}" -->
+						<!--	visible="{modelTableRes3>Input}" textAlign="End" change=".liveChangeimportiReiscrizioni($event, 'modelTableRes3', 'ImportoAnno2')"/>-->
+						<Input value="{modelTableRes3>ImportoAnno2}" visible="{modelTableRes3>Input}" textAlign="End"
+							change=".liveChangeimportiReiscrizioni($event, 'modelTableRes3', 'ImportoAnno2')"/>
+					</VBox>
+					<VBox>
+						<Text
+							text="{path:'modelTableRes3>ImportoAnno3', type:'sap.ui.model.odata.type.Double', formatOptions:{decimals: 2, groupingSeparator:'.', decimalSeparator:',', preserveDecimals: true}}"
+							visible="{modelTableRes3>Text}" class="sapUiTinyMarginEnd"/>
+						<!--<Input value="{path:'modelTableRes3>ImportoAnno3', type:'sap.ui.model.odata.type.Double', formatOptions:{decimals: 2, groupingSeparator:'.', decimalSeparator:',', preserveDecimals: true}}" -->
+						<!--	visible="{modelTableRes3>Input}" textAlign="End" change=".liveChangeimportiReiscrizioni($event, 'modelTableRes3', 'ImportoAnno3')"/>-->
+						<Input value="{modelTableRes3>ImportoAnno3}" visible="{modelTableRes3>Input}" textAlign="End"
+							change=".liveChangeimportiReiscrizioni($event, 'modelTableRes3', 'ImportoAnno3')"/>
+					</VBox>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<OverflowToolbar visible="{= ${modelVisQuadri>/OkAuth} &amp;&amp; ${modelVisQuadri>/Attivo}}">
+		<Text text="La somma delle Economie reiscritte può essere minore o uguale alle Economie da Reiscrivere arrotondata all'euro inferiore."
+			class="boldCss"/>
+		<ToolbarSpacer/>
+		<Label text="Allinea Cassa"/>
+		<CheckBox selected="{modelPayload>/AllineaCassa}"/>
+		<Button icon="sap-icon://delete" press="onDeleteValue" type="Emphasized"/>
+		<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennali"/>
+		<Button press="onSaveReiscrizioni" type="Emphasized" text="Salva"/>
+	</OverflowToolbar>
+	<Table items="{path:'mTableQuadroDal>/'}">
+		<!-- , filters: [{path:'RecordType',operator: 'EQ',value1:'CP'}] -->
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="{i18n>StanzPluriComp}" level="H4"/>
+					<ToolbarSpacer/>
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="19%" hAlign="Right">
+				<Label text="{i18n>AnnoDa}" design="Bold"/>
+			</Column>
+			<Column width="19%" hAlign="Right">
+				<Label text="{i18n>AnnoAL}" design="Bold"/>
+			</Column>
+			<Column width="22%" hAlign="Right">
+				<Label text="" design="Bold"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem >
+				<cells>
+					<Text text="{mTableQuadroDal>YearLow}"/>
+					<Text text="{mTableQuadroDal>YearHigh}"/>
+					<Text text="{mTableQuadroDal>Importo}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<Table items="{path:'mTableQuadroDalCs>/'}">
+		<!-- , filters: [{path:'RecordType',operator: 'EQ',value1:'CP'}] -->
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="{i18n>StanzPluriCassa}" level="H4"/>
+					<ToolbarSpacer/>
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="19%" hAlign="Right">
+				<Label text="{i18n>AnnoDa}" design="Bold"/>
+			</Column>
+			<Column width="19%" hAlign="Right">
+				<Label text="{i18n>AnnoAL}" design="Bold"/>
+			</Column>
+			<Column width="22%" hAlign="Right">
+				<Label text="" design="Bold"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem >
+				<cells>
+					<Text text="{mTableQuadroDalCs>YearLow}"/>
+					<Text text="{mTableQuadroDalCs>YearHigh}"/>
+					<Text text="{mTableQuadroDalCs>Importo}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

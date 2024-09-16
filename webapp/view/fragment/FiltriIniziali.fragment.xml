@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:uxap="sap.uxap">
+	<Dialog title="{i18n>titleFragmentFiltriIniziali}" contentWidth="40%" contentHeight="auto">
+		<content>
+			<f:SimpleForm  editable="true" singleContainerFullSize="false" adjustLabelSpan="false"
+				layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" emptySpanXL="2" emptySpanL="0" emptySpanM="2"
+				emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1">
+				<f:content>
+					<core:Title/>
+					<Label text="{i18n>Sottostrumento}" labelFor="idSottostrumento" />
+					<Input id="idSottostrumento" width="auto" showValueHelp="true" required="false" valueHelpRequest="onSottostrumento"
+							valueHelpOnly="true" value="{modelPosFin>/Sottostrumento}" />
+                    
+                    <Label text="{i18n>Esercizio}" labelFor="idEsercizio" />
+                    <Input id="idEsercizio" width="auto" value="2023" enabled="true" editable="false" />
+                    
+                    <Label text="{i18n>posFin}" labelFor="idPosFin" visible="{visibleCheckModel>/visiblePosFin}" />
+					<Input id="idPosFin" value="{modelPosFin>/posFin}" required="false" width="auto" showValueHelp="true"
+							valueHelpOnly="true" valueHelpRequest="onPosFin"  visible="{visibleCheckModel>/visiblePosFin}" />
+                    
+                    <Label text="" labelFor="idAzioneF" />
+					<RadioButtonGroup id="GroupA">
+						<RadioButton text="{i18n>Spesa}" selected="true"/>
+						<RadioButton text="{i18n>Entrata}"/>
+					</RadioButtonGroup>
+				
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		 <beginButton>
+			<Button press="onGestisciPosFin" type="Emphasized" text="{i18n>gestisciPosFin}"/>
+		</beginButton> 
+		<endButton>
+            <Button press="onCreaPosFin" type="Emphasized" text="{i18n>creaPosFin}"></Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

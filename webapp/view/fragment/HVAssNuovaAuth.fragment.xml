@@ -1,0 +1,32 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<SelectDialog
+        contentWidth=""
+        contentHeight="60%"
+        noDataText=""
+        rememberSelections="false"
+        showClearButton="false"
+        title="Associa Nuova Autorizzazione"
+        cancel="onClose"
+        items="{modelPosFin>/nuoveAuth/}"
+        confirm="onChooseNuovaAuth"
+    >
+        <items>
+            <StandardListItem
+                activeIcon=""
+                adaptTitleSize="true"
+                description="{modelPosFin>id}"
+                icon=""
+                iconDensityAware="true"
+                iconInset="true"
+                info=""
+                infoState="None"
+                infoTextDirection="Inherit"
+                title="{modelPosFin>desc}"
+                titleTextDirection="Inherit"
+            />
+        </items>
+    </SelectDialog>
+</c:FragmentDefinition>

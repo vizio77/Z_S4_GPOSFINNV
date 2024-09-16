@@ -1,0 +1,59 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca Tipo" contentHeight="90%">
+		<content><!-- updateFinished="onResetSelectionSH" -->
+            <Table
+                growing="true"
+                selectionChange="onConfirmItem($event,'Tipo')"
+                mode="SingleSelectMaster"
+                growingScrollToLoad="true"
+                items="{path: 'modelPosFin>/formAutorizzazione/Tipo_results/', length: '5000',  sorter: [{path: 'DESC_SIGLA', comparator: '.sorterHVString'}]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                 busy="{modelPosFin>/busyAuth}"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="50%">
+                                <customData>
+                                    <c:CustomData key="tipo" value="DESC_TESTO"/>
+                                    <c:CustomData key="tipo" value="DESC_SIGLA"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column  width="auto">
+                        <Text text="Tipo" class="boldCss"/>
+                    </Column>
+                    <Column  width="auto" >
+                        <Text text="Descr. Provvedimento" class="boldCss"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active" >
+                        <cells>
+                            <Text text="{modelPosFin>DESC_SIGLA}"/>
+                            <Text text="{modelPosFin>DESC_TESTO}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="AZIONE" value="Azione" writeToDom="false" />
+                    <c:CustomData key="selezioni" value="azioni" writeToDom="false" />
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+            <Button text="Seleziona" press="onConfirmItem" type="Emphasized">
+                <customData>
+                    <c:CustomData key="selezioni" value="Tipo" writeToDom="false" />
+                </customData>
+            </Button>
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

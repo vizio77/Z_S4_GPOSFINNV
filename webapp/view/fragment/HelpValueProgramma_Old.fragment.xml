@@ -1,0 +1,48 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+    <TableSelectDialog
+        contentHeight=""
+        contentWidth=""
+        growing="true"
+        multiSelect="false"
+        noDataText=""
+        rememberSelections="false"
+        showClearButton="false"
+        title="Cerca"
+        items="{modelPosFin>/helpValueProgramma/}"
+        confirm="onPressChoiceTableProgramma"
+    >
+        <columns>
+            <Column width="8rem">
+                <Text text="Missione" />
+            </Column>
+            <Column width="12rem">
+                <Text text="Descr. Missione"/>
+            </Column>
+            <Column width="8rem">
+                <Text text="Programma"/>
+            </Column>
+            <Column width="12rem">
+                <Text text="Descr. Programma"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem type="Active">
+                <cells>          
+                    <Text text="{modelPosFin>MISSIONE}"/>
+                    <Text text="{modelPosFin>DESCR_MISSIONE}"/>
+                    <Text text="{modelPosFin>VALORE}"/>
+                    <Text text="{modelPosFin>DESCRIZIONE}"/>
+                </cells>
+                <customData>
+                    <c:CustomData key="{modelPosFin>VALORE}" value="{modelPosFin>DESCRIZIONE}" writeToDom="false" />
+                </customData>
+            </ColumnListItem>
+        </items>
+         <customData>
+            <c:CustomData key="PROGRAMMA" value="DESC_PROGRAMMA" writeToDom="false" />
+        </customData>
+    </TableSelectDialog>
+</c:FragmentDefinition>

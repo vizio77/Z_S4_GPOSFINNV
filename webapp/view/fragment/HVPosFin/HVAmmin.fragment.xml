@@ -1,0 +1,61 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog
+    contentHeight="90%" 
+    draggable="false"
+    escapeHandler=""
+    horizontalScrolling="true"
+    icon=""
+    resizable="false"
+    showHeader="true"
+    state="None"
+    stretch="false"
+    title="Cerca Amministrazione"
+    type="Standard"
+    verticalScrolling="true"
+>
+    <content>
+        <List
+        selectionChange = "onConfirmSelectionPosFin($event,'Amministrazione')"
+        mode="SingleSelectMaster"
+		items="{
+			path: 'modelPosFin>/formPosFin/amministrazioni', sorter: [{path: 'Prctr', comparator: '.sorterAmmByNumericCode'}]
+		}" >
+        <headerToolbar>
+            <!-- <OverflowToolbar>
+                <content> width="65%" -->
+                <Toolbar width="100%">
+                    <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="auto" >
+                        <customData>
+                            <c:CustomData key="amm" value="DescEstesa"/>
+                            <c:CustomData key="amm" value="Prctr"/>
+                        </customData>
+                    </SearchField>
+                </Toolbar>
+                <!-- </content>
+            </OverflowToolbar> -->
+        </headerToolbar>
+		<StandardListItem
+			title="{modelPosFin>Prctr}"
+			description="{modelPosFin>DescEstesa}"
+			iconDensityAware="false"
+			iconInset="false"/>
+       <!--  <customData>
+            <c:CustomData key="selezioni" value="Amministrazione" writeToDom="false" />
+        </customData> -->
+	</List>
+    </content>
+    <customHeader>
+    </customHeader>
+    <buttons>
+        <Button text="Annulla" press="onCloseHVPosFin" type="Emphasized"/>
+        <!-- <Button text="Seleziona" press="onConfirmSelectionPosFin" type="Emphasized">
+            <customData>
+                <c:CustomData key="selezioni" value="Amministrazione" writeToDom="false" />
+            </customData>
+        </Button> -->
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

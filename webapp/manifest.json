@@ -1,0 +1,337 @@
+{
+	"_version": "1.17.0",
+	"sap.app": {
+		"id": "zsap.com.r3.cobi.s4.gestposfinnv",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"dataSources": {
+			"sapHanaS2": {
+				"uri": "/sap/opu/odata/sap/ZSS4_COBI_ALV_SRV/",
+				"type": "OData",
+				"settings": {
+					"annotations": [],
+					"localUri": "localService/metadata.xml",
+					"odataVersion": "2.0"
+				}
+			},
+			"sapHanaS2Tipologiche": {
+				"uri": "/sap/opu/odata/sap/ZSS4_CO_GEST_TIPOLOGICHE_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadataTipologiche.xml"
+				}
+			},
+			"sapHanaS2Revisione": {
+				"uri": "/sap/opu/odata/sap/ZSS4_REVIS_001_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"sapHanaS2Autorizzazioni": {
+				"uri": "/sap/opu/odata/sap/ZSS4_COBI_LEGGI_AUTORIZZAZIONI_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadataAutorizzazioni.xml"
+				}
+			},
+			"sapHanaS2FoglioNotizie": {
+				"uri": "/sap/opu/odata/sap/ZSS4_CO_GEST_FOGLIO_NOTIZIE_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadataFoglioNotizie.xml"
+				}
+			},
+			"ZSS4_URL_DINAMICO_SRV": {
+				"uri": "/sap/opu/odata/sap/ZSS4_URL_DINAMICO_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"annotations": [],
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"ZSS4_COBI_QUADRO_CONTABILE_SRV": {
+				"uri": "/sap/opu/odata/sap/ZSS4_COBI_QUADRO_CONTABILE_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadataQuadro.xml"
+				}
+			},
+			"ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV": {
+				"uri": "/sap/opu/odata/sap/ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadataQuadroDlb.xml"
+				}
+			},
+			"modelSHReiscrizioni": {
+				"uri": "/sap/opu/odata/sap/ZSS4_COBI_REISCRIZ_ECONOMIE_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadataAutorizzazioni.xml"
+				}
+			},
+			"modemAmm": {
+				"uri": "/sap/opu/odata/sap/ZSS4_GEST_POSFIN_AMM_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadataAmm.xml"
+				}
+			},
+			"modemVarCont": {
+				"uri": "/sap/opu/odata/sap/ZSS4_COBI_VAR_CONT_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadataAmm.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"dependencies": {
+			"minUI5Version": "1.71.64",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.f": {},
+				"sap.suite.ui.generic.template": {},
+				"sap.ui.comp": {},
+				"sap.ui.generic.app": {},
+				"sap.ui.table": {},
+				"sap.ushell": {},
+				"sap.uxap": {},
+				"zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink": {},
+				"zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin": {},
+				"zsap.com.r3.cobi.s4.z_s4_auth_tooltip": {},
+				"z_s4_coniauth.coniauth": {},
+				"z_s4_crosslock.crosslock": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "zsap.com.r3.cobi.s4.gestposfinnv.i18n.i18n"
+				}
+			},
+			"sapHanaS2": {
+				"dataSource": "sapHanaS2",
+				"preload": true,
+				"settings": {}
+			},
+			"sapHanaS2Tipologiche": {
+				"dataSource": "sapHanaS2Tipologiche"
+			},
+			"sapHanaS2Autorizzazioni": {
+				"dataSource": "sapHanaS2Autorizzazioni"
+			},
+			"sapHanaS2Revisione": {
+				"dataSource": "sapHanaS2Revisione"
+			},
+			"sapHanaS2FoglioNotizie": {
+				"dataSource": "sapHanaS2FoglioNotizie"
+			},
+			"ZSS4_COBI_QUADRO_CONTABILE_SRV": {
+				"dataSource": "ZSS4_COBI_QUADRO_CONTABILE_SRV"
+			},
+			"ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV": {
+				"dataSource": "ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV"
+			},
+			"ZSS4_URL_DINAMICO_SRV": {
+				"dataSource": "ZSS4_URL_DINAMICO_SRV"
+			},
+			"modemAmm": {
+				"dataSource": "modemAmm"
+			},
+			"modelSHReiscrizioni": {
+				"dataSource": "modelSHReiscrizioni"
+			},
+			"modemVarCont": {
+				"dataSource": "modemVarCont"
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "zsap.com.r3.cobi.s4.gestposfinnv.view",
+				"controlAggregation": "pages",
+				"controlId": "app",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "",
+					"pattern": "",
+					"target": [
+						"TargetHome"
+					]
+				},
+				{
+					"name": "Home",
+					"pattern": "Home",
+					"target": [
+						"TargetHome"
+					]
+				},
+				{
+					"name": "HomePosFin",
+					"pattern": "HomePosFin/{Fikrs}/{CodiceStrumento}/{CodiceStrumentoOri}/{CodiceSottostrumento}/{Datbis}",
+					"target": [
+						"HomePosFin"
+					]
+				},
+				{
+					"name": "RimodulazioneVerticale",
+					"pattern": "RimodulazioneVerticale/{Fikrs}/{CodiceStrumento}/{CodiceStrumentoOri}/{CodiceSottostrumento}/{Datbis}",
+					"target": [
+						"RimodulazioneVerticale"
+					]
+				},
+				{
+					"name": "Finanziamento",
+					"pattern": "Finanziamento/{Fikrs}/{CodiceStrumento}/{CodiceStrumentoOri}/{CodiceSottostrumento}/{Datbis}",
+					"target": [
+						"Finanziamento"
+					]
+				},
+				{
+					"name": "Riprogrammazioni",
+					"pattern": "Riprogrammazioni/{Fikrs}/{CodiceStrumento}/{CodiceStrumentoOri}/{CodiceSottostrumento}/{Datbis}/{Fincode}/{Fikrs}",
+					"target": [
+						"Riprogrammazioni"
+					]
+				},
+				{
+					"name": "DetailPosFin",
+					"pattern": "DetailPosFin/{Fikrs}/{CodiceStrumento}/{CodiceStrumentoOri}/{CodiceSottostrumento}/{Datbis}/{Anno}/{Fase}/{Reale}/{Fipex}",
+					"target": [
+						"DetailPosFin"
+					]
+				},
+				{
+					"name": "DetailPosFinFinanziamento",
+					"pattern": "DetailPosFinFinanziamento/{Fikrs}/{CodiceStrumento}/{CodiceStrumentoOri}/{CodiceSottostrumento}/{Datbis}/{Fincode}/{Fikrs}/{Anno}/{Fase}/{Reale}/{Fipex}/{Auth}/{Esposizione}",
+					"target": [
+						"DetailPosFinFinanziamento"
+					]
+				}
+			],
+			"targets": {
+				"TargetHome": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "Home",
+					"viewName": "Home"
+				},
+				"Home": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "Home"
+				},
+				"HomePosFin": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "HomePosFin",
+					"viewName": "HomePosFin"
+				},
+				"RimodulazioneVerticale": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "RimodulazioneVerticale",
+					"viewName": "RimodulazioneVerticale"
+				},
+				"Finanziamento": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "Finanziamento",
+					"viewName": "Finanziamento"
+				},
+				"Riprogrammazioni": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "Riprogrammazioni",
+					"viewName": "Riprogrammazioni"
+				},
+				"DetailPosFin": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "DetailPosFin",
+					"viewName": "DetailPosFin"
+				},
+				"DetailPosFinFinanziamento": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "DetailPosFinFinanziamento",
+					"viewName": "DetailPosFinFinanziamento"
+				}
+			}
+		},
+		"rootView": {
+			"viewName": "zsap.com.r3.cobi.s4.gestposfinnv.view.App",
+			"type": "XML"
+		},
+		"services": {
+			"ShellUIService": {
+				"factoryName": "sap.ushell.ui5service.ShellUIService"
+			}
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/z_s4_gestposfin/webapp",
+		"_version": "1.1.0"
+	}
+}

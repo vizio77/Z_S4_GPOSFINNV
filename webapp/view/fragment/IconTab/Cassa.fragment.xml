@@ -1,0 +1,214 @@
+<core:FragmentDefinition
+xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<OverflowToolbar id="autorizzazioniCompButtonCassa" class="sapUiSmallMarginBottom" style="Clear">
+		<!-- <Select id="selectAnnicassaCa" width="auto" selectedKey="{modelFilter>/keyAnno}" items="{modelAnno>/}" editable="true"
+			change="onSelectTriennio">
+			<core:Item key="{modelAnno>keyAnno}" text="{modelAnno>textAnno}"/>
+		</Select> -->
+		<ToolbarSpacer/>
+		<!-- <Button text="{i18n>resetta}" type="Emphasized" press="onResetDati"/> -->
+		<!-- <Button text="{i18n>avvia}" type="Emphasized" press="onPressAvvioCassa" enabled="true"/> -->
+		<!-- <Button text="{i18n>avvia}" type="Emphasized" press="showCassaSAC" enabled="true"/> -->
+		<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event)"/>
+	</OverflowToolbar>
+	<VBox class="sapUiSmallMargin">
+		<!--<ScrollContainer>-->
+			<Table id="idTableyearCassa" inset="false" items="{modelTableCassa>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+				<!-- <OverflowToolbar class="sapUiSmallMarginBottom" style="Clear">
+				<ToolbarSpacer/>
+					<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event)"/>
+				</OverflowToolbar> -->
+				
+				
+				<columns>
+					<Column width="30rem">
+						<Text text="" class="boldCss"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem id="idColumnListItemsYearCassa">
+						<cells>
+							<VBox>
+								<Text text="{modelTableCassa>ViewLabel}" visible="{= ${modelTableCassa>FlagGriglia} === 'BOLD' ? true : false}" class="boldCss"></Text>
+								<Text text="{modelTableCassa>ViewLabel}" visible="{= ${modelTableCassa>FlagGriglia} === 'ALIGNR_RIGHT' ? true : false}"
+									class="sapUiMediumMarginBegin"/>
+								<Text text="{modelTableCassa>ViewLabel}" visible="{= ${modelTableCassa>FlagGriglia} === 'CHILD' ? true : false}" class="sapUiLargeMarginBegin boldAndSmallCss"/>
+								<Text text="{modelTableCassa>ViewLabel}" visible="{= ${modelTableCassa>FlagGriglia} === '' ? true : false }"/>
+								<!-- <Text text="{modelTableCassa>ViewLabel}"  class="{= ${modelTableCassa>FlagGriglia} === 'BOLD' ? boldCss' : ''}{= ${modelTableCassa>FlagGriglia} === 'ALIGNR_RIGHT' ? 'sapUiMediumMarginBegin' : ''}"> -->
+								<!-- </Text> -->
+							</VBox>
+							<!--<Text text="{modelTableMoreYear>PROP_NAME}"/>-->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		<!-- <Table id="idTableyearCassa" inset="false" items="{modelTableCassa>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+
+			<columns>
+				<Column width="9rem">
+					<Text text="" class="boldCss"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem id="idColumnListItemsYearCassa">
+					<cells>
+						<Text text="{modelTableCassa>LABEL}">
+							<customData>
+								<core:CustomData key="typeField" value="{modelTableCassa>FLAG_GRIGLIA}" writeToDom="true"/>
+							</customData>
+						</Text>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table> -->
+		<!--</ScrollContainer>-->
+		<VBox class="sapUiSmallMargin">
+			<Table width="40%" inset="false" items="{modelRes>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+				<columns>
+					<Column width="30rem">
+						<Text text="" class="boldCss"/>
+					</Column>
+					<Column >
+						<Text text="Residui {mdColumnVariazioniCa>/ANNO1}" class="boldCss"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem >
+						<cells>
+							<Text text="{modelRes>ViewLabel}">
+								<customData>
+									<core:CustomData key="typeField" value="{modelRes>FlagGriglia}" writeToDom="true"/>
+								</customData>
+							</Text>
+							<Text text="{modelRes>ImportoCSAnno001}" textAlign="End"></Text>
+			
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+
+		</VBox>
+		<VBox>
+			<Table id="tableSacCa" inset="false" items="{modelTableSacCa>/}" 
+				visible="{modelVisQuadri>/Attivo}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+				
+				<columns>
+					<Column width="40%">
+						<Text text="" class="boldCss"/>
+					</Column>
+					<Column width="10rem" hAlign="End">
+						<Label text="{mdColumnVariazioniCa>/ANNO1}" design="Bold"/>
+					</Column>
+					<Column width="10rem" hAlign="End">
+						<Label text="{mdColumnVariazioniCa>/ANNO2}" design="Bold"/>
+					</Column>
+					<Column width="10rem" hAlign="End">
+						<Label text="{mdColumnVariazioniCa>/ANNO3}" design="Bold"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<!--<VBox>-->
+							<Text text="{modelTableSacCa>LABEL}"/>
+							<Input value="{modelTableSacCa>VAL_ANNO1}" type="Text" textAlign="End" change="liveChangeimporti('modelTableSacCa', 'VAL_ANNO1', '')"/>
+							<Input value="{modelTableSacCa>VAL_ANNO2}" type="Text" textAlign="End" change="liveChangeimporti( 'modelTableSacCa', 'VAL_ANNO2', '')"/>
+							<Input value="{modelTableSacCa>VAL_ANNO3}" type="Text" textAlign="End" change="liveChangeimporti( 'modelTableSacCa', 'VAL_ANNO3', '')"/>
+							<!--</VBox>-->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</VBox>
+		<VBox>
+			<Table id="tableSacCa2" inset="false" items="{modelTableSacCaVaRes>/}" 
+				visible="{= ${modelVisQuadri>/Attivo} === true &amp;&amp; ${modelPosFin>/infoSottoStrumento/TipoSstr} === '52' &amp;&amp; ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '0' }"
+				sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+				<columns>
+					<Column width="40%">
+						<Text text="" class="boldCss"/>
+					</Column>
+					<Column width="10rem" hAlign="End">
+						<Label text="{mdColumnVariazioniCa>/ANNO1}" design="Bold"/>
+					</Column>
+					<Column width="10rem" hAlign="End">
+						<!-- <Label text="{mdColumnVariazioniCa>/ANNO2}" design="Bold"/> -->
+					</Column>
+					<Column width="10rem" hAlign="End">
+						<!-- <Label text="{mdColumnVariazioniCa>/ANNO3}" design="Bold"/> -->
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<!--<VBox>-->
+							<Text text="{modelTableSacCaVaRes>LABEL}"/>
+							<Input value="{modelTableSacCaVaRes>VAL_ANNO1}" type="Text" textAlign="End" change="liveChangeimporti('modelTableSacCaVaRes', 'VAL_ANNO1', '')"/>
+							<!-- <Input value="{modelTableSacCa>VAL_ANNO2}" type="Text" textAlign="End" change="liveChangeimporti( 'modelTableSacCa', 'VAL_ANNO2', '')"/>
+							<Input value="{modelTableSacCa>VAL_ANNO3}" type="Text" textAlign="End" change="liveChangeimporti( 'modelTableSacCa', 'VAL_ANNO3', '')"/> -->
+							<!--</VBox>-->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</VBox>
+		
+		<VBox class="sapUiSmallMargin">
+			<Table items="{modelTableCassaDA>/}">
+				<headerToolbar>
+					<OverflowToolbar visible="{modelVisQuadri>/Attivo}">
+						<!--<Select id="selectAnnicassa" width="auto" selectedKey="{modelAnnoTriennio>/keyAnno}" items="{modelAnno>/}" editable="true"-->
+						<!--	change="onChangeColumns">-->
+						<!--	<core:Item key="" text=""/>-->
+						<!--	<core:Item key="{modelAnno>keyAnno}" text="{modelAnno>textAnno}"/>-->
+						<!--</Select>-->
+						<ToolbarSpacer/>
+						<!-- <Label text="Allinea Cassa"/>
+						<CheckBox selected="{modelTableSacCa>/0/FLAG_ALLINEA_CS}"/> -->
+						<Label text="A Decorrere"/>
+						<CheckBox selected="{modelTableSacCa>/0/FLAG_A_DECORRERE}"/>
+						<Button icon="sap-icon://delete" press=".onDeleteValueCassa" type="Emphasized"/>
+						<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennali"/>
+						<Button press="onSavePluriennale" type="Emphasized" text="Salva"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<!--<Column width="auto">-->
+					<!--	<Text text="" class="boldCss"/>-->
+					<!--</Column>-->
+					<!--<Column width="auto">-->
+					<!--	<Text text="" class="boldCss"/>-->
+					<!--</Column>-->
+					<Column width="19%" hAlign="Right">
+						<Label text="{i18n>AnnoDa}" design="Bold"/>
+					</Column>
+					<Column width="19%" hAlign="Right">
+						<Label text="{i18n>AnnoAL}" design="Bold"/>
+					</Column>
+					<Column width="22%" hAlign="Right">
+						<Label text="{i18n>Cassa}" design="Bold"/>
+					</Column>
+					<Column width="40%">
+						<Label text="" design="Bold"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem >
+						<cells>
+							<Text text="{modelTableCassaDA>YearLow}"/>
+							<Text text="{modelTableCassaDA>YearHigh}"/>
+							<Text text="{modelTableCassaDA>Importo}"/>
+							<Text text=""/>
+							<!--<Text text=""/>-->
+							<!--<Text text=""/>-->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</VBox>
+	</VBox>
+
+
+
+</core:FragmentDefinition>

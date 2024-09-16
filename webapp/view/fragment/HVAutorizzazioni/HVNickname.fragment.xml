@@ -1,0 +1,49 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:uxap="sap.uxap">
+	<Dialog  title="Cerca {i18n>Nickname}" contentWidth="80%" contentHeight="60%">
+		<content>
+			<Table 
+			inset="false" 
+			items="{path: 'modelPosFin>/formAutorizzazione/Nickname_results/', length: '5000',  sorter: [{path: 'NICKNAME', comparator: '.sorterHVDomSStr'}]}"
+			sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+			mode="SingleSelectLeft">
+				<headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="65%">
+                                <customData>
+                                    <core:CustomData key="nickname" value="NICKNAME"/>
+                                    <core:CustomData key="nickname" value="DESCR_ESTESA"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+				<columns>
+					<Column width="auto" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>Nickname}" class="boldCss"/>
+					</Column>
+					<Column width="auto" demandPopin="true" popinDisplay="Inline">
+						<Text text="{i18n>descrizione}" class="boldCss"/>
+					</Column>					
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle" press="onPressNavtoDetails">
+						<cells>
+							<Text text="{modelPosFin>NICKNAME}"/>
+							<Text text="{modelPosFin>DESCR_ESTESA}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<buttons>
+			<Button press="onClose" type="Emphasized" text="{i18n>close}"/>
+				<Button type="Emphasized"  press="onConfirmItem" text="{i18n>conf}">
+					<customData>
+						<core:CustomData key="selezioni" value="Nickname" writeToDom="false" />
+					</customData>
+				</Button>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

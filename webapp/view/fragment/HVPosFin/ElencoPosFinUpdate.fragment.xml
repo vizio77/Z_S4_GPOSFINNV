@@ -1,0 +1,33 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog
+    draggable="true"
+    escapeHandler=""
+    horizontalScrolling="true"
+    icon="sap-icon://message-warning"
+    resizable="false"
+    showHeader="true"
+    state="Warning"
+    stretch="false"
+    title="Attenzione"
+    type="Message"
+    verticalScrolling="true"
+>   
+    <Label text="Le seguenti posizioni finanziarie saranno aggiornate"/>
+    <List
+		id="posFinUpdate"
+		items="{modelPosFin>/posFinUpdate/}">
+		<items>
+			<StandardListItem
+				title="{modelPosFin>Fipex}"
+				iconDensityAware="false"
+				iconInset="false" />
+		</items>
+	</List>
+    <buttons>
+        <Button text="Ok" press="onSaveModifica" type="Emphasized"/>
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

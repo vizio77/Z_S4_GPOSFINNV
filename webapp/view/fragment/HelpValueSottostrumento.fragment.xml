@@ -1,0 +1,232 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+>
+<Dialog  title="{i18n>cercaSottostrumento}" contentWidth="80%" contentHeight="auto" id="HVSottostrumento" busyIndicatorDelay="200">
+    <content>
+        <f:SimpleForm id="formInserimentoSottoStrumento" editable="true" singleContainerFullSize="false" adjustLabelSpan="false"
+            layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" emptySpanXL="2" emptySpanL="0" emptySpanM="2"
+            emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1">
+            <f:content>
+                <Label text="{i18n>TipoSottoStr}" labelFor="idformStTipologia"/>
+                    <!-- <Input id="idformStTipologia" value="{modelHome>/formSottostrumento/tipologia}" width="70%" showValueHelp="true"/> -->
+                        <Select id="idformStTipologia"  width="70%"  selectedKey="{modelHome>/formSottostrumento/tipologia}" items="{
+                            path: 'modelHome>/formSottostrumento/tipologieSet/'
+                        }" change=".onChangeSelect($event)">
+                        <c:Item key="{modelHome>Tipologia}" text="{modelHome>DescrTipologia}" />
+                        </Select>
+                <Label text="{i18n>formSottostrumento}" labelFor="idformSottoStr"/>
+                <Input id="idformSottoStr" value="{modelHome>/formSottostrumento/codice_sstr}" width="70%" showValueHelp="false"/>
+                <Label text="{i18n>EspContabile}" labelFor="idformStEspCont"/>
+                    <!-- value="{modelHome>/formSottostrumento/esposizione_contabile}" -->
+				<Select id="idformStEspCont"  width="70%"  selectedKey="{modelHome>/formSottostrumento/esposizione_contabile}" items="{
+                    path:'modelHome>/formSottostrumento/esposizione_contabileSet/'}" forceSelection="false" change=".onChangeSelect($event)">
+                    <c:Item key="{modelHome>Esposizione}-{modelHome>Progr}" text="{modelHome>DescrEsposizione}" />
+                </Select>
+                <Label text="{i18n>descrizione}" labelFor="idFormStDescr"/>
+				<Input id="idFormStDescr" value="{modelHome>/formSottostrumento/descrizione_sstr}" width="70%"/>
+                <Label text="{i18n>Visibilita}" labelFor="idFormStVisibilita"/>
+                <!-- value="{modelHome>/formSottostrumento/visibilita}" -->
+				<Select id="idFormStVisibilita" selectedKey="{modelHome>/formSottostrumento/visibilita}" width="70%"
+                    items="{
+                        path:'modelHome>/formSottostrumento/visibilitaSet/'}" forceSelection="false" change=".onChangeSelect($event)">
+                    <c:Item key="{modelHome>Reale}" text="{modelHome>DescrReale}" />
+                </Select>
+                <Label text="{i18n>EspAttoDov}"/>
+                <Select width="70%">
+                </Select>
+                <Label text="{i18n>Stato}" />
+                <Select width="70%" selectedKey="{modelHome>/formSottostrumento/stato}">
+                    <c:Item key="" text="" />
+                    <c:Item key="1" text="Aperto" />
+                    <c:Item key="0" text="Chiuso" />
+                </Select>
+                <Label text="{i18n>authgiust}" labelFor="id_auth_giust"/>
+                <Input id="id_auth_giust" width="70%" value="{modelHome>/formSottostrumento/auth_giust}">
+                </Input>
+                <!-- <cust:InputAutorizzazioneGiustificativa width="70%" id="id_auth_giust"
+                        value="{autorizzazioneGiustificativaModel>/SEQ_AUT/DESCR_ESTESA} - {autorizzazioneGiustificativaModel>/FINCODE/DESCR_ESTESA}" 
+                    /> -->
+                <Toolbar visible="false"/>
+                <Panel expandable="true" width="100%" class="marginHeaderSStr">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Label text="Dominio Sottostrumento:"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <f:SimpleForm id="formDominioSStr" editable="true" singleContainerFullSize="false" adjustLabelSpan="false"
+                    layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" emptySpanXL="2" emptySpanL="0" emptySpanM="2"
+                    emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1">
+                    <f:content>
+                        <Label text="{i18n>dom_amm}" labelFor="id_dom_amm"/>
+                        <MultiInput id="id_dom_amm" width="72.5%" tokens="{path: 'modelHome>/formSottostrumento/dominio_sstr/'}" maxTokens="1000" valueHelpRequest="onHRDomSStr"
+                            tokenUpdate=".onDeleteTokenDomSStr">
+                            <tokens>
+                                <Token
+                                    editable="true"
+                                    key="{modelHome>Prctr}"
+                                    selected="false"
+                                    text="{= ${modelHome>Prctr} !== null ? ${modelHome>Prctr} + ' - ' + ${modelHome>DescBreve} : '' }"
+                                    textDirection="Inherit" />
+                            </tokens>
+                            <customData>
+                                <c:CustomData key="popup" value="HelpValueAmm"/>
+                                <c:CustomData key="deleteToken" value="dominio_sstr"/>
+                            </customData>
+                        </MultiInput>
+                        <Label text="{i18n>dom_titolo}" labelFor="id_dom_titolo"/>
+                        <MultiInput id="id_dom_titolo" width="72.5%" tokens="{path: 'modelHome>/formSottostrumento/titoli/'}" maxTokens="1000" valueHelpRequest="onHRDomSStr"
+                            tokenUpdate=".onDeleteTokenDomSStr">
+                            <tokens>
+                                <Token
+                                    editable="true"
+                                    key="{modelHome>Titolo}"
+                                    selected="false"
+                                    text="{modelHome>Titolo} - {modelHome>DescEstesaTitolo}"
+                                    textDirection="Inherit"  />
+                            </tokens>
+                            <customData>
+                                <c:CustomData key="popup" value="HelpValueTitolo"/>
+                                <c:CustomData key="deleteToken" value="titoli"/>
+                            </customData>
+                        </MultiInput>
+                        <Label text="{i18n>dom_categoria}" labelFor="id_dom_categ"/>
+                        <MultiInput id="id_dom_categ" width="72.5%" tokens="{path: 'modelHome>/formSottostrumento/categoria/'}" maxTokens="1000" valueHelpRequest="onHRDomSStr"
+                                   tokenUpdate=".onDeleteTokenDomSStr">
+                            <tokens>
+                                <Token
+                                    editable="true"
+                                    key="{modelHome>Categoria}-{modelHome>Titolo}"
+                                    selected="false"
+                                    text="{modelHome>Categoria} - {modelHome>DescEstesaCategoria}"
+                                    textDirection="Inherit"  />
+                            </tokens>
+                            <customData>
+                                <c:CustomData key="popup" value="HelpValueCategoria"/>
+                                <c:CustomData key="deleteToken" value="categoria"/>
+                            </customData>
+                        </MultiInput>
+                        <Label text="{i18n>dom_ce2}" labelFor="id_dom_ce2"/>
+                        <MultiInput id="id_dom_ce2" width="72.5%"  tokens="{path: 'modelHome>/formSottostrumento/economica2/'}" maxTokens="1000" valueHelpRequest="onHRDomSStr"
+                                   tokenUpdate=".onDeleteTokenDomSStr">
+                            <tokens>
+                                <Token
+                                    editable="true"
+                                    key="{modelHome>Ce2}-{modelHome>Titolo}-{modelHome>Categoria}"
+                                    selected="false"
+                                    text="{modelHome>Ce2} - {modelHome>DescEstesaCe2}"
+                                    textDirection="Inherit" />
+                            </tokens>
+                            <customData>
+                                <c:CustomData key="popup" value="HelpValueEconomica2"/>
+                                <c:CustomData key="deleteToken" value="economica2"/>
+                            </customData>
+                        </MultiInput>
+                        <Label text="{i18n>dom_ce3}" labelFor="id_dom_ce3"/>
+                        <MultiInput id="id_dom_ce3" width="72.5%" tokens="{path: 'modelHome>/formSottostrumento/economica3/'}" maxTokens="1000" valueHelpRequest="onHRDomSStr"
+                                   tokenUpdate=".onDeleteTokenDomSStr">
+                            <tokens>
+                                <Token
+                                    editable="true"
+                                    key="{modelHome>Ce3}-{modelHome>Titolo}-{modelHome>Categoria}-{modelHome>Ce2}"
+                                    selected="false"
+                                    text="{modelHome>Ce3} - {modelHome>DescEstesaCe3}"
+                                    textDirection="Inherit" />
+                            </tokens>
+                            <customData>
+                                <c:CustomData key="popup" value="HelpValueEconomica3"/>
+                                <c:CustomData key="deleteToken" value="economica3"/>
+                            </customData>
+                        </MultiInput>
+                        <Label text="{i18n>dom_miss}" labelFor="id_dom_missione"/>
+                        <MultiInput id="id_dom_missione" width="72.5%" tokens="{path: 'modelHome>/formSottostrumento/missioni/'}" maxTokens="1000" valueHelpRequest="onHRDomSStr"
+                            tokenUpdate=".onDeleteTokenDomSStr">
+                            <tokens>
+                                <Token
+                                    editable="true"
+                                    key="{modelHome>Missione}"
+                                    selected="false"
+                                    text="{modelHome>Missione} - {modelHome>DescEstesaMissione}"
+                                    textDirection="Inherit" />
+                            </tokens>
+                            <customData>
+                                <c:CustomData key="popup" value="HelpValueMissione"/>
+                                <c:CustomData key="deleteToken" value="missioni"/>
+                            </customData>
+                        </MultiInput>
+                        <Label text="{i18n>dom_progr}" labelFor="id_dom_progr"/>
+                        <MultiInput id="id_dom_progr" width="72.5%" tokens="{path: 'modelHome>/formSottostrumento/programmi/'}" maxTokens="1000" valueHelpRequest="onHRDomSStr"
+                                   tokenUpdate=".onDeleteTokenDomSStr">
+                            <tokens>
+                                <Token
+                                    editable="true"
+                                    key="{modelHome>Programma}-{modelHome>Missione}-{modelHome>Prctr}"
+                                    selected="false"
+                                    text="{modelHome>Programma} - {modelHome>DescEstesaProgramma}"
+                                    textDirection="Inherit" />
+                            </tokens>
+                            <customData>
+                                <c:CustomData key="popup" value="HelpValueProgramma"/>
+                                <c:CustomData key="deleteToken" value="programmi"/>
+                            </customData>
+                        </MultiInput>
+                        <Label text="{i18n>dom_azione}" labelFor="id_dom_azione"/>
+                        <MultiInput id="id_dom_azione" width="72.5%" valueHelpRequest="onHRDomSStr" tokens="{modelHome>/formSottostrumento/azioni/}"
+                                    maxTokens="1000" tokenUpdate=".onDeleteTokenDomSStr">
+                                <tokens>
+                                    <Token
+                                        editable="true"
+                                        key="{modelHome>Azione}-{modelHome>Programma}-{modelHome>Missione}-{modelHome>Missione}-{modelHome>Prctr}"
+                                        selected="false"
+                                        text="{modelHome>Azione} - {modelHome>DescEstesaAzione}"
+                                        textDirection="Inherit" />
+                                </tokens>
+                                <customData>
+                                    <c:CustomData key="popup" value="HelpValueAzione"/>
+                                    <c:CustomData key="deleteToken" value="azioni"/>
+                                </customData>
+                        </MultiInput>
+                        <Label text="{i18n>dom_tipolog_auth}" labelFor="id_dom_tipo_auth"/>
+                        <FlexBox id="id_dom_tipo_auth" justifyContent="SpaceAround" width="60%">
+                            <CheckBox text="FL" selected="{modelHome>/formSottostrumento/FL}"/>
+                            <CheckBox text="FB" selected="{modelHome>/formSottostrumento/FB}"/>
+                            <CheckBox text="OI" selected="{modelHome>/formSottostrumento/OI}"/>
+                            <CheckBox text="E" enabled="false"/>
+                        </FlexBox>
+                        <Label text="{i18n>dom_tipo_var}" labelFor="id_dom_tipo_var"/>
+                        <!-- <RadioButtonGroup id="id_dom_tipo_var" columns="6" selectedIndex="2">
+                            <buttons>
+                                <RadioButton text="Solo variazioni struttura" selected="{modelHome>/formSottostrumento/solo_struttura}" enabled="{= !!${modelHome>/formSottostrumento/esposizione_contabile} &amp;&amp; ${modelHome>/formSottostrumento/esposizione_contabile}.split('-')[0] === '0'}"/>
+                                <RadioButton text="Solo variazioni contabili"  selected="{modelHome>/formSottostrumento/solo_contabili}"/>
+                                <RadioButton text="Nessuna Restrizione"  selected="{modelHome>/formSottostrumento/nessuna_restrizione}"/>
+                            </buttons>
+                        </RadioButtonGroup> -->
+                        <FlexBox id="id_dom_tipo_var" justifyContent="SpaceAround" width="60%">
+                            <CheckBox text="Solo variazioni struttura" selected="{modelHome>/formSottostrumento/var_struttura}" enabled="{= !!${modelHome>/formSottostrumento/esposizione_contabile} &amp;&amp; ${modelHome>/formSottostrumento/esposizione_contabile}.split('-')[0] === '0'}"/>
+                            <CheckBox text="Solo variazioni contabili" selected="{modelHome>/formSottostrumento/var_contabili}"/>
+                            <!-- <CheckBox text="Solo variazioni contabili" selected="{= ${modelHome>/formSottostrumento/tipologia} === '53'}"/> -->
+                        </FlexBox>
+                    </f:content>
+                </f:SimpleForm>
+                </Panel>
+            </f:content>
+        </f:SimpleForm>
+    </content>
+    <buttons>
+        <Button press="onClose" type="Emphasized" text="{i18n>close}">
+            <customData>
+                <c:CustomData key="resetFiltri" value="formSottostrumento"/>
+                <c:CustomData key="HVSottostrumento" value="oDialogHVSottoStrumento"/>
+            </customData>
+        </Button>
+        <Button press="onResetVHSstr" type="Emphasized" text="{i18n>Resetta}">
+            <customData>
+                <c:CustomData key="resetFiltri" value="formSottostrumento"/>
+            </customData>
+        </Button>
+        <Button press="onPressConfSottoStrumento" type="Emphasized" text="{i18n>Cerca}"/>
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

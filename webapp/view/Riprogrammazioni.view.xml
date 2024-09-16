@@ -1,0 +1,77 @@
+<mvc:View controllerName="zsap.com.r3.cobi.s4.gestposfinnv.controller.Riprogrammazioni" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:semantic="sap.f.semantic" xmlns:layout="sap.ui.layout" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form"
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:card="sap.f.cards"
+	xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	xmlns:commons="sap.suite.ui.commons" busyIndicatorDelay="0">
+	<App id="app">
+		<f:DynamicPage id="dynamicPageId" showFooter="true" preserveHeaderStateOnScroll="true">
+			<!-- <f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title> -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<f:content>
+						<FlexBox alignItems="Start" justifyContent="SpaceBetween">
+							<FlexBox >
+								<items>
+									<VBox visible="true" class="sapUiTinyMarginBegin">
+										<HBox >
+											<Text text="{i18n>Esercizio}" class="boldCss"/>
+											<Text text="{modelPosFin>/infoSottoStrumento/AnnoSstr}" class="sapUiTinyMarginBegin"/>
+										</HBox>
+										<HBox>
+											<Text text="{i18n>Sottostrumento}" class="boldCss"/>
+											<Link text="{modelPosFin>/Sottostrumento}" press="onExpandPopOverSottostrumento" class="sapUiTinyMarginBegin"/>
+										</HBox>
+									</VBox>
+									<VBox visible="true" class="sapUiTinyMarginBegin">
+										<HBox >
+											<Text text="{i18n>MacroFase}" class="boldCss"/>
+											<Text text="{globalModel>/STAT_FASE}" class="sapUiTinyMarginBegin"/>
+										</HBox>
+										<HBox >
+											<Text text="{i18n>auth}:" class="boldCss"/>
+											<TooltipAutorizzazioneBtn:TooltipAutorizzazione class="sapUiTinyMarginBegin" type="Emphasized" id="InputAutorizzazioniBtn"
+													Fincode="{modelPosFin>/Fincode}" Fikrs="S001" text="{modelPosFin>/AuthDesc}"/>
+										</HBox>
+									</VBox>
+								</items>
+							</FlexBox>
+							<FlexBox >
+								<items>
+									<Button text="{i18n>pulsanteReimpAuth}" press="onReimpostaAuth" type="Emphasized" class="sapUiSmallMarginEnd"/>
+									<Button text="{i18n>pulsanteHome}" press="onNavToHome" type="Emphasized"/>
+								</items>
+							</FlexBox>
+							<items>
+							</items>
+						</FlexBox>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+				<IconTabBar expanded="{device>/isNoPhone}"  expandable="false">
+					<items>
+						<IconTabFilter icon="sap-icon://fax-machine" key="Riprogrammazione" text="{i18n>riprogrammazione}" id="idRiprogrammazioneTab">
+							<core:Fragment fragmentName="zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.IconTab.FrameRiprogrammazioni" type="XML"/>
+						</IconTabFilter>
+					</items>	
+				</IconTabBar>
+			</f:content>
+			<f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<!-- <Label text="Allinea Cassa"/>
+					<CheckBox selected="{modelRip>/AllineaCassa}"/> 
+					<Button text="Resetta" type="Emphasized" press="creaStrutturaRiprogrammazioni"
+						visible="{= ${modelLocked>/LOCKED} === 'X' ? false : true }"/>
+					<Button text="Salva" type="Emphasized" press="onSavePluriennale" enabled="{modelRip>/visible}"
+						visible="{= ${modelLocked>/LOCKED} === 'X' ? false : true }"/>-->
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+	</App>
+</mvc:View>

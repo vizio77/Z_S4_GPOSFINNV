@@ -1,0 +1,4 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<BusyDialog title="{i18n>Creazione Excel Spesa}" />
+		<!-- <BusyDialog title="{exportModel>/Load}"/> -->
+</core:FragmentDefinition>

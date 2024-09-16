@@ -1,0 +1,76 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca Programma" contentHeight="90%">
+		<content>
+            <Table
+                growing="true"
+                mode="MultiSelect"
+                growingScrollToLoad="true"
+                items="{path: 'modelHome>/formSottostrumento/programma_set/', length: '1000', sorter: [{path: 'Missione', comparator: '.sorterHVDomSStr'},
+                                                                                                        {path: 'Programma', comparator: '.sorterHVDomSStr'}]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                updateStarted="onUpdateStartedHVDomSStr"
+                updateFinished="onUpdateFinishedHVDomSStr"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchHVDomSStr" width="50%">
+                                <customData>
+                                    <c:CustomData key="programma" value="DescEstesaProgramma"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <infoToolbar>
+                    <OverflowToolbar visible="{= ${modelHome>/formSottostrumento/programmi}.length > 0}">
+                        <Text text="{= 'Selezionati: ' + ${modelHome>/formSottostrumento/programmi}.length }" />
+                    </OverflowToolbar>
+                </infoToolbar>
+                <columns>
+                     <Column width="8rem">
+                            <Text text="Missione" />
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="Descr. Missione"/>
+                    </Column>
+                    <Column width="8rem">
+                        <Text text="Programma"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="Descr. Programma"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active" selected="{ parts: [
+                                                    {path: 'modelHome>Missione'},
+                                                    {path:'modelHome>Prctr'}, 
+                                                    {path:'modelHome>Programma'}
+                                                ], formatter: '.setSelectedProgrammi' 
+                                                }">
+                        <cells>
+                            <Text text="{modelHome>Missione}"/>
+                            <Text text="{modelHome>DescEstesaMissione}"/>
+                            <Text text="{modelHome>Programma}"/>
+                            <Text text="{modelHome>DescEstesaProgramma}"/>
+                        </cells>
+                        <!-- <customData>
+                            <c:CustomData key="{homeModel>VALORE}" value="{homeModel>DESCRIZIONE}" writeToDom="false" />
+                        </customData> -->
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="PROGRAMMA" value="Programma" writeToDom="false" />
+                    <c:CustomData key="selezioni" value="programmi"/>
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVDomSStr" type="Emphasized"/>
+            <Button text="{i18n>conf}" press="onConfirmSelectionDomSStr" type="Emphasized"/>
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

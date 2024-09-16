@@ -1,0 +1,632 @@
+<mvc:View controllerName="zsap.com.r3.cobi.s4.gestposfinnv.controller.DetailPosFinFinanziamento" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:semantic="sap.f.semantic" xmlns:layout="sap.ui.layout" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form"
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:card="sap.f.cards"
+	xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+	xmlns:commons="sap.suite.ui.commons" busyIndicatorDelay="0">
+	<App id="app">
+		<f:DynamicPage id="dynamicPageId" showFooter="true" preserveHeaderStateOnScroll="true">
+			<!-- <f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title> -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<f:content>
+						<FlexBox alignItems="Start" justifyContent="SpaceBetween">
+							<FlexBox >
+								<items>
+									<VBox visible="true" class="sapUiTinyMarginBegin">
+										<HBox >
+											<Text text="{i18n>Esercizio}" class="boldCss"/>
+											<Text text="{modelPosFin>/infoSottoStrumento/AnnoSstr}" class="sapUiTinyMarginBegin"/>
+										</HBox>
+										<HBox>
+											<Text text="{i18n>Sottostrumento}" class="boldCss"/>
+											<Link text="{modelPosFin>/Sottostrumento}" press="onExpandPopOverSottostrumento" class="sapUiTinyMarginBegin"/>
+										</HBox>
+										<HBox>
+											<Text text="{i18n>auth}: " class="boldCss"/>
+											<TooltipAutorizzazioneBtn:TooltipAutorizzazione class="sapUiTinyMarginBegin" type="Emphasized" id="InputAutorizzazioniBtn"
+													Fincode="{modelPosFin>/Auth/Fincode}" Fikrs="S001" text="{modelPosFin>/Auth/ZzdescrEstesaFm}"/>
+										</HBox>
+									</VBox>
+									<VBox visible="true" class="sapUiTinyMarginBegin">
+										<HBox >
+											<Text text="{i18n>Processo}" class="boldCss"/>
+											<Text text="{globalModel>/DDTEXT}" class="sapUiTinyMarginBegin"/>
+										</HBox>
+										<HBox>
+											<Text text="{i18n>labelPosFin}" class="boldCss"/>
+											<Link text="{modelPosFin>/posFin}" press="onExpandPopOverPosFin" class="sapUiTinyMarginBegin"/>
+										</HBox>
+									</VBox>
+									<VBox visible="true" class="sapUiTinyMarginBegin">
+										<HBox >
+											<Text text="{i18n>MacroFase}" class="boldCss"/>
+											<Text text="{globalModel>/STAT_FASE}" class="sapUiTinyMarginBegin"/>
+										</HBox>
+										<HBox>
+											<Text text="{i18n>dettStruttAmmCentr}" class="boldCss"/>
+											<Link text="{modelPosFin>/strutturaAmminCentrale/Codifica_rep_sar}" press="onExpandPopOverDettStruttCentr" class="sapUiTinyMarginBegin"/>
+										</HBox>
+									</VBox>
+								</items>
+							</FlexBox>
+							<FlexBox >
+								<items>
+									<Button text="{i18n>pulsanteReimpPosFin}" press="onReimpostaPosFin" type="Emphasized" class="sapUiSmallMarginEnd"/>
+									<Button text="{i18n>pulsanteHome}" press="onNavToHome" type="Emphasized"/>
+								</items>
+							</FlexBox>
+						</FlexBox>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+			<f:content>
+				<VBox visible="true" height="100%"/>
+				<VBox visible="{= !!${modelPosFin>/onAvvio} }" height="100%">
+					<IconTabBar id="idIconTabBarMulti" selectedKey="Contabile"  expandable="false" expanded="{device>/isNoPhone}" visible="{visibleCheckModel>/visibleIconTab}" select="onTabChanged">
+						<items>
+							<IconTabFilter icon="sap-icon://fax-machine" key="Contabile" text="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '5' ? ${i18n>rifinanziamenti} : ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '6' ? ${i18n>definanziamenti} : ${i18n>reiscrizioniEconomie}}" id="idContabileTab">
+								<!-- <html:iframe id="ContabileSac" height="1000em" width="100%" allowfullscreen="true"></html:iframe> -->
+								<Panel visible="{= ${modelPosFin>/Esposizione} !== '9'}" >
+									<headerToolbar>
+										<OverflowToolbar>
+											<Title text="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '5' ? ${i18n>rifinanziamenti} : ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '6' ? ${i18n>definanziamenti} : ${i18n>reiscrizioniEconomie}}"/>
+											<ToolbarSpacer/>
+											<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event)"/>
+											<Button text="{i18n>QCCAPF}" type="Emphasized" press="openquadroCont('PF',$event)"/>
+										</OverflowToolbar>
+									</headerToolbar>
+									<core:Fragment fragmentName="zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.IconTab.FrameDefRif"  type="XML"/>
+								</Panel>
+								<Panel visible="{= ${modelPosFin>/Esposizione} === '9'}" >
+									<headerToolbar>
+										<OverflowToolbar>
+											<Title text="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '5' ? ${i18n>rifinanziamenti} : ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '6' ? ${i18n>definanziamenti} : ${i18n>reiscrizioniEconomie}}"/>
+											<ToolbarSpacer/>
+											<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event)"/>
+											<Button text="{i18n>QCCAPF}" type="Emphasized" press="openquadroCont('PF',$event)"/>
+											<Button text="{i18n>QCCCB}" visible="{= ${modelPosFin>/Esposizione} === '9'}" type="Emphasized" press="openquadroCont('CBREI',$event,null,null,null,null,true)"/>
+
+										</OverflowToolbar>
+									</headerToolbar>
+									<core:Fragment fragmentName="zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.IconTab.FrameReiscrizioni"  type="XML"/>
+								</Panel>
+								
+							</IconTabFilter>
+							<IconTabFilter icon="sap-icon://form" key="info" text="{i18n>Anagrafica}">
+								<Panel id="idPanel" visible="{visibleCheckModel>/visiblePanel}">
+									<headerToolbar>
+										<OverflowToolbar>
+											<Title text="{i18n>AnagraficaPS}"/>
+										</OverflowToolbar>
+									</headerToolbar>
+									<!-- MODIFICA LAYOUT SECONDO ANTONIO 10/06/2022 -->
+									<!-- AMMINISTRAZIONE -->
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1"
+										id="AmmCapPG">
+										<form:content>
+											<core:Title text=""/>
+											<Label text="Amministrazione" required="true"/>
+											<Input value="{modelPosFin>/detailAnagrafica/AMMINISTAZIONE}" editable="false" showValueHelp="true"
+												valueHelpRequest="onHVFormPosFin" valueHelpOnly="true" width="30%">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="4" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVAmmin"/>
+												</customData>
+											</Input>
+											<Input value="{modelPosFin>/detailAnagrafica/DESC_AMMINISTAZIONE}" editable="false" width="80%"/>
+										</form:content>
+									</form:SimpleForm>
+									<!-- CAPITOLO E PG -->
+									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="12" labelSpanS="12"
+										adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2"
+										singleContainerFullSize="false">
+										<form:content>
+											<!-- required="{= !${modelPosFin>/onModify} }" -->
+											<Label text="{i18n>Capitolo}" required="true"/>
+											<Input width="65%" value="{modelPosFin>/detailAnagrafica/CAPITOLO}" maxLength="4" editable="false"
+												showValueHelp="true" valueHelpOnly="false" valueHelpRequest="onHVFormPosFin" liveChange="checkNumericPGCapitolo" submit="onChangeCapitolo">
+												<layoutData>
+													<layout:GridData span="XL3 L3 M4 S4"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVCapitolo"/>
+												</customData>
+											</Input>
+											<HBox >
+												<Text text="Provvisorio" visible="{= !${modelPosFin>/onModify} }" class="sapUiMediumMarginEnd"/>
+												<Label text="Stato del Capitolo: {= ${modelPosFin>/detailAnagrafica/StatusCapitolo} === true ? 'Attivo' : 'Disattivo'}" visible="{= ${modelPosFin>/onModify} }" class="sapUiTinyMarginTop sapUiTinyMarginEnd"/>
+												<!-- enabled="{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+												<Switch state="{modelPosFin>/detailAnagrafica/StatusCapitolo}" visible="{= ${modelPosFin>/onModify} }" type="AcceptReject"
+													enabled="false" change="onChangeStatusCapitolo">
+													<customData>
+														<core:CustomData key="switch" value="switch"/>
+													</customData>
+												</Switch>
+											</HBox>
+											<!-- required="{= !${modelPosFin>/onModify} }" -->
+											<Label text="{i18n>Pg}" required="true"/>
+											<!-- liveChange="checkNumericPGCapitolo" -->
+											<Input width="65%" value="{modelPosFin>/detailAnagrafica/pg}" editable="false" showValueHelp="false"
+												valueHelpRequest="onHVFormPosFin" maxLength="2" liveChange="onCheckNumericPG">
+												<layoutData>
+													<layout:GridData span="XL3 L3 M4 S4"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVPg"/>
+												</customData>
+											</Input>
+											<HBox >
+												<ToggleButton icon="sap-icon://search" visible="{= !${modelPosFin>/onModify} }" press="onHVFormPosFin" type="Emphasized">
+													<customData>
+														<core:CustomData key="popup" value="HVPg"/>
+													</customData>
+												</ToggleButton>
+												<Text text="Provvisorio" visible="{= !${modelPosFin>/onModify} }" class="sapUiTinyMarginBegin"/>
+												<Label text="Stato del Pg: {= ${modelPosFin>/detailAnagrafica/StatusPg} === true ? 'Attivo' : 'Disattivo'}" visible="{= ${modelPosFin>/onModify} }" class="sapUiTinyMarginTop sapUiTinyMarginEnd"/>
+												<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+												<Switch state="{modelPosFin>/detailAnagrafica/StatusPg}" visible="{= ${modelPosFin>/onModify} }" type="AcceptReject"
+													enabled="false"/>
+											</HBox>
+										</form:content>
+									</form:SimpleForm>
+									<!-- MISSIONE - PROGRAMMA - AZIONE -->
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
+										<form:content>
+											<Label text="{i18n>mission}" required="true"/>
+											<!-- editable="false"  -->
+											<Input showValueHelp="true" value="{modelPosFin>/detailAnagrafica/MISSIONE}" valueHelpRequest="onHVFormPosFin" valueHelpOnly="true"
+												editable="false" width="30%">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="3" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVMissione"/>
+												</customData>
+											</Input>
+											<Input value="{modelPosFin>/detailAnagrafica/DESC_MISSIONE}" editable="false" showValueHelp="false" width="80%"/>
+											<Label text="{i18n>programma}" required="true"/>
+											<!-- editable="false" -->
+											<Input showValueHelp="true" value="{modelPosFin>/detailAnagrafica/PROGRAMMA}" valueHelpRequest="onHVFormPosFin" valueHelpOnly="true"
+												editable="false" width="30%">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="3" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVProgramma"/>
+												</customData>
+											</Input>
+											<Input value="{modelPosFin>/detailAnagrafica/DESC_PROGRAMMA}" editable="false" showValueHelp="false" width="80%"/>
+											<Label text="{i18n>azione}" required="true"/>
+											<!-- editable="false" -->
+											<Input showValueHelp="true" value="{modelPosFin>/detailAnagrafica/AZIONE}" valueHelpRequest="onHVFormPosFin" valueHelpOnly="true"
+												editable="false" width="30%">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="3" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVAzione"/>
+												</customData>
+											</Input>
+											<Input value="{modelPosFin>/detailAnagrafica/DESC_AZIONE}" editable="false" showValueHelp="false" width="80%"/>
+										</form:content>
+									</form:SimpleForm>
+									<Toolbar visible="false"/>
+									<!-- UDV -->
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" emptySpanL="9" labelSpanS="12" layout="ColumnLayout" columnsM="1"
+										columnsL="1" columnsXL="1">
+										<form:content>
+											<Label text="{i18n>Udv}"/>
+											<Input value="{modelPosFin>/detailAnagrafica/UdvL1}" editable="false" width="100%"/>
+											<Input value="{modelPosFin>/detailAnagrafica/UdvL2}" editable="false" width="100%"/>
+										</form:content>
+									</form:SimpleForm>
+									<!--<Label text="{i18n>Udv}"/>
+												<Input value="{modelPosFin>/detailAnagrafica/UdvL1}" editable="false" textAlign="Center" width="100%">
+													<layoutData>
+														<layout:GridData span="XL3 L3 M4 S4"/>
+													</layoutData>
+												</Input>
+												<Input value="{modelPosFin>/detailAnagrafica/UdvL2}" editable="false" width="100%"/>-->
+									<!-- DA TIT A CAPITOLONE -->
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1"
+										singleContainerFullSize="false">
+										<form:content>
+											<Label text="{i18n>Tit}" required="true"/>
+											<!--  editable="false" -->
+											<Input width="30%" value="{modelPosFin>/detailAnagrafica/TITOLO}" showValueHelp="true" valueHelpOnly="true"
+												valueHelpRequest="onHVFormPosFin" editable="false">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="3" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVTitolo"/>
+												</customData>
+											</Input>
+											<Input value="{modelPosFin>/detailAnagrafica/DESC_TITOLO}" editable="false" width="80%"/>
+											<Label text="{i18n>Cat}" required="true"/>
+											<!--  editable="false" -->
+											<Input width="30%" value="{modelPosFin>/detailAnagrafica/CATEGORIA}" showValueHelp="true" valueHelpOnly="true"
+												valueHelpRequest="onHVFormPosFin" editable="false">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="3" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVCategoria"/>
+												</customData>
+											</Input>
+											<Input width="80%" value="{modelPosFin>/detailAnagrafica/DESC_CATEGORIA}" editable="false"/>
+											<Label text="{i18n>Cdr}" required="true"/>
+											<!--  editable="false" -->
+											<Input width="30%" value="{modelPosFin>/detailAnagrafica/CDR}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVFormPosFin"
+												editable="false">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="3" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVCdr"/>
+												</customData>
+											</Input>
+											<Input width="80%" showValueHelp="false" value="{modelPosFin>/detailAnagrafica/CDR_DESCR}" editable="false"/>
+											<Label text="{i18n>Rag}" required="true"/>
+											<!--  editable="false" -->
+											<Input width="30%" value="{modelPosFin>/detailAnagrafica/RAG}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onHVFormPosFin"
+												editable="false">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="3" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVRagioneria"/>
+												</customData>
+											</Input>
+											<Input width="80%" value="{modelPosFin>/detailAnagrafica/DESC_RAG}" editable="false"/>
+											<Toolbar visible="false"/>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Label text="{i18n>Mac}" required="true"/>
+											<Input width="30%" value="{modelPosFin>/detailAnagrafica/MAC}" editable="false" showValueHelp="true"
+												valueHelpOnly="true" valueHelpRequest="onHVFormPosFin">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="3" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVMac"/>
+												</customData>
+											</Input>
+											<Input value="{modelPosFin>/detailAnagrafica/DESC_MAC}" editable="false" width="80%"/>
+											<!--  editable="{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+										</form:content>
+									</form:SimpleForm>
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" emptySpanL="9" labelSpanS="12" layout="ColumnLayout" columnsM="1"
+										columnsL="1" columnsXL="1">
+										<form:content>
+											<Label text="{i18n>TipoFondo}"/>
+											<Select width="auto" selectedKey="{modelPosFin>/detailAnagrafica/tipoFondo}" editable="false"
+												items="{path: 'modelPosFin>/formPosFin/tipofondo/'}">
+												<core:Item key="{modelPosFin>CodiceTipoFondo}" text="{modelPosFin>DescEstesa}"/>
+											</Select >
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Label text="{i18n>TipoSpesa}"/>
+											<Select width="auto" selectedKey="{modelPosFin>/detailAnagrafica/tipoSpesaCapitolo}"
+												editable="false"
+												items="{path: 'sapHanaS2>/TipoSpesaSet/', filters: [{ path: 'CapitoloPg', operator: 'EQ', value1: 'C' }]}">
+												<core:Item key="{sapHanaS2>CodiceTipoSpesa}" text="{sapHanaS2>DescTipoSpesa}"/>
+											</Select>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Label text="{i18n>TipoNaturaSpesa}"/>
+											<Select width="auto" selectedKey="{modelPosFin>/detailAnagrafica/CodiceNaturaSpesa}"
+												editable="false" items="{path: 'sapHanaS2>/NaturaSpesaSet/'}">
+												<core:Item key="{sapHanaS2>CodiceNaturaSpesa}" text="{sapHanaS2>DescNaturaSpesa}"/>
+											</Select>
+											<Toolbar visible="false"/>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Label text="{i18n>Memoria}"/>
+											<CheckBox selected="{modelPosFin>/detailAnagrafica/Memoria}" editable="false"/>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Label text="{i18n>Capitolone}"/>
+											<CheckBox selected="{modelPosFin>/detailAnagrafica/Capitolone}" editable="false"/>
+										</form:content>
+									</form:SimpleForm>
+									<!-- CU/IRAP/NON CU - NOIPA - Posizione Finanziaria IRAP -->
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" emptySpanL="9" labelSpanS="12" layout="ColumnLayout" columnsM="1"
+										columnsL="1" columnsXL="1">
+										<form:content>
+											<!--  "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }"-->
+											<Label text="{i18n>Cu}"/>
+											<Select width="auto" selectedKey="{modelPosFin>/detailAnagrafica/CuIrapNoncu}" editable="false"
+												items="{path: 'sapHanaS2>/CuIrapNonCuSet/'}" change="onSelectCuIrapNonCu">
+												<core:Item key="{sapHanaS2>Indicatore}" text="{sapHanaS2>Desc}"/>
+											</Select>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Label text="{i18n>Noipa}"/>
+											<Select width="auto" selectedKey="{modelPosFin>/detailAnagrafica/Noipa}" editable="false"
+												items="{path: 'modelPosFin>/formPosFin/Noipa/', sorter: [{path: 'DescNoipa'}] }">
+												<core:Item key="{modelPosFin>CodiceNoipa}" text="{modelPosFin>DescNoipa}"/>
+											</Select>
+											<Label text="{i18n>CapitoloIrap}"/>
+											<ToggleButton width="10%" icon="sap-icon://list" press="onPosFinIRAP" type="Emphasized"/>
+										</form:content>
+									</form:SimpleForm>
+									<!-- FO/FP -->
+									<form:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="2"
+										adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2"
+										singleContainerFullSize="false" class="sapUiResponsiveMarginBegin">
+										<form:content>
+											<!--
+											<Label text="FO/FP"/>
+											 <RadioButtonGroup select="onChangeFOP" editable="false">
+												<buttons>
+													<RadioButton text="Fondo Progetti ai sensi del D.Lgs 229/2011 articolo 10 comma 2"
+														selected="{= ${modelPosFin>/detailAnagrafica/FOFP} === 'FP'}"/>
+													<RadioButton text="Fondo Opere ai sensi del D.Lgs 229/2011 articolo 10 comma 2"
+														selected="{= ${modelPosFin>/detailAnagrafica/FOFP} === 'FO'}"/>
+												</buttons>
+											</RadioButtonGroup> -->
+
+											
+											<VBox>
+												<Label text="FO/FP"/>
+												<CheckBox id="checkboxFP" 
+													select="onSelectionFP" editable="false" text="Fondo Progetti ai sensi del D.Lgs 229/2011 articolo 10 comma 2" 	
+													selected="{= ${modelPosFin>/detailAnagrafica/FOFP} === '' ? false : ${modelPosFin>/detailAnagrafica/FOFP} === 'FP' ? true : false}"/>
+												
+													<CheckBox id="checkboxFO" 
+													select="onSelectionFO" editable="false" text="Fondo Opere ai sensi del D.Lgs 229/2011 articolo 10 comma 2" 		
+													selected="{= ${modelPosFin>/detailAnagrafica/FOFP} === '' ? false : ${modelPosFin>/detailAnagrafica/FOFP} === 'FO' ? true : false}"/>  
+											</VBox>	
+											
+
+											<Toolbar visible="false"/>
+											<HBox ></HBox>
+										</form:content>
+									</form:SimpleForm>
+									<!-- Denominazione Capitolo -->
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
+										<form:content>
+											<core:Title text="{i18n>DenominazioneCapitolo}">
+												<core:customData>
+													<core:CustomData key="required" value="true" writeToDom="true"/>
+												</core:customData>
+											</core:Title>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Label text="{i18n>CodStandard}" required="false" labelFor="test"/>
+											<Input width="8%" showValueHelp="true" value="{modelPosFin>/detailAnagrafica/CODICE_STANDARD_CAPITOLO}"
+												editable="false" valueHelpRequest="onValueHelpCodStd" change="onModifyCodStandard">
+												<customData>
+													<core:CustomData key="CapPg" value="CodiceStandardCapitolo"/>
+												</customData>
+											</Input>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiyDenominazioneIntegraleCapitolo' }"  -->
+											<Label text="{i18n>DenInt}" required="false" labelFor="test"/>
+											<TextArea rows="4" value="{modelPosFin>/detailAnagrafica/CD_CAPITOLO_DEN_EST}" maxLength="1333"
+												editable="false" width="85%"/>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiyDenominazioneBreveCapitolo' }" -->
+											<Label text="{i18n>DenRid}" required="false" labelFor="test"/>
+											<TextArea rows="4" width="85%" showValueHelp="false" value="{modelPosFin>/detailAnagrafica/CD_CAPITOLO_DEN_BREVE}" maxLength="120"
+												visible="{visibleCheckModel>/visibleOnlyCreaPosFin}" editable="false"/>
+										</form:content>
+									</form:SimpleForm>
+									<!-- Denominazione PG -->
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
+										<form:content>
+											<core:Title text="{i18n>DenominazionePG}">
+												<core:customData>
+													<core:CustomData key="required" value="true" writeToDom="true"/>
+												</core:customData>
+											</core:Title>
+											<Label text="{i18n>CodStandard}" required="false" labelFor="test"/>
+											<!-- "{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Input width="8%" value="{modelPosFin>/detailAnagrafica/CODICE_STANDARD_PG}" showValueHelp="true"
+												editable="false" valueHelpRequest="onValueHelpCodStd" change="onModifyCodStandard">
+												<customData>
+													<core:CustomData key="CapPg" value="CodiceStandardPG"/>
+												</customData>
+											</Input>
+											<Label text="{i18n>DenInt}" required="false" labelFor="test"/>
+											<!-- editable="{path: 'modelPosFin>/onModify' , formatter: '.checkModifiyDenominazioneIntegralePG' }" -->
+											<TextArea rows="4" width="85%" value="{modelPosFin>/detailAnagrafica/CD_PG_DEN_EST}" visible="{visibleCheckModel>/visibleOnlyCreaPosFin}" maxLength="1333"
+												editable="false"/>
+											<Label text="{i18n>DenRid}" required="false" labelFor="test"/>
+											<!-- editable="{path: 'modelPosFin>/onModify', formatter: '.checkModifiyDenominazioneBrevePG' }" -->
+											<TextArea rows="4" width="85%" showValueHelp="false" value="{modelPosFin>/detailAnagrafica/CD_PG_DEN_BREVE}" maxLength="120"
+												visible="{visibleCheckModel>/visibleOnlyCreaPosFin}" editable="false"/>
+										</form:content>
+									</form:SimpleForm>
+									<!-- Anagrafica Piano Di Gestione -->
+									<form:SimpleForm editable="true" labelSpanL="1" labelSpanM="1" labelSpanS="12" layout="ColumnLayout" columnsM="1" columnsL="1" columnsXL="1">
+										<form:content>
+											<core:Title text="{i18n>AnagraficaPianoDiGestione}"/>
+											<Label text="{i18n>Class2}" required="true"/>
+											<!--  editable="false" -->
+											<Input width="30%" showValueHelp="true" value="{modelPosFin>/detailAnagrafica/CE2}" textAlign="Left" valueHelpRequest="onHVFormPosFin"
+												editable="false">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="4" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVCe2"/>
+												</customData>
+											</Input>
+											<Input width="80%" showValueHelp="false" value="{modelPosFin>/detailAnagrafica/DESC_CE2}" editable="false" textAlign="Left"/>
+											<Label text="{i18n>Class3}" required="true"/>
+											<!--  editable="false" -->
+											<Input width="30%" showValueHelp="true" value="{modelPosFin>/detailAnagrafica/CE3}" textAlign="Left" valueHelpRequest="onHVFormPosFin"
+												editable="false">
+												<layoutData>
+													<form:ColumnElementData cellsSmall="4" cellsLarge="3"/>
+												</layoutData>
+												<customData>
+													<core:CustomData key="popup" value="HVCe3"/>
+												</customData>
+											</Input>
+											<Input width="80%" showValueHelp="false" value="{modelPosFin>/detailAnagrafica/DESC_CE3}" editable="false" textAlign="Left"/>
+											<Label text="{i18n>TipoSpesa}"/>
+											<!-- editable="{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Select width="30%" selectedKey="{modelPosFin>/detailAnagrafica/TipoSpesaPg}" editable="false"
+												items="{path: 'sapHanaS2>/TipoSpesaSet/', filters: [{ path: 'CapitoloPg', operator: 'EQ', value1: 'P' }]}">
+												<core:Item key="{sapHanaS2>CodiceTipoSpesa}" text="{sapHanaS2>DescTipoSpesa}"/>
+											</Select>
+											<Label text="{i18n>AreeDDI}"/>
+											<!-- editable="{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<Select width="30%" selectedKey="{modelPosFin>/detailAnagrafica/AreaDestinataria}"
+												editable="false" items="{path: 'modelPosFin>/formPosFin/AreaInterventi/'}">
+												<core:Item key="{modelPosFin>AreaDestinataria}" text="{modelPosFin>Desc}"/>
+											</Select>
+											<Label text="{i18n>ObiettiviMinisteri}"/>
+											<!-- editable="{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<CheckBox selected="{modelPosFin>/detailAnagrafica/ObiettiviMinisteri}" editable="false"/>
+											<Label text="{i18n>RuoliSpesaFissa}"/>
+											<!-- editable="{path: 'modelPosFin>/onModify', formatter: '.checkModifiableValue' }" -->
+											<CheckBox selected="{modelPosFin>/detailAnagrafica/RuoliSpesaFissa}" editable="false"/>
+										</form:content>
+									</form:SimpleForm>
+									<!-- Elenchi -->
+									<Panel expandable="true" visible="{visibleCheckModel>/visiblePanel}" expanded="false">
+										<headerToolbar>
+											<OverflowToolbar>
+												<Title text="{i18n>GestioneCapitoloPg}"/>
+											</OverflowToolbar>
+										</headerToolbar>
+										<Table id="TableGestioneCapitoloPg" width="auto"
+											items="{path: 'modelPosFin>/detailAnagrafica/elenchiCapitolo', sorter: [{path: 'PrctrElenco', compartator: '.sorterAmmByNumericCode'}, {path: 'NumeroElenco', comparator: '.sorterHVDomSStr'} ]}">
+											<headerToolbar>
+												<Toolbar >
+													<ToolbarSpacer/>
+													<!-- <Button type="Emphasized" icon="sap-icon://add" text="{i18n>btnAddRowCapitoloPg}" press="handleAddElenco"
+														enabled="{modelPosFin>/gestioneCampiEditabili/enableElenchi}"/> -->
+												</Toolbar>
+											</headerToolbar>
+											<columns>
+												<Column width="10em">
+													<Text text="{i18n>Amministrazione}"/>
+												</Column>
+												<Column width="7em">
+													<Text text="{i18n>codice}"/>
+												</Column>
+												<Column width="80em">
+													<Text text="{i18n>descrizione}"/>
+												</Column>
+												<Column width="auto">
+													<Text text=""/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem >
+													<cells>
+														<Text text="{modelPosFin>PrctrElenco}"/>
+														<Text text="{modelPosFin>NumeroElenco}"/>
+														<Text text="{modelPosFin>Desc}"/>
+														<ToggleButton icon="sap-icon://delete" type="Emphasized" press="onDeleteElenco" enabled="{modelPosFin>/gestioneCampiEditabili/enableCofog}"
+															visible="{= ${modelPosFin>PrctrElenco} !== 'A020' || ${modelPosFin>NumeroElenco} !== '001' }"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</Panel>
+									<!-- C.O.F.O.G. -->
+									<Panel expandable="true" visible="{visibleCheckModel>/visiblePanel}" expanded="false">
+										<headerToolbar>
+											<OverflowToolbar>
+												<Title text="{i18n>Cofog}">
+													<customData>
+														<core:CustomData key="requiredSpan" value="true" writeToDom="true"/>
+													</customData>
+												</Title>
+											</OverflowToolbar>
+										</headerToolbar>
+										<Table id="TableCofog" width="auto"
+											items="{path: 'modelPosFin>/detailAnagrafica/elencoCOFOG', sorter: [{path: 'CofogL1', compartator: '.sorterHVDomSStr'}, {path: 'CofogL2', comparator: '.sorterHVDomSStr'}, {path: 'CofogL3', comparator: '.sorterHVDomSStr'} ]}">
+											<headerToolbar>
+												<Toolbar >
+													<ToolbarSpacer/>
+													<!-- <Button type="Emphasized" icon="sap-icon://add" text="{i18n>btnAddRowCofog}" press="handleAddCOFOG"
+														enabled="{modelPosFin>/gestioneCampiEditabili/enableCofog}"/> -->
+												</Toolbar>
+											</headerToolbar>
+											<columns>
+												<Column width="5em">
+													<Text text="{i18n>liv1}"/>
+												</Column>
+												<Column width="5em">
+													<Text text="{i18n>liv2}"/>
+												</Column>
+												<Column width="5em">
+													<Text text="{i18n>liv3}"/>
+												</Column>
+												<Column width="auto">
+													<Text text="{i18n>descrizione}"/>
+												</Column>
+												<Column width="auto">
+													<Text text="{i18n>percent}"/>
+												</Column>
+												<Column width="auto">
+													<Text text=""/>
+												</Column>
+											</columns>
+											<items>
+												<ColumnListItem >
+													<cells>
+														<Text text="{path: 'modelPosFin>CofogL1', formatter: '.formatZeroes'}"/>
+														<Text text="{path: 'modelPosFin>CofogL2', formatter: '.formatZeroes'}"/>
+														<Text text="{path: 'modelPosFin>CofogL3', formatter: '.formatZeroes'}"/>
+														<Text text="{modelPosFin>Desc}"/>
+														<!-- , formatter: '.formatPercent'} change="onUpdatePercent"  type="Number" maxLength="6" -->
+														<Input value="{path:'modelPosFin>PercCofog'}" liveChange="onCheckPercCofog" maxLength="6" type="Number" width="20%" textAlign="End"
+															editable="false"/>
+														<ToggleButton icon="sap-icon://delete" visible="false" type="Emphasized" press="onDeleteCofog" enabled="{modelPosFin>/gestioneCampiEditabili/enableCofog}"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</Panel>
+									<!-- Visualizza Collegamenti -->
+									 <Panel expandable="true" visible="true" expanded="false">
+										<headerToolbar>
+											<OverflowToolbar>
+												<Title text="{i18n>collegamenti}"/>
+											</OverflowToolbar>
+										</headerToolbar>
+										<Table id="tableCollegamenti" width="auto" items="{path: 'modelPosFin>/detailAnagrafica/collegamenti'}">
+											<columns>
+												<Column width="5rem">
+													<Text text="{i18n>Esercizio}"/>
+												</Column>
+												<Column width="14rem">
+													<Text text="{i18n>Posizione Finanziaria}"/>
+												</Column>
+												
+											</columns>
+											<items>
+												<ColumnListItem >
+													<cells>
+														<Text text="{modelPosFin>AnnoMit}"/>																												
+														<Text text="{modelPosFin>PosfinMit}"/>
+													</cells>
+												</ColumnListItem>
+											</items>
+										</Table>
+									</Panel>
+								</Panel>
+							</IconTabFilter>
+						</items>	
+					</IconTabBar>
+				</VBox>
+			</f:content>
+			<f:footer>
+				<!-- <OverflowToolbar>
+					<ToolbarSpacer/>
+					<Button text="{i18n>tornaAllaHome}" icon="sap-icon://home" press="onNavToHome" type="Emphasized" visible="true"/>
+					<Button text="Salva" id="salvaModifica" type="Emphasized" press="onSaveAnagPosFin2"
+						visible="{= ${modelPosFin>/onAvvio} === true &amp;&amp; ${modelPosFin>/tabAnagrafica} === true &amp;&amp; ${modelPosFin>/onModify} === true &amp;&amp; ${modelPosFin>/infoSottoStrumento/TipoEsposizione} !== '2' }"/>
+					<Button text="Salva" id="salvaCrea" type="Emphasized" press="onSaveCreaPosFin2"
+						visible="{= ${modelPosFin>/onAvvio} === true &amp;&amp; ${modelPosFin>/tabAnagrafica} === true &amp;&amp; ${modelPosFin>/onModify} === false}"/>
+				</OverflowToolbar> -->
+			</f:footer>
+		</f:DynamicPage>
+	</App>
+</mvc:View>

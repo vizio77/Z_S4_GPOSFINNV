@@ -1,0 +1,154 @@
+<core:FragmentDefinition
+xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:TooltipAutorizzazioneBtn="zsap.com.r3.cobi.s4.z_s4_auth_tooltip"
+xmlns:zcontrollink="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink.controls"
+	xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+
+								<!-- <Label text="Fragment Riprogrammazioni da definire"></Label> -->
+							<VBox class="sapUiSmallMargin" visible="{modelVisQuadri>/quadroVisible}" >								
+								<Table id="RimidTableyear" inset="false" items="{modelRiprogrammazioni>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" >
+									<columns>
+										<Column width="50%">
+											<Text text="Posizioni Finanziarie" class="boldCss"/>
+										</Column>
+										<Column width="15%">
+											<Text text="Competenza {labelColumn>/annoCp1}" class="boldCss"/>
+										</Column>
+										<Column width="15%">
+											<Text text="Competenza {labelColumn>/annoCp2}" class="boldCss"/>
+										</Column>
+										<Column width="15%">
+											<Text text="Competenza {labelColumn>/annoCp3}" class="boldCss"/>
+										</Column>
+										<Column width="5%" hAlign="End">
+											<Text text="" class="boldCss"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem id="RimidColumnListItemsYear">
+											<cells>
+												<!-- <VBox>
+													<Text text="{modelRiprogrammazioni>ViewLabel}" visible="{= ${modelRiprogrammazioni>FlagGriglia} === 'BOLD' ? true : false}" class="boldCss">
+													</Text>
+													<Text text="{modelRiprogrammazioni>ViewLabel}" visible="{= ${modelRiprogrammazioni>FlagGriglia} === 'ALIGNR_RIGHT' ? true : false}" class="sapUiMediumMarginBegin"/>
+													<Text text="{modelRiprogrammazioni>ViewLabel}" visible="{= ${modelRiprogrammazioni>FlagGriglia} === 'CHILD' ? true : false}" class="sapUiLargeMarginBegin boldAndSmallCss"/>
+													<Text text="{modelRiprogrammazioni>ViewLabel}" visible="{= ${modelRiprogrammazioni>FlagGriglia} === '' ? true : false}"/>
+												</VBox> -->
+												<FlexBox alignItems="Center" justifyContent="SpaceBetween">
+													<items >
+													<FlexBox alignItems="Center" justifyContent="Start">
+														<items >
+
+																<!-- <Text text="{modelRiprogrammazioni>CodificaRep}" visible="true" class="boldCss" /> -->
+																	<zcontrollink:LinkPosizioneFinanziaria class="sapUiTinyMarginTopBottom sapUiTinyMarginEnd" id="linkPosFin" anno="{modelRiprogrammazioni>Anno}" fikrs="{modelRiprogrammazioni>Fikrs}" fase="{modelRiprogrammazioni>Fase}"
+															reale="R" versione="{modelRiprogrammazioni>Versione}" fipex="{ path:'modelRiprogrammazioni>Fipex', formatter: '.formatterPosFin'}"
+															datbis='{modelRiprogrammazioni>Datbis}' text="{modelRiprogrammazioni>CodificaRep}" semanticObject=""/>
+																<Button icon="sap-icon://inspection" class="sapUiTinyMarginBeginEnd" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>capitolo}"  press="openquadroCont('CAP',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},'' )" visible="true" >
+																	<customData>
+																		<core:CustomData key="from" value="capitolo" writeToDom="true"/>
+																	</customData>
+																</Button>
+																<Button icon="sap-icon://detail-view" class="sapUiTinyMarginEnd" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>posFin}"  press="openquadroCont('PF',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},'')" visible="true">
+																	<customData>
+																		<core:CustomData key="from" value="posfin" writeToDom="true"/>
+																	</customData>
+																</Button>
+																<Button icon="sap-icon://approvals" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>codingBlock}" press="openquadroCont('FN',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},${modelRiprogrammazioni>IdAutorizzazione})" visible="true">
+																	<customData>
+																			<core:CustomData key="from" value="autorizzazione" writeToDom="true"/>
+																	</customData>
+																</Button>
+																
+															</items>
+														</FlexBox>
+														<Button  type="Emphasized" icon="sap-icon://delete" press="onPressResetta" tooltip="Resetta Triennio Competenza"/>
+													</items>
+												</FlexBox>
+													
+												<Input value="{modelRiprogrammazioni>VAL_ANNO1}" type="Text" textAlign="End" change="liveChangeimporti('modelRiprogrammazioni', 'VAL_ANNO1', '')"></Input>
+												<Input value="{modelRiprogrammazioni>VAL_ANNO2}" type="Text" textAlign="End" change="liveChangeimporti('modelRiprogrammazioni', 'VAL_ANNO2', '')" ></Input>
+												<Input value="{modelRiprogrammazioni>VAL_ANNO3}" type="Text" textAlign="End" change="liveChangeimporti('modelRiprogrammazioni', 'VAL_ANNO3', '')" ></Input>
+												<ToggleButton text="Pluriennali" type="Emphasized" press=".onPressPluriennaliRipr($event, true)" enabled="true"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</VBox>
+							<OverflowToolbar class="sapUiSmallMargin">
+								<ToolbarSpacer/>
+								<Label text="Allinea Cassa"/>
+								<CheckBox selected="{modelRip>/AllineaCassa}"/>
+								<Button text="Resetta" type="Emphasized" press="creaStrutturaRiprogrammazioni"
+									visible="{= ${modelLocked>/LOCKED} === 'X' ? false : true }"/>
+								<Button text="Salva" type="Emphasized" press="onSavePluriennale" enabled="{modelRip>/visible}"
+									visible="{= ${modelLocked>/LOCKED} === 'X' ? false : true }"/>
+							</OverflowToolbar>
+							
+							<!-- <VBox visible="{modelVisQuadri>/quadroVisible}">
+								<Table id="RimtableSac" inset="false" items="{modelRiprogrammazioniSac>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders" visible="{modelVisQuadri>/Attivo}">
+									
+									<columns>
+										<Column width="40%">
+											<Text text="" class="boldCss"/>
+										</Column>
+										<Column width="10rem" hAlign="End">
+											<Label text="{mdColumnVariazioni>/ANNO1}" design="Bold"/>
+										</Column>
+									<Column width="10rem" hAlign="End">
+											<Label text="{mdColumnVariazioni>/ANNO2}" design="Bold"/>
+										</Column>
+										<Column width="10rem" hAlign="End">
+											<Label text="{mdColumnVariazioni>/ANNO3}" design="Bold"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{modelRiprogrammazioniSac>LABEL}"/>
+												<Input value="{modelRiprogrammazioniSac>VAL_ANNO1}" type="Text" textAlign="End" change="liveChangeimporti('modelRiprogrammazioniSac', 'VAL_ANNO1', '')"/>
+												<Input value="{modelRiprogrammazioniSac>VAL_ANNO2}" type="Text" textAlign="End" change="liveChangeimporti( 'modelRiprogrammazioniSac', 'VAL_ANNO2', '')"/>
+												<Input value="{modelRiprogrammazioniSac>VAL_ANNO3}" type="Text" textAlign="End" change="liveChangeimporti( 'modelRiprogrammazioniSac', 'VAL_ANNO3', '')"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</VBox> -->
+							<!-- <VBox class="sapUiSmallMargin" visible="{modelVisQuadri>/quadroVisible}">
+								<Table items="{modelRiprogrammazioniComp>/}" >
+									<headerToolbar>
+										<OverflowToolbar visible="{modelVisQuadri>/Attivo}">
+											<ToolbarSpacer/>
+											<Label text="Allinea Cassa"/>
+											<CheckBox selected="{modelRiprogrammazioniSac>/0/FLAG_ALLINEA_CS}"/>
+											<Button icon="sap-icon://delete" press="onDeleteValue" type="Emphasized"/>
+											<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennali"/>
+											<Button press="onSavePluriennale" type="Emphasized" text="Salva"/>
+										</OverflowToolbar>
+									</headerToolbar>
+									<columns>
+										<Column width="19%" hAlign="Right">
+											<Label text="{i18n>AnnoDa}" design="Bold"/>
+										</Column>
+										<Column width="19%" hAlign="Right">
+											<Label text="{i18n>AnnoAL}" design="Bold"/>
+										</Column>
+										<Column width="22%" hAlign="Right">
+											<Label text="{i18n>Compentenza}" design="Bold"/>
+										</Column>
+										<Column width="40%">
+											<Label text="" design="Bold"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem >
+											<cells>
+												<Text text="{modelRiprogrammazioniComp>YearLow}"/>
+												<Text text="{modelRiprogrammazioniComp>YearHigh}"/>
+												<Text text="{modelRiprogrammazioniComp>Importo}"/>
+												<Text text=""/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</VBox> -->
+</core:FragmentDefinition>

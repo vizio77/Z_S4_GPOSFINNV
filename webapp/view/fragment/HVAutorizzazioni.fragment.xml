@@ -1,0 +1,104 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<TableSelectDialog title="Cerca Autorizzazione" search="onSearchAuth" confirm="handleConfirmAuth" cancel=".onClose"
+		items="{modelPosFin>/elencoAuth/}" busy="{modelPosFin>/busyAuth}">
+		<columns>
+			<Column width="14rem">
+				<header>
+					<Text text="Descrizione compatta" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="Nickname" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="Attivazione" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="Scadenza" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="Classificazione" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="Natura" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="{modelPosFin>/dispAnnoFaseLabel}" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="{modelPosFin>/dispAnnoPlusOneLabel}" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text  text="{modelPosFin>/dispAnnoPlusTwoLabel}" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="Tipologia" class="boldCss"/>
+				</header>
+			</Column>
+			<!-- <Column width="8rem">
+				<header>
+					<Text text="Indicatore Monitoraggio" class="boldCss"/>
+				</header>
+			</Column> -->
+			<Column width="8rem">
+				<header>
+					<Text text="Indicatore Finalizzata" class="boldCss"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="Indicatore Stabilizzata" class="boldCss"/>
+				</header>
+			</Column>
+		</columns>
+		<ColumnListItem>
+			<cells>
+				<Text text="{= ${modelPosFin>ZzdescrEstesaFm} ? ${modelPosFin>ZzdescrEstesaFm} : 'NULL'}"/>
+				<Text text="{modelPosFin>DescNickname}"/>
+				<Text text="{modelPosFin>Attivazione}"/>
+				<Text text="{modelPosFin>Scadenza}"/>
+				<Text text="{modelPosFin>DescClassificazione}"/>
+				<Text text="{modelPosFin>DescNaturaSpesaAuth}"/>
+				<Text text="{path: 'modelPosFin>ImpoDispCurrent', type: 'sap.ui.model.type.Float', formatOptions: {
+					maxFractionDigits: 2,
+					roundingMode: 'away_from_zero',
+					preserveDecimals: false
+				  }}"/>
+				<Text text="{path: 'modelPosFin>ImpoDispPlusOne' , type: 'sap.ui.model.type.Float', formatOptions: {
+					maxFractionDigits: 2,
+					roundingMode: 'away_from_zero',
+					preserveDecimals: false
+				  }}"/>
+				<Text text="{path: 'modelPosFin>ImpoDispPlusTwo', type: 'sap.ui.model.type.Float', formatOptions: {
+					maxFractionDigits: 2,
+					roundingMode: 'away_from_zero',
+					preserveDecimals: false
+				  }}"/>
+				<Text text="{modelPosFin>Tipologia}"/>
+				<!-- <Text text="{= ${modelPosFin>IndicatMonit} === 'X' ? 'Sì' : 'No'}"/> -->
+				<Text text="{= ${modelPosFin>IndFinalizzata} === true ? 'Sì' : 'No'}"/>
+				<Text text="{= ${modelPosFin>IndStabilizzata} === true ? 'Sì' : 'No'}"/>
+			</cells>
+		</ColumnListItem>
+	</TableSelectDialog>
+</c:FragmentDefinition>

@@ -1,0 +1,73 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog title="Cerca" contentHeight="90%">
+		<content>
+            <Table
+                growing="true"
+                mode="MultiSelect"
+                growingScrollToLoad="true"
+                items="{path: 'modelHome>/formSottostrumento/categoria_set/', length: '1000', sorter: [
+                    {path: 'Categoria', comparator: '.sorterHVDomSStr'},
+                    {path: 'Titolo', comparator: '.sorterHVDomSStr'}
+                  ]}"
+                sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+                updateStarted="onUpdateStartedHVDomSStr"
+                updateFinished="onUpdateFinishedHVDomSStr"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchHVDomSStr" width="50%" >
+                                <customData>
+                                    <c:CustomData key="categoria" value="DescEstesaCategoria"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <infoToolbar>
+                    <OverflowToolbar visible="{= ${modelHome>/formSottostrumento/categoria}.length > 0}">
+                        <Text text="{= 'Selezionati: ' + ${modelHome>/formSottostrumento/categoria}.length }" />
+                    </OverflowToolbar>
+                </infoToolbar>
+                <columns>
+                    <Column width="8rem">
+                        <Text text="{i18n>dom_titolo}"/>
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="{i18n>descr_titolo}"/>
+                    </Column>
+                    <Column width="8rem">
+                        <Text text="{i18n>dom_categoria}" />
+                    </Column>
+                    <Column width="12rem">
+                        <Text text="{i18n>descrCategoria}"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Active" selected="{ parts: [
+                                                    {path: 'modelHome>Titolo'},
+                                                    {path:'modelHome>Categoria'}
+                                                ], formatter: '.setSelectedCategoria' 
+                                                }">
+                        <cells>          
+                            <Text text="{modelHome>Titolo}"/>
+                            <Text text="{modelHome>DescEstesaTitolo}"/>
+                            <Text text="{modelHome>Categoria}"/>
+                            <Text text="{modelHome>DescEstesaCategoria}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+                <customData>
+                    <c:CustomData key="selezioni" value="categoria" writeToDom="false" />
+                </customData>
+            </Table>
+        </content>
+        <buttons>
+            <Button text="Annulla" press="onCloseHVDomSStr" type="Emphasized"/>
+            <Button text="{i18n>conf}" press="onConfirmSelectionDomSStr" type="Emphasized"/>
+        </buttons>
+    </Dialog>
+</c:FragmentDefinition>

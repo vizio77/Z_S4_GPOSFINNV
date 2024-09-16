@@ -1,0 +1,61 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+<Dialog
+    contentHeight="90%" 
+    draggable="false"
+    escapeHandler=""
+    horizontalScrolling="true"
+    icon=""
+    resizable="false"
+    showHeader="true"
+    state="None"
+    stretch="false"
+    title="Cerca Missioni"
+    type="Standard"
+    verticalScrolling="true"
+>
+    <content>
+        <List
+        mode="MultiSelect"
+		items="{
+			path: 'modelHome>/formSottostrumento/missione_set', sorter: {path:'Missione', comparator: '.sorterHVDomSStr'}
+		}" >
+        <headerToolbar>
+            <OverflowToolbar>
+                <content>
+                    <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchHVDomSStr" width="65%">
+                        <customData>
+                            <c:CustomData key="missioni" value="DescEstesaMissione"/>
+                        </customData>
+                    </SearchField>
+                </content>
+            </OverflowToolbar>
+        </headerToolbar>
+        <infoToolbar>
+            <OverflowToolbar visible="{= ${modelHome>/formSottostrumento/missioni}.length > 0}">
+                <Text text="{= 'Selezionati: ' + ${modelHome>/formSottostrumento/missioni}.length }" />
+            </OverflowToolbar>
+        </infoToolbar>
+		<StandardListItem
+			title="{modelHome>Missione}"
+			description="{modelHome>DescEstesaMissione}"
+			iconDensityAware="false"
+			iconInset="false" selected="{ parts: [
+                            {path:'modelHome>Missione'}
+                        ], formatter: '.setSelectedMissioni' 
+                        }"/>
+        <customData>
+            <c:CustomData key="selezioni" value="missioni" writeToDom="false" />
+        </customData>
+	</List>
+    </content>
+    <customHeader>
+    </customHeader>
+    <buttons>
+        <Button text="Annulla" press="onCloseHVDomSStr" type="Emphasized"/>
+        <Button text="{i18n>conf}" press="onConfirmSelectionDomSStr" type="Emphasized"/>
+    </buttons>
+</Dialog>
+</c:FragmentDefinition>

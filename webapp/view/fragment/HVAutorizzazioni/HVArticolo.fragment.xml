@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:uxap="sap.uxap">
+	<Dialog  title="Cerca {i18n>Articolo}" contentWidth="20%" contentHeight="60%">
+		<content>
+			<Table  
+			growing="true" 
+			items="{path: 'modelPosFin>/formAutorizzazione/Articolo_results/', length: '5000', sorter: [{path: 'NUMERO_ARTICOLO', comparator: '.sorterHVDomSStr'}]}"
+			selectionChange="onConfirmItem($event,'Articolo')"
+			mode="SingleSelectMaster"  
+			inset="false" 
+			sticky="InfoToolbar,HeaderToolbar,ColumnHeaders"
+			busy="{modelPosFin>/busyAuth}">
+				<headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <SearchField class="sapUiMarginEnd sapUiMarginBegin" search="onSearchDescr" width="65%">
+                                <customData>
+                                    <core:CustomData key="articolo" value="NUMERO_ARTICOLO"/>
+                                </customData>
+                            </SearchField>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+				<columns>
+					<Column width="12em">
+						<Text text="{i18n>Numero}" class="boldCss"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							<Text text="{modelPosFin>NUMERO_ARTICOLO}"/>
+							
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<buttons>
+			<Button press="onClose" type="Emphasized" text="{i18n>close}"/>
+				<Button type="Emphasized"  press="onConfirmItem" text="{i18n>conf}">
+					<customData>
+						<core:CustomData key="selezioni" value="Articolo" writeToDom="false" />
+					</customData>
+				</Button>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

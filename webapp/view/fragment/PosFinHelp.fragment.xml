@@ -1,0 +1,146 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:uxap="sap.uxap">
+	<Dialog  title="{i18n>cercaPosFin}" contentWidth="80%" contentHeight="60%">
+		<content>
+			<f:SimpleForm  editable="true" singleContainerFullSize="false" adjustLabelSpan="false"
+				layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" emptySpanXL="2" emptySpanL="0" emptySpanM="2"
+				emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1">
+				<f:content>
+					<core:Title/>
+					<Label text="{i18n>labelPosFin}" labelFor="idAmmPosizioneFin"/>
+					<Input placeholder="{i18n>labelPosFin}" value="{modelPosFin>/posFinHelp/fipex}" width="70%" showValueHelp="false"/>
+					<!-- Amministrazione -->
+					<Label text="{i18n>Amministrazione}" labelFor="idAmmFraa"/>
+					<Input  placeholder="{i18n>Amministrazione}" value="{modelPosFin>/posFinHelp/Prctr}" width="70%" showValueHelp="true"   editable="{= ${modelPosFin>/ammCedente}}"
+						valueHelpRequest="onHVAdattaFiltri">
+                        <customData>
+							<core:CustomData key="posFinHelp" value="HVAmmin" />
+						</customData>
+                    </Input>
+					<!-- Centro di Responsabilità -->
+					<Label text="{i18n>centroDiResp}"/>
+					<Input placeholder="{i18n>centroDiResp}" value="{modelPosFin>/posFinHelp/Cdr}" width="70%" showValueHelp="true"  valueHelpRequest="onHVAdattaFiltri">
+						<customData>
+							<core:CustomData key="posFinHelp" value="HVCdr" />
+						</customData>
+					</Input>
+					<!-- Ragioneria -->
+					<Label text="{i18n>ragioneria}"/>
+					<Input placeholder="{i18n>ragioneria}" value="{modelPosFin>/posFinHelp/Ragioneria}" width="70%" showValueHelp="true"  valueHelpRequest="onHVAdattaFiltri">
+						<customData>
+							<core:CustomData key="posFinHelp" value="HVRagioneria" />
+						</customData>
+					</Input>
+					<!-- Missione -->
+					<Label text="{i18n>mission}" labelFor="idMiss"/>
+					<Input placeholder="{i18n>mission}" value="{modelPosFin>/posFinHelp/Missione}" width="70%" showValueHelp="true" valueHelpRequest="onHVAdattaFiltri" >
+                        <customData>
+                            <core:CustomData key="posFinHelp" value="HVMissione" writeToDom="false"/>
+                        </customData>
+                    </Input>
+					<!-- Programma -->
+					<Label text="{i18n>programma}" labelFor="idProgFs"/>
+					<Input placeholder="{i18n>programma}" value="{modelPosFin>/posFinHelp/Programma}" width="70%" showValueHelp="true" valueHelpRequest="onHVAdattaFiltri" >
+                        <customData>
+                            <core:CustomData key="posFinHelp" value="HVProgramma" writeToDom="false"/>
+                        </customData>
+                    </Input>
+					<!-- Azione -->
+					<Label text="{i18n>azione}" labelFor="idAzioneF"/>
+					<Input placeholder="{i18n>azione}" value="{modelPosFin>/posFinHelp/Azione}" width="70%" showValueHelp="true" valueHelpRequest="onHVAdattaFiltri" >
+                    <customData>
+                            <core:CustomData key="posFinHelp" value="HVAzione" writeToDom="false"/>
+                        </customData>
+                    </Input>
+					<!-- Capitolo -->
+					<Label text="{i18n>Capitolo}" labelFor="idCapitoloF"/>
+					<Input placeholder="{i18n>Capitolo}" value="{modelPosFin>/posFinHelp/Capitolo}" width="70%" showValueHelp="true" valueHelpRequest="onHVAdattaFiltri" liveChange="liveChangeCPPG($event,'Capitolo')" >
+                    	<customData>
+                            <core:CustomData key="posFinHelp" value="HVCapitolo" writeToDom="false"/>
+                        </customData>
+                    </Input>
+					<!-- PG -->
+					<Label text="{i18n>PgExt}" labelFor="idPgF"/>
+					<Input placeholder="{i18n>PgExt}" value="{modelPosFin>/posFinHelp/Pg}" width="70%" showValueHelp="true"  valueHelpRequest="onHVAdattaFiltri" liveChange="liveChangeCPPG($event,'Pg')">
+                    	<customData>
+                            <core:CustomData key="posFinHelp" value="HVPgChoice" writeToDom="false"/>
+                        </customData>
+                    </Input>
+					<!-- Titolo -->
+					<Label text="{i18n>dom_titolo}"/>
+					<Input placeholder="{i18n>dom_titolo}" value="{modelPosFin>/posFinHelp/Titolo}" width="70%" showValueHelp="true"  valueHelpRequest="onHVAdattaFiltri">
+						<customData>
+							<core:CustomData key="posFinHelp" value="HVTitolo" />
+						</customData>
+					</Input>
+					<!-- Categoria -->
+					<Label text="{i18n>categoria}" labelFor="idCategoriaF"/>
+					<Input placeholder="{i18n>categoria}" value="{modelPosFin>/posFinHelp/Categoria}" width="70%" showValueHelp="true" valueHelpRequest="onHVAdattaFiltri"  >
+						<customData>
+                            <core:CustomData key="posFinHelp" value="HVCategoria" writeToDom="false"/>
+                        </customData>
+                    </Input>
+					<!-- Ce2 -->
+					<Label text="{i18n>ce}" labelFor="idCeF"/>
+					<Input placeholder="{i18n>ce}" value="{modelPosFin>/posFinHelp/Ce2}" width="70%" showValueHelp="true" valueHelpRequest="onHVAdattaFiltri"  >
+						<customData>
+							<core:CustomData key="posFinHelp" value="HVCe2" />
+						</customData>
+					</Input>
+					<!-- Ce3 -->
+					<Label text="{i18n>ce3}" labelFor="idCe3F"/>
+					<Input placeholder="{i18n>ce3}" value="{modelPosFin>/posFinHelp/Ce3}" width="70%" showValueHelp="true" valueHelpRequest="onHVAdattaFiltri"  >
+						<customData>
+							<core:CustomData key="posFinHelp" value="HVCe3" />
+						</customData>
+					</Input>
+
+					
+					<core:Title/>
+					<Text />
+					<!-- Desc Amministrazione -->
+					<Label text="{i18n>descAmm}" labelFor="idDescAmmF"/>
+					<Input value="{modelPosFin>/posFinHelp/AmministrazioneDesc}" width="80%" editable="false"/>
+					<!-- Descr Cdr -->
+					<Label text="Desc. CdR"/> 
+					<Input  value="{modelPosFin>/posFinHelp/CdrDesc}" width="80%" editable="false"/>
+					<!-- Descr Ragioneria -->
+					<Label text="Desc. Ragioneria"/> 
+					<Input  value="{modelPosFin>/posFinHelp/RagioneriaDesc}" width="80%" editable="false"/>
+					<!-- Desc Missione -->
+					<Label text="{i18n>descrMissione}" labelFor="idDescMissF"/>
+					<Input  value="{modelPosFin>/posFinHelp/MissioneDesc}" width="80%" editable="false"/>
+					<!-- Desc Programma -->
+					<Label text="{i18n>descrProgramma}" labelFor="idDescProgF"/>
+					<Input  value="{modelPosFin>/posFinHelp/ProgrammaDesc}" width="80%" editable="false"/>
+					<!-- Desc Azione -->
+					<Label text="{i18n>descrAzione}" labelFor="idDescAzioneF"/>
+					<Input value="{modelPosFin>/posFinHelp/AzioneDesc}" width="80%" editable="false"/>
+					<!-- Desc Capitolo -->
+					<Label text="{i18n>descrCapitolo}" labelFor="idDescCapitoloF"/>
+					<Input value="{modelPosFin>/posFinHelp/CapitoloDesc}" width="80%" editable="false"/>
+					<!-- Desc Pg -->
+					<Label text="{i18n>descrPg}" labelFor="idDescrPgF"/>
+					<Input value="{modelPosFin>/posFinHelp/PgDesc}" width="80%" editable="false"/>
+					<!-- Desc Titolo -->
+					<Label text="{i18n>descrTitolo}"/>
+					<Input value="{modelPosFin>/posFinHelp/TitoloDesc}" width="80%" editable="false"/>
+					<!-- Desc Categoria -->
+					<Label text="{i18n>descrCategoria}" labelFor="idDescCategoria"/>
+					<Input value="{modelPosFin>/posFinHelp/CategoriaDesc}" width="80%" editable="false"/>
+					<!-- Desc Ce2 -->
+					<Label text="{i18n>descrCe}" labelFor="idDescCeF"/>
+					<Input value="{modelPosFin>/posFinHelp/Ce2Desc}" width="80%" editable="false"/>
+					<!-- Desc Ce3 -->
+					<Label text="{i18n>descrCe3}" labelFor="idDescCe3F"/>
+					<Input value="{modelPosFin>/posFinHelp/Ce3Desc}" width="80%" editable="false"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button press="onClose" type="Emphasized" text="{i18n>close}"></Button>
+			<Button press="onResetPosFinHelp" type="Emphasized" text="{i18n>Resetta}"></Button>
+			<Button press="onPressConfPosFin" type="Emphasized" text="{i18n>Cerca}"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

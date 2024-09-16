@@ -1,0 +1,170 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<TableSelectDialog title="Cerca" search="onSearchPosFinDialog" confirm="onConfirmTablePosFin" cancel="handleCloseFinan"
+		items="{path: 'modelPosFin>/elencoPosFin/', sorter: [{path: 'Ammin', comparator: '.sorterHVDomSStr'},
+															 {path: 'Capitolo', comparator: '.sorterHVDomSStr'},
+															 {path: 'Pg', comparator: '.sorterHVDomSStr'}
+															 ]}" busy="{modelPosFin>/tablePosFinBusy}">
+		<columns>
+			<Column width="14rem">
+				<header>
+					<Text text="{i18n>labelPosFin}"/>
+				</header>
+			</Column>
+			<Column width="8rem">
+				<header>
+					<Text text="{i18n>Amministrazione}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descAmm}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>Cdr}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descCdr}"/>
+				</header>
+			</Column>
+			<Column width="6rem">
+				<header>
+					<Text text="{i18n>ragioneria}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descRagioneria}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>mission}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descrMissione}"/>
+				</header>
+			</Column>
+			<Column width="6rem">
+				<header>
+					<Text text="{i18n>programma}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descrProgramma}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>azione}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descrAzione}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>Capitolo}"/>
+				</header>
+			</Column>
+			<Column width="20rem">
+				<header>
+					<Text text="{i18n>descrCapitolo}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>Pg}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descrPg}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>dom_titolo}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descr_titolo}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>categoria}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descrCategoria}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>ce}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descrCe}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>ce3}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descrCe3}"/>
+				</header>
+			</Column>
+		</columns>
+		<ColumnListItem>
+			<cells>
+				<Text text="{modelPosFin>CodificaRepPf}"/>
+				<Text text="{modelPosFin>Prctr}"/>
+				<Text text="{modelPosFin>DescAmmin}"/>
+				<Text text="{modelPosFin>Cdr}"/>
+				<Text text="{modelPosFin>DescCdr}"/>
+				<Text text="{modelPosFin>Ragioneria}"/>
+				<Text text="{modelPosFin>DescRagioneria}"/>
+				<Text text="{modelPosFin>Missione}"/>
+				<Text text="{modelPosFin>DescMissione}"/>
+				<Text text="{modelPosFin>Programma}"/>
+				<Text text="{modelPosFin>DescProgramma}"/>
+				<Text text="{modelPosFin>Azione}"/>
+				<Text text="{modelPosFin>DescAzione}"/>
+				<Text text="{modelPosFin>Capitolo}"/>
+				<Text text="{modelPosFin>DescCapitolo}"/>
+				<Text text="{modelPosFin>Pg}"/>
+				<Text text="{modelPosFin>DescPg}"/>
+				<Text text="{modelPosFin>Titolo}"/>
+				<Text text="{modelPosFin>DescTitolo}"/>
+				<Text text="{modelPosFin>Categoria}"/>
+				<Text text="{modelPosFin>DescCategoria}"/>
+				<Text text="{modelPosFin>Ce2}"/>
+				<Text text="{modelPosFin>DescCe2}"/>
+				<Text text="{modelPosFin>Ce3}"/>
+				<Text text="{modelPosFin>DescCe3}"/>
+			</cells>
+		</ColumnListItem>
+		<customData>
+			<core:CustomData key="posfin" value="Capitolo"/>
+			<core:CustomData key="posfin" value="Pg"/>
+			<core:CustomData key="posfin" value="Prctr"/>
+			<core:CustomData key="posfin" value="CodificaRepPf"/>
+		</customData>
+	</TableSelectDialog>
+</core:FragmentDefinition>
