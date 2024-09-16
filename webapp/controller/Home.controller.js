@@ -1910,11 +1910,13 @@ sap.ui.define([
 			onHelpValueStrumento: async function(e) {
 				// var index = e.getSource().getId().split('-')[12];
 				// this.getView().getModel("sPathIndexModel").getData().sPathSottostrumento = index;
+
+                const globalModel = this.getView().getModel("globalModel");
 				const t = this.getView().getModel("modelHome");
 				const n = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZSS4_STRUMENTO_SRV/");
 				var aFilters = [];
 				aFilters.push(new Filter("TipoStr", FilterOperator.EQ, "54"));
-				aFilters.push(new Filter("AnnoStr", FilterOperator.EQ, "2025"));
+				aFilters.push(new Filter("AnnoStr", FilterOperator.EQ, globalModel.getProperty("/ANNO")));
 				if (t.getData().Sottostrumento) {
 					aFilters.push(new Filter("CodiceStrumento", FilterOperator.EQ, t.getData().infoSottoStrumento.CodiceStrumento));
 				}
