@@ -248,7 +248,7 @@ sap.ui.define([
           let modelTopologiche = this.getOwnerComponent().getModel("sapHanaS2Tipologiche")  
           return new Promise((resolve, reject) => {
             modelTopologiche.read("/ZES_CAL_FIN_SET",{
-                filters: [new Filter("FASE", FilterOperator.EQ, "F")],
+                filters: [new Filter("FASE", FilterOperator.EQ, "F"), new Filter("SEM_OBJ", FilterOperator.EQ, "Z_S4_GPOSFINNV")],
                 success: (oData) => {
                     resolve(oData.results[0].ANNO)
                 },

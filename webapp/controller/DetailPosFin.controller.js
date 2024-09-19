@@ -5,6 +5,7 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"sap/ui/core/Fragment",
 	"sap/m/MessageBox",
+	"sap/ui/core/syncStyleClass",
 	"z_s4_crosslock/crosslock/controls/Lock",
 	"sap/ui/core/routing/History",
 	"sap/m/library",
@@ -12,7 +13,7 @@ sap.ui.define([
 	"sap/ui/core/format/NumberFormat",
 	"../model/formatter",
 	"../model/models",
-], function(Controller, JSONModel, Filter, FilterOperator, Fragment, MessageBox, Lock, History, mobileLibrary, BaseController, NumberFormat, formatter, models) {
+], function(Controller, JSONModel, Filter, FilterOperator, Fragment, MessageBox, syncStyleClass,Lock, History, mobileLibrary, BaseController, NumberFormat, formatter, models) {
 	"use strict";
 	var DialogType = mobileLibrary.DialogType;
 	var variabGlobal;
@@ -759,6 +760,10 @@ sap.ui.define([
 			var icontab = this.getView().byId("idIconTabBarMulti");
 			if(icontab) icontab.setSelectedKey("info");
 
+			//lt inserisco per le IRAP
+			this.getView().setModel(new JSONModel([]), "fipexIrapSelected");
+			this.getView().setModel(new JSONModel([]), "modelDeleteIrap");
+
 			modelPosFin.setProperty("/gestioneCampiEditabili", { stato_pg: true, quadri : true})
 			modelPosFin.setProperty("/formPosFin", {
 				amministrazioni: [],
@@ -1083,7 +1088,7 @@ sap.ui.define([
 				enableCofog: state,
 				stato_pg: modelPosFin.getProperty("/PosFin/StatusCapitolo") === '3' ? false : true
 				/*,
-				 stato_capitolo: state*/
+				stato_capitolo: state*/
 			})
 		},
 		__setAllFieldNotModifiable: function (modelPosFin, state, stato_pg) {
@@ -2962,7 +2967,7 @@ sap.ui.define([
 		},
 		onPosFinIRAP: function (oEvent) {
 			var oButton = oEvent.getSource(),
-			oView = this.getView();
+			oView = this.getView();	
 
 			// create popover
 			if (!this.popOverPosFinIRAP) {
@@ -2976,8 +2981,175 @@ sap.ui.define([
 				});
 			}
 			this.popOverPosFinIRAP.then(function(oPopover) {
-				oPopover.openBy(oButton);
+				oPopover.open();
 			});
+		},
+		handleAddIrap: function(oEvent) {
+			var oView = this.getView();
+			let modelPosFin = this.getView().getModel("modelPosFin");
+			modelPosFin.setProperty("/codiceElenco", null);
+			modelPosFin.setProperty("/descElenco", null);
+			let modelHana = this.getOwnerComponent().getModel("sapHanaS2")
+			let aFilters = [
+				new Filter(
+					"Fikrs",
+					sap.ui.model.FilterOperator.EQ,
+					modelPosFin.getProperty("/PosFin/Fikrs")
+				), //Attualmente statico per necessità
+				new Filter(
+					"Anno",
+					sap.ui.model.FilterOperator.EQ,
+					modelPosFin.getProperty("/PosFin/Anno")
+				),
+				new Filter(
+					"Fase",
+					sap.ui.model.FilterOperator.EQ,
+					modelPosFin.getProperty("/PosFin/Fase")
+				),
+				new Filter("Reale", sap.ui.model.FilterOperator.EQ, "R"),
+				new Filter(
+					"Prctr",
+					FilterOperator.EQ,
+					modelPosFin.getProperty("/detailAnagrafica/AMMINISTAZIONE")
+				),
+				// new Filter("LOEKZ", FilterOperator.EQ, ""),
+			];
+			if (
+				modelPosFin.getProperty("/detailAnagrafica/elenchiCapitolo")
+				.length > 0
+			) {
+				modelPosFin
+					.getProperty("/detailAnagrafica/elenchiCapitolo")
+					.map((el) =>
+						aFilters.push(
+							new Filter("NumeroElenco", FilterOperator.NE, el.NumeroElenco)
+						)
+					);
+			}
+			modelHana.read("/ElencoSet", {
+				filters: aFilters,
+
+				success: function(oData) {
+					//oData.results = oData.results.filter(item => !(item.Prctr === "A020" && item.NumeroElenco === "1"))
+					let aShowCapElenchi = [];
+					oData.results = oData.results.filter(
+						(el) => !(el.Prctr === "A020" && el.NumeroElenco === "001")
+					);
+					for (let i = 0; i < oData.results.length; i++) {
+						if (!modelPosFin
+							.getProperty("/detailAnagrafica/elenchiCapitolo")
+							.find(
+								(el) => oData.results[i].NumeroElenco === el.NumeroElenco
+							)
+						) {
+							aShowCapElenchi.push(oData.results[i]);
+						}
+					}
+					var codice_elenco = {
+						codice_elenco: [],
+					};
+					modelPosFin.getData().formPosFin = codice_elenco;
+					modelPosFin.setProperty(
+						"/formPosFin/codice_elenco",
+						aShowCapElenchi
+					);
+				},
+			});
+			if (!this._handleAddIrap) {
+				this._handleAddIrap = sap.ui.xmlfragment(
+					"zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.HVPosFin.AddIrap",
+					this
+				);
+				this.getView().addDependent(this._handleAddIrap);
+				/* syncStyleClass(
+					oView
+					.getController()
+					.getOwnerComponent()
+					.getContentDensityClass(),
+					oView,
+					this._handleAddIrap
+				); */
+			}
+			this._handleAddIrap.open();
+		},
+		addIrap: async function() {
+			var that = this;
+			var aIrapModel = that.getView().getModel("modelPosFin").getProperty("/detailAnagrafica/PosizioneFinanziariaIrap");
+			var sIrapInput = sap.ui.getCore().byId("idInputGestPosFin").getValue();
+			var sModelPosFinMC = that.getView().getModel("fipexIrapSelected");
+
+			var obj = {
+				Fipex: sModelPosFinMC.getProperty("/FIPEX"),
+				CodificaRepPf: sModelPosFinMC.getProperty("/CODIFICA_REP_PF"),
+				DescriBreve: sModelPosFinMC.getProperty("/DESCR_PG"),
+				ADDFE: true,
+				// "DESCR_ESTESA": sDescrIrap
+			};
+			if (aIrapModel) {
+				var aIrapRecord = aIrapModel.find((a) => a.Fipex === obj.Fipex);
+				if (aIrapRecord) {
+					return MessageBox.error(this.recuperaTestoI18n("errIrapD"));
+				} else {
+					aIrapModel.push(obj);
+					that.getView().getModel("modelPosFin").setProperty("/detailAnagrafica/PosizioneFinanziariaIrap", aIrapModel)
+					that.getView().getModel("modelPosFin").refresh();
+				}
+			} else {
+				that
+					.getView()
+					.getModel("modelPosFin")
+					.setProperty("/detailAnagrafica/PosizioneFinanziariaIrap/", [obj]);
+				// aIrapModel.push(obj);
+				that.getView().getModel("modelPosFin").refresh();
+			}
+
+			that.handlecloseIrap();
+		},
+		onDeleteIrap: function(oEvent) {
+			var sContextPath = oEvent
+				.getSource()
+				.getParent()
+				.getBindingContextPath();
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact")
+				.length;
+			var that = this;
+			sap.m.MessageBox.warning(
+				that.recuperaTestoI18n("onDeleteDomandaIrap"), {
+					id: "messageWarning",
+					title: that.recuperaTestoI18n("opWa"),
+					actions: [MessageBox.Action.OK, "Annulla"],
+					styleClass: bCompact ? "sapUiSizeCompact" : "",
+					onClose: function(sAction) {
+						if (sAction === "OK") {
+							var sInt = parseInt(
+								sContextPath.split("/detailAnagrafica/PosizioneFinanziariaIrap/")[1]
+							);
+							var sModelPosFin = that.getView().getModel("modelPosFin");
+							var sArr = sModelPosFin.getProperty("/detailAnagrafica/PosizioneFinanziariaIrap/");
+							var sRecordSelected = that
+								.getView()
+								.getModel("modelPosFin")
+								.getProperty(sContextPath);
+							if (!sRecordSelected.ADDFE) {
+								sRecordSelected.ADDFE = false;
+								that
+									.getView()
+									.getModel("modelDeleteIrap")
+									.getData()
+									.push(sRecordSelected);
+							}
+							sArr.splice(sInt, 1);
+							sModelPosFin.setProperty("/NAV_POSFIN/0/NAV_IRAP", sArr);
+						}
+					},
+				}
+			);
+		},
+		handlecloseIrap: function() {
+			if (this._handleAddIrap) {
+				this._handleAddIrap.destroy();
+				this._handleAddIrap = null;
+			}
 		},
 		onSottostrumento: function () {
 			var oModel = this.getOwnerComponent().getModel("sapHanaS2");
@@ -4076,7 +4248,7 @@ sap.ui.define([
 			const exp = isForExport === true ? "Exp" : ""
 			this.getView().setBusy(true);
 			this.getView().setModel(new JSONModel([{}]), `modelTableCassa${exp}`);
-			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
 			let oModelPosFin = this.getView().getModel("modelPosFin");
 			//lt regolo visibilità dei quadri in modo semplice
 			if(!isForExport){
@@ -4220,7 +4392,7 @@ sap.ui.define([
 
 			/* this.popolateModelFilter();
 			var modelFilter = this.getView().getModel("modelFilter").getData(); */
-			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
 			let sAnno = this.getOwnerComponent().getModel("globalModel").getData().ANNO;
 			var sEntity =
 				`/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='${modelFilter.keyAnno}',P_AnnoMin='${modelFilter.keyAnno}',P_AnnoMax='${modelFilter.keyAnno + 2}',P_Fase='NV',P_Eos='S',P_PosFin='${modelFilter.posfin}',P_Autorizz='${modelFilter.fincode}',P_Capitolo='${modelFilter.codCap}',P_RecordType='CB')/Set`;
@@ -4299,7 +4471,7 @@ sap.ui.define([
 			if(isRimodulazioni) 
 			this.popolateModelFilter();
 			var modelFilter = this.getView().getModel("modelFilter").getData();
-			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
 			let sAnno = this.getOwnerComponent().getModel("globalModel").getData().ANNO;
 			var sEntity =
 				`/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='${modelFilter.keyAnno}',P_AnnoMin='${modelFilter.keyAnno}',P_AnnoMax='${modelFilter.keyAnno + 2}',P_Fase='NV',P_Eos='S',P_PosFin='${modelFilter.posfin}',P_Autorizz='${modelFilter.fincode}',P_Capitolo='${modelFilter.codCap}',P_RecordType='CB')/Set`;
@@ -9806,7 +9978,7 @@ sap.ui.define([
 				case "2":
 					return this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV");
 				case "3":
-					return this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV");
+					return this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV");
 				case "4":
 					return this.getOwnerComponent().getModel("sapHanaS2FoglioNotizie");
 
@@ -9834,7 +10006,7 @@ sap.ui.define([
 			const exp = isForExport === true ? "Exp" : ""
 			this.getView().setBusy(true);
 			this.getView().setModel(new JSONModel([{}]), `modelTableQuadro${exp}`);
-			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
 			let oModelPosFin = this.getView().getModel("modelPosFin");
 			let sAnno = this.getOwnerComponent().getModel("globalModel").getData().ANNO;
 			let oAut = oModelPosFin.getProperty("/CompetenzaAuth");

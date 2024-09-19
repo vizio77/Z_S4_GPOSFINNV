@@ -1,14 +1,63 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<Popover title="{i18n>CapitoloIrap}" class="sapUiContentPadding" placement="Right" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+    <Dialog title="Gestione Irap" contentHeight="auto">
 		<content>
-			<List
-                id="posFinIrap"
-                items="{modelPosFin>/detailAnagrafica/PosizioneFinanziariaIrap/}">
-                <items>
-                    <StandardListItem
-                        title="{modelPosFin>CodificaRepPf}" />
-                </items>
-            </List>
+            <Panel expandable="true" visible="{visibleCheckModel>/visiblePanel}" expanded="true">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="{i18n>CapitoloIrap}">
+                            <customData>
+                                <core:CustomData key="requiredSpan" value="true" writeToDom="true"/>
+                            </customData>
+                        </Title>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <Table id="TableIrap" width="auto"
+                    items="{modelPosFin>/detailAnagrafica/PosizioneFinanziariaIrap}">
+                    <headerToolbar>
+                        <Toolbar >
+                            <ToolbarSpacer/>
+                            <Button type="Emphasized" icon="sap-icon://add" text="{i18n>btnAddRowIrap}" press="handleAddIrap" enabled="true"/><!-- {modelEditableField>/ADDIRAP} -->
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column width="auto">
+                            <Text text="{i18n>labelPosFin}"/>
+                        </Column>
+                         <Column width="auto">
+                            <Text text="{i18n>descrizione}"/>
+                        </Column><!-- 
+                        <Column width="5em">
+                            <Text text="{i18n>liv3}"/>
+                        </Column>
+                        <Column width="auto">
+                            <Text text="{i18n>descrizione}"/>
+                        </Column>
+                        <Column width="auto">
+                            <Text text="{i18n>percent}"/>
+                        </Column> -->
+                        <Column width="auto" hAlign="End">
+                            <Text text=""/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem >
+                            <cells>
+                                <Text text="{path: 'modelPosFin>CodificaRepPf'}"/>
+                                <Text text="{path: 'modelPosFin>DescriBreve'}"/>
+                                <!-- <Text text="{path: 'modelPosFin>CofogL3', formatter: '.formatZeroes'}"/>
+                                <Text text="{modelPosFin>Desc}"/> -->
+                                <!-- , formatter: '.formatPercent'} change="onUpdatePercent"  type="Number" maxLength="6" -->
+                                <!-- <Input value="{path:'modelPosFin>PercCofog'}" liveChange="onCheckPercCofog" maxLength="6" type="Number" width="20%" textAlign="End"
+                                    editable="{modelPosFin>/gestioneCampiEditabili/enableCofog}"/> -->
+                                <ToggleButton icon="sap-icon://delete" type="Emphasized" press="onDeleteIrap" enabled="true"/> <!-- {modelPosFin>/gestioneCampiEditabili/enableCofog} {modelEditableField>/ADDIRAP} -->
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </Panel>
 		</content>
-	</Popover>
+        <buttons>
+            <Button text="Chiudi" press="onCloseHVPosFin" type="Emphasized"/>
+        </buttons>
+    </Dialog>
 </core:FragmentDefinition>

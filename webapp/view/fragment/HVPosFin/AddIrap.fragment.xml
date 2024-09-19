@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:uxap="sap.uxap"
+	xmlns:zcontrol="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfin.controls">
+	<Dialog title="{i18n>frgmentAddIrap}" contentWidth="40%" contentHeight="auto">
+		<content>
+			<f:SimpleForm editable="true" singleContainerFullSize="false" adjustLabelSpan="false" layout="ResponsiveGridLayout" labelSpanXL="3"
+				labelSpanL="3" labelSpanM="3" labelSpanS="12" emptySpanXL="2" emptySpanL="0" emptySpanM="2" emptySpanS="0" columnsXL="1" columnsL="1"
+				columnsM="1">
+				<f:content>
+					<core:Title/>
+					<Label text="{i18n>GestPosFin}" labelFor="idInputGestPosFin" required="{= !${modelPosFin>/onModify} }"/>
+					<zcontrol:InputPosizioneFinanziaria id="idInputGestPosFin" width="100%" fase="{modelPosFin>/PosFin/Fase}" spesa="X" fikrs="S001" reale="R"
+						anno="{modelPosFin>/PosFin/Anno}" FILTER_IRAP="X" bilancio="X" MODEL_SELECTED_POSFIN="fipexIrapSelected" maxSuggestionWidth="60%"
+						change="onChangeT" liveChange="onSelectPosFin" valueHelpOnly="true" visible="true"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button press="handlecloseIrap" type="Emphasized" text="{i18n>close}"/>
+		</beginButton>
+		<endButton>
+			<Button press="addIrap" type="Emphasized" text="{i18n>aggiungi}"></Button>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
