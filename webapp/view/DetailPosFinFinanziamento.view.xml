@@ -76,8 +76,10 @@
 										<OverflowToolbar>
 											<Title text="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '5' ? ${i18n>rifinanziamenti} : ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '6' ? ${i18n>definanziamenti} : ${i18n>reiscrizioniEconomie}}"/>
 											<ToolbarSpacer/>
-											<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event)"/>
-											<Button text="{i18n>QCCAPF}" type="Emphasized" press="openquadroCont('PF',$event)"/>
+												<Button text="{i18n>QCCAPDLB}" type="Emphasized" press="openquadroCont('CAP',$event,null,null,null,null,null,'DLB')"/>
+												<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event,null,null,null,null,null,'NV')"/>
+												<Button text="{i18n>QCCAPFDLB}" type="Emphasized" press="openquadroCont('PF',$event,null,null,null,null,null,'DLB')"/>
+												<Button text="{i18n>QCCAPF}" type="Emphasized" press="openquadroCont('PF',$event,null,null,null,null,null,'NV')"/>
 										</OverflowToolbar>
 									</headerToolbar>
 									<core:Fragment fragmentName="zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.IconTab.FrameDefRif"  type="XML"/>
@@ -87,10 +89,12 @@
 										<OverflowToolbar>
 											<Title text="{= ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '5' ? ${i18n>rifinanziamenti} : ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '6' ? ${i18n>definanziamenti} : ${i18n>reiscrizioniEconomie}}"/>
 											<ToolbarSpacer/>
-											<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event)"/>
-											<Button text="{i18n>QCCAPF}" type="Emphasized" press="openquadroCont('PF',$event)"/>
-											<Button text="{i18n>QCCCB}" visible="{= ${modelPosFin>/Esposizione} === '9'}" type="Emphasized" press="openquadroCont('CBREI',$event,null,null,null,null,true)"/>
-
+												<Button text="{i18n>QCCAPDLB}" type="Emphasized" press="openquadroCont('CAP',$event,null,null,null,null,null,'DLB')"/>
+												<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event,null,null,null,null,null,'NV')"/>
+												<Button text="{i18n>QCCAPFDLB}" type="Emphasized" press="openquadroCont('PF',$event,null,null,null,null,null,'DLB')"/>
+												<Button text="{i18n>QCCAPF}" type="Emphasized" press="openquadroCont('PF',$event,null,null,null,null,null,'NV')"/>
+												<Button text="{i18n>QCCCBDLB}" visible="{= ${modelPosFin>/Esposizione} === '9'}" type="Emphasized" press="openquadroCont('CBREI',$event,null,null,null,null,true,'DLB')"/>
+												<Button text="{i18n>QCCCB}" visible="{= ${modelPosFin>/Esposizione} === '9'}" type="Emphasized" press="openquadroCont('CBREI',$event,null,null,null,null,true,'NV')"/>
 										</OverflowToolbar>
 									</headerToolbar>
 									<core:Fragment fragmentName="zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.IconTab.FrameReiscrizioni"  type="XML"/>

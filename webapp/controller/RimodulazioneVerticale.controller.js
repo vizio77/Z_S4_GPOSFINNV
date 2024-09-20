@@ -1570,10 +1570,13 @@ sap.ui.define([
 				} */
 				return oPayload
 		},
-		openquadroCont: async function (sValue, oEvent, sPF, sCP, sCB) {
+		openquadroCont: async function (sValue, oEvent, sPF, sCP, sCB,sFase) {
 			this.getView().setBusy(true);
 			this.getView().setModel(new JSONModel([{}]), "modelTableQuadro");
-			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+			let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+			if(sFase === "NV"){
+				oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
+			}
 			let oModelPosFin = this.getView().getModel("modelPosFin");
 			let sAnno = this.getOwnerComponent().getModel("globalModel").getData().ANNO;
 			var aDataRim = this.getView().getModel("modelRimVerticali").getData().tablePosFinRicCed;
@@ -1586,9 +1589,9 @@ sap.ui.define([
 			var aSingRim = aDataRim.filter((word) => word.Fipex === sPF && word.Capitolo === sCP)
 			if (sValue === "CAP") {
 				if (sCP.length !== 0) {
-					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='NV',P_Eos='S',P_PosFin='" + sPF.replaceAll(".", "") + "',P_Autorizz='',P_Capitolo='" + sCP + "',P_RecordType='OC')/Set"
+					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='"+sFase+"',P_Eos='S',P_PosFin='" + sPF.replaceAll(".", "") + "',P_Autorizz='',P_Capitolo='" + sCP + "',P_RecordType='OC')/Set"
 				} else {
-					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='NV',P_Eos='S',P_PosFin='" + oModelPosFin.getProperty("/posFin").replaceAll(".", "") + "',P_Autorizz='',P_Capitolo='" + oModelPosFin.getProperty("/PosFin/Capitolo") + "',P_RecordType='OC')/Set"
+					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='"+sFase+"',P_Eos='S',P_PosFin='" + oModelPosFin.getProperty("/posFin").replaceAll(".", "") + "',P_Autorizz='',P_Capitolo='" + oModelPosFin.getProperty("/PosFin/Capitolo") + "',P_RecordType='OC')/Set"
 				}
 
 				var sTitle = "Quadro Contabile Capitolo " + aSingRim[0].Prctr + " " + aSingRim[0].Capitolo;
@@ -1596,9 +1599,9 @@ sap.ui.define([
 
 			} else if (sValue === "PF") {
 				if (sPF.length !== 0) {
-					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='NV',P_Eos='S',P_PosFin='" + sPF.replaceAll(".", "") + "',P_Autorizz='',P_Capitolo='" + sCP + "',P_RecordType='OP')/Set"
+					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='"+sFase+"',P_Eos='S',P_PosFin='" + sPF.replaceAll(".", "") + "',P_Autorizz='',P_Capitolo='" + sCP + "',P_RecordType='OP')/Set"
 				} else {
-					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='NV',P_Eos='S',P_PosFin='" + oModelPosFin.getProperty("/posFin").replaceAll(".", "") + "',P_Autorizz='',P_Capitolo='" + oModelPosFin.getProperty("/PosFin/Capitolo") + "',P_RecordType='OP')/Set"
+					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='"+sFase+"',P_Eos='S',P_PosFin='" + oModelPosFin.getProperty("/posFin").replaceAll(".", "") + "',P_Autorizz='',P_Capitolo='" + oModelPosFin.getProperty("/PosFin/Capitolo") + "',P_RecordType='OP')/Set"
 				}
 
 				var sTitle = "Quadro Contabile Posizione Finanziaria " + aSingRim[0].Prctr + " " +aSingRim[0].Capitolo+"."+aSingRim[0].Pg;
@@ -1607,9 +1610,9 @@ sap.ui.define([
 
 				var aSingRimCB = aSingRim.filter((word) => word.IdAutorizzazione === sCB)
 				if (sCB.length !== 0) {
-					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='NV',P_Eos='S',P_PosFin='" + sPF.replaceAll(".", "") + "',P_Autorizz='" + sCB + "',P_Capitolo='" + sCP + "',P_RecordType='CB')/Set"
+					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='"+sFase+"',P_Eos='S',P_PosFin='" + sPF.replaceAll(".", "") + "',P_Autorizz='" + sCB + "',P_Capitolo='" + sCP + "',P_RecordType='CB')/Set"
 				} else {
-					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='NV',P_Eos='S',P_PosFin='" + oModelPosFin.getProperty("/posFin") + "',P_Autorizz='" + oAut.Auth.IdAutorizzazione + "',P_Capitolo='" + oModelPosFin.getProperty("/PosFin/Capitolo") + "',P_RecordType='CB')/Set"
+					var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='"+sFase+"',P_Eos='S',P_PosFin='" + oModelPosFin.getProperty("/posFin") + "',P_Autorizz='" + oAut.Auth.IdAutorizzazione + "',P_Capitolo='" + oModelPosFin.getProperty("/PosFin/Capitolo") + "',P_RecordType='CB')/Set"
 				}
 
 				var sTitle = "Quadro Contabile del Coding Block  " + aSingRim[0].Prctr + " " +aSingRim[0].Capitolo+"."+aSingRim[0].Pg + " " + aSingRim[0].ZzdescrEstesaFm;
@@ -1659,8 +1662,9 @@ sap.ui.define([
 			let dalAlCs = true
 			//! LT dal al quadro contabile capitolo
 			if(sValue === 'CAP'){
-                    
-				const entityDalAl = `/ZCOBI_I_CAP_DAL_AL(P_AnnoFase='${sAnno}',P_Fase='NV',P_Capitolo='${sCP}',P_Eos='S',P_Ammin='${object.Ammin}')/Set`
+				const entityDalAl = `/ZCOBI_I_CAP_DAL_AL(P_AnnoFase='${sAnno}',P_Fase='${sFase}',P_Capitolo='${sCP}',P_Eos='S',P_Ammin='${object.Ammin}')/Set`
+				if(sFase === "NV")
+					entityDalAl = `/ZCOBI_I_CAP_DAL_AL_NV(P_AnnoFase='${sAnno}',P_Fase='${sFase}',P_Capitolo='${sCP}',P_Eos='S',P_Ammin='${object.Ammin}')/Set`
 				var aReqDalAl = await this.__getDataPromise(entityDalAl, [], oModelQuadro);
 				this.formatterImporti(aReqDalAl, false, "Importo")
 
@@ -1674,9 +1678,17 @@ sap.ui.define([
 			//const sstr = oModelPosFin.getProperty("/infoSottoStrumento")
       //let sEntityCp = `/ZCOBI_I_SSTRPF_DAL_AL(P_AnnoFase='${sAnno}',P_Fase='NV',P_Sstr='${object.CodiceSottostrumento}',P_Str='${object.CodiceStrumento}',P_Str_ori='${object.CodiceStrumentoOri}',P_StruttAmm='${object.Fictr}',P_PosFin='${sPF.replaceAll(".", "")}')/Set?`
       //let sEntityCs = `/ZCOBI_I_SSTR_DAL_AL(P_AnnoFase='${sAnno}',P_Fase='NV',P_Sstr='${object.CodiceSottostrumento}',P_Str='${object.CodiceStrumento}',P_Str_ori='${object.CodiceStrumentoOri}',P_StruttAmm='${object.Fictr}',P_PosFin='${sPF.replaceAll(".", "")}',P_Autorizz='')/Set?`
-			let sEntityCp = `/ZCOBI_I_PF_DAL_AL_DLB(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${(parseInt(sAnno) + 2)}',P_PosFin='${sPF}',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
-      let sEntityCs = `/ZCOBI_I_QC_DAL_AL_DLB(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${(parseInt(sAnno) + 2)}',P_PosFin='${sPF}',P_Autorizz='',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
-			if(sEntityCp){  
+	
+	
+		let sEntityCp = `/ZCOBI_I_PF_DAL_AL_DLB(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${(parseInt(sAnno) + 2)}',P_PosFin='${sPF}',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
+		let sEntityCs = `/ZCOBI_I_QC_DAL_AL_DLB(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${(parseInt(sAnno) + 2)}',P_PosFin='${sPF}',P_Autorizz='',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
+		if(sFase === "NV"){
+			sEntityCp = `/ZCOBI_I_PF_DAL_AL_NV(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${(parseInt(sAnno) + 2)}',P_PosFin='${sPF}',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
+			sEntityCs = `/ZCOBI_I_QC_DAL_AL(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${(parseInt(sAnno) + 2)}',P_PosFin='${sPF}',P_Autorizz='',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
+			
+		}
+	
+		if(sEntityCp){  
 				var aReqDalAlCp = await this.__getDataPromise(sEntityCp, [], oModelQuadro);
 				this.formatterImporti(aReqDalAlCp, false, "Importo")
 
@@ -1696,8 +1708,13 @@ sap.ui.define([
 		}else if(sValue === 'FN'){
 			dalAlCs = false
 			//Coding Block
+
       let sEntityCp = `/ZCOBI_I_QC_DAL_AL_DLB(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${sAnno}',P_PosFin='${sPF}',P_Autorizz='${object.IdAutorizzazione}',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
-		
+	  
+	  if(sFase === "NV"){
+		  sEntityCp = `/ZCOBI_I_QC_DAL_AL(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${sAnno}',P_PosFin='${sPF}',P_Autorizz='${object.IdAutorizzazione}',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
+		  
+		}
 			if(sEntityCp){
 				var aReqDalAlCp = await this.__getDataPromise(sEntityCp, [], oModelQuadro);
 				this.formatterImporti(aReqDalAlCp, false, "Importo")

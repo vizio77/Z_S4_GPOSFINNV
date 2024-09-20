@@ -43,17 +43,17 @@ xmlns:zcontrollink="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink.controls"
 																	<zcontrollink:LinkPosizioneFinanziaria class="sapUiTinyMarginTopBottom sapUiTinyMarginEnd" id="linkPosFin" anno="{modelRiprogrammazioni>Anno}" fikrs="{modelRiprogrammazioni>Fikrs}" fase="{modelRiprogrammazioni>Fase}"
 															reale="R" versione="{modelRiprogrammazioni>Versione}" fipex="{ path:'modelRiprogrammazioni>Fipex', formatter: '.formatterPosFin'}"
 															datbis='{modelRiprogrammazioni>Datbis}' text="{modelRiprogrammazioni>CodificaRep}" semanticObject=""/>
-																<Button icon="sap-icon://inspection" class="sapUiTinyMarginBeginEnd" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>capitolo}"  press="openquadroCont('CAP',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},'' )" visible="true" >
+																<Button icon="sap-icon://inspection" class="sapUiTinyMarginBeginEnd" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>capitolo}"  press="openquadroCont('CAP',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},'','NV' )" visible="true" >
 																	<customData>
 																		<core:CustomData key="from" value="capitolo" writeToDom="true"/>
 																	</customData>
 																</Button>
-																<Button icon="sap-icon://detail-view" class="sapUiTinyMarginEnd" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>posFin}"  press="openquadroCont('PF',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},'')" visible="true">
+																<Button icon="sap-icon://detail-view" class="sapUiTinyMarginEnd" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>posFin}"  press="openquadroCont('PF',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},'','NV')" visible="true">
 																	<customData>
 																		<core:CustomData key="from" value="posfin" writeToDom="true"/>
 																	</customData>
 																</Button>
-																<Button icon="sap-icon://approvals" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>codingBlock}" press="openquadroCont('FN',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},${modelRiprogrammazioni>IdAutorizzazione})" visible="true">
+																<Button icon="sap-icon://approvals" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>codingBlock}" press="openquadroCont('FN',$event,${modelRiprogrammazioni>Fipex},${modelRiprogrammazioni>Capitolo},${modelRiprogrammazioni>IdAutorizzazione},'NV')" visible="true">
 																	<customData>
 																			<core:CustomData key="from" value="autorizzazione" writeToDom="true"/>
 																	</customData>

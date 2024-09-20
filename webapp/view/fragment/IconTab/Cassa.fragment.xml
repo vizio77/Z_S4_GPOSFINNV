@@ -10,7 +10,8 @@ xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="h
 		<!-- <Button text="{i18n>resetta}" type="Emphasized" press="onResetDati"/> -->
 		<!-- <Button text="{i18n>avvia}" type="Emphasized" press="onPressAvvioCassa" enabled="true"/> -->
 		<!-- <Button text="{i18n>avvia}" type="Emphasized" press="showCassaSAC" enabled="true"/> -->
-		<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event)"/>
+		<Button text="{i18n>QCCAPDLB}" type="Emphasized" press="openquadroCont('CAP',$event,null,null,null,null,null,'DLB')"/>
+		<Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event,null,null,null,null,null,'NV')"/>
 	</OverflowToolbar>
 	<VBox class="sapUiSmallMargin">
 		<!--<ScrollContainer>-->

@@ -1915,6 +1915,7 @@ sap.ui.define([
 				const t = this.getView().getModel("modelHome");
 				const n = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZSS4_STRUMENTO_SRV/");
 				var aFilters = [];
+				aFilters.push(new Filter("Fikrs", FilterOperator.EQ, "S001"));
 				aFilters.push(new Filter("TipoStr", FilterOperator.EQ, "54"));
 				aFilters.push(new Filter("AnnoStr", FilterOperator.EQ, globalModel.getProperty("/ANNO")));
 				if (t.getData().Sottostrumento) {

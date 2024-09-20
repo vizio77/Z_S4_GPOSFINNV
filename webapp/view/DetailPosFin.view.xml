@@ -465,7 +465,7 @@
 											</OverflowToolbar>
 										</headerToolbar>
 										<Table id="TableGestioneCapitoloPg" width="auto"
-											items="{path: 'modelPosFin>/detailAnagrafica/elenchiCapitolo', sorter: [{path: 'PrctrElenco', compartator: '.sorterAmmByNumericCode'}, {path: 'NumeroElenco', comparator: '.sorterHVDomSStr'} ]}">
+											items="{path: 'modelPosFin>/detailAnagrafica/elenchiCapitolo', sorter: [{path: 'PrctrElenco', comparator: '.sorterAmmByNumericCode'}, {path: 'NumeroElenco', comparator: '.sorterHVDomSStr'} ]}">
 											<headerToolbar>
 												<Toolbar >
 													<ToolbarSpacer/>

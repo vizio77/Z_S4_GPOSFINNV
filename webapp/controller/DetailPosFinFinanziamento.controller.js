@@ -914,7 +914,8 @@ sap.ui.define([
 				var modelFilterData = modelFilter.getData()
 				
 
-				let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+				// let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+				let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
 				//let sFase = this.getQCFase();
 				let oModelPosFin = this.getView().getModel("modelPosFin");
 				let sAnno = this.getOwnerComponent().getModel("globalModel").getData().ANNO;
@@ -1300,7 +1301,8 @@ sap.ui.define([
 			const oModelHana = this.getOwnerComponent().getModel("sapHanaS2")
 			
 			
-			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+			// const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+			const oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
 			let sAnno = this.getOwnerComponent().getModel("globalModel").getData().ANNO;
 			var sEntity =
 				`/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='${modelFilter.keyAnno}',P_AnnoMin='${modelFilter.keyAnno}',P_AnnoMax='${modelFilter.keyAnno + 2}',P_Fase='NV',P_Eos='S',P_PosFin='${modelFilter.posfin}',P_Autorizz='${modelFilter.fincode}',P_Capitolo='${modelFilter.codCap}',P_RecordType='CB')/Set`;
@@ -1316,7 +1318,7 @@ sap.ui.define([
 			
 			//this.byId("toolbarQuadro").setVisible(true);
 			//var sEntityDA = "/ZCOBI_I_QC_DAL_AL(P_AnnoFase='" + sAnno + "',P_AnnoStr='" + sAnno + "',P_AnnoSstr='" + (parseInt(sAnno) + 2) + "',P_PosFin='" + oModelPosFin.getProperty("/posFin").replaceAll(".", "") + "',P_Autorizz='',P_StruttAmm='" + oModelPosFin.getProperty("/strutturaAmminCentrale").Fictr + "')/Set";
-			var sEntityDA = "/ZCOBI_I_QC_DAL_AL_DLB(P_AnnoFase='" + sAnno + "',P_AnnoStr='" + sAnno + "',P_AnnoSstr='" + (parseInt(sAnno) + 2) + "',P_PosFin='" + modelFilter.posfin + "',P_Autorizz='" + modelFilter.fincode + "',P_StruttAmm='" + modelFilter.struttAmm + "')/Set";
+			var sEntityDA = "/ZCOBI_I_QC_DAL_AL(P_AnnoFase='" + sAnno + "',P_AnnoStr='" + sAnno + "',P_AnnoSstr='" + (parseInt(sAnno) + 2) + "',P_PosFin='" + modelFilter.posfin + "',P_Autorizz='" + modelFilter.fincode + "',P_StruttAmm='" + modelFilter.struttAmm + "')/Set";
 			var aFilters = [];
 			aFilters.push(new sap.ui.model.Filter("RecordType", sap.ui.model.FilterOperator.EQ, "CP"));
 			var aRes = await this.__getDataPromise(sEntityDA, aFilters, oModelQuadro);
