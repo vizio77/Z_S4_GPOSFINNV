@@ -843,7 +843,7 @@ sap.ui.define([
 
 														///ZCOBI_I_SIT_AUT_CONS_05(P_AreaFin='S001',P_AnnoFase='2025',P_Fase='NV',P_PosFin=' ',P_Autorizz=' ')/Set?sap-client=100
 				//oModelQuadroReis.read("/ZCOBI_I_SIT_AUT_CONS_05(P_Anno1='" + sAnno + "',P_Anno2='" + (parseInt(sAnno) + 1) + "',P_Anno3='" + (parseInt(sAnno) + 2) + "',P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_Fase='NV',P_PosFin='" + sFipex.replaceAll(".", "") + "',P_Autorizz='" + sAuth + "')/Set", {
-				oModelQuadroReis.read(`/SitAutoCons05(P_Anno1='${sAnno}',P_Anno2='${(parseInt(sAnno) + 1)}',P_Anno3='${(parseInt(sAnno) + 2)}',P_AreaFin='S001',P_AnnoFase='${sAnno}',P_Fase='NV',P_PosFin='${sFipex}',P_Autorizz='${sAuth}')/Set`, {
+				oModelQuadroReis.read(`/SitAutoCons03(P_Anno1='${sAnno}',P_Anno2='${(parseInt(sAnno) + 1)}',P_Anno3='${(parseInt(sAnno) + 2)}',P_AreaFin='S001',P_AnnoFase='${sAnno}',P_Fase='NV',P_PosFin='${sFipex}',P_Autorizz='${sAuth}')/Set`, {
 
 					success: (oData) => {
 
@@ -868,6 +868,31 @@ sap.ui.define([
 									oData.results[i].Voice="Totale Reiscrizioni economie"
 									oData.results[i].Input = false;
 									oData.results[i].Text = true;
+								break
+								case 'ReiscrizioniDLB':
+									oData.results[i].Voice="Reiscrizioni DLB"
+									oData.results[i].Input = false;
+									oData.results[i].Text = true;
+								break
+								case 'ReiscrizioniNota':
+									oData.results[i].Voice="Reiscrizioni Nota"
+									oData.results[i].Input = false;
+									oData.results[i].Text = true;
+								break
+								case 'DiCuiNotaProvv':
+									oData.results[i].Voice="Di Cui Nota Provvisoria"
+									oData.results[i].Input = false;
+									oData.results[i].Text = true;
+								break
+								case 'DiCuiNotaPubbl':
+									oData.results[i].Voice="Di Cui Nota Pubblicata"
+									oData.results[i].Input = false;
+									oData.results[i].Text = true;
+								break
+								case 'Variazioni':
+									oData.results[i].Voice="Variazioni"
+									oData.results[i].Input = true;
+									oData.results[i].Text = false;
 								break
 
 							}
