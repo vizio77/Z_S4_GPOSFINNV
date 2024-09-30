@@ -16,7 +16,7 @@
                     <headerToolbar>
                         <Toolbar >
                             <ToolbarSpacer/>
-                            <Button type="Emphasized" icon="sap-icon://add" text="{i18n>btnAddRowIrap}" press="handleAddIrap" enabled="true"/><!-- {modelEditableField>/ADDIRAP} -->
+                            <Button type="Emphasized" icon="sap-icon://add" text="{i18n>btnAddRowIrap}" press="handleAddIrap" enabled="{modelPosFin>/gestioneCampiEditabili/cuirapnocu}"/><!-- {modelEditableField>/ADDIRAP} -->
                         </Toolbar>
                     </headerToolbar>
                     <columns>
@@ -43,13 +43,13 @@
                         <ColumnListItem >
                             <cells>
                                 <Text text="{path: 'modelPosFin>CodificaRepPf'}"/>
-                                <Text text="{path: 'modelPosFin>DescriBreve'}"/>
+                                <Text text="{path: 'modelPosFin>DescrBreve'}"/>
                                 <!-- <Text text="{path: 'modelPosFin>CofogL3', formatter: '.formatZeroes'}"/>
                                 <Text text="{modelPosFin>Desc}"/> -->
                                 <!-- , formatter: '.formatPercent'} change="onUpdatePercent"  type="Number" maxLength="6" -->
                                 <!-- <Input value="{path:'modelPosFin>PercCofog'}" liveChange="onCheckPercCofog" maxLength="6" type="Number" width="20%" textAlign="End"
                                     editable="{modelPosFin>/gestioneCampiEditabili/enableCofog}"/> -->
-                                <ToggleButton icon="sap-icon://delete" type="Emphasized" press="onDeleteIrap" enabled="true"/> <!-- {modelPosFin>/gestioneCampiEditabili/enableCofog} {modelEditableField>/ADDIRAP} -->
+                                <ToggleButton icon="sap-icon://delete" type="Emphasized" press="onDeleteIrap" enabled="{modelPosFin>/gestioneCampiEditabili/cuirapnocu}"/> <!-- {modelPosFin>/gestioneCampiEditabili/enableCofog} {modelEditableField>/ADDIRAP} -->
                             </cells>
                         </ColumnListItem>
                     </items>

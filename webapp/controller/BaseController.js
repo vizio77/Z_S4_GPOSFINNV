@@ -603,8 +603,11 @@ sap.ui.define([
             
             XLSX.utils.book_append_sheet(workbook, sheet1, "Filtri");
             XLSX.utils.book_append_sheet(workbook, sheet2, "Lista");
-                      
-           XLSX.writeFile(workbook, "Lista Pososizioni Finanziarie Spesa.xlsx", { type: 'buffer' });
+            const dataOra = this.getDataForSheet();
+
+            var nameFile =
+            `Lista Posizioni Finanziarie Spesa ${dataOra}.xlsx`;
+            XLSX.writeFile(workbook, nameFile, { type: 'buffer' });
         },
 
         creaStrutturaFiltri: async function(modelPosFin){
@@ -696,6 +699,15 @@ sap.ui.define([
             var posizioniFinanziarie = modelPosFin.getProperty("/tablePosFin");  
             
             if(!posizioniFinanziarie) posizioniFinanziarie = [];
+            posizioniFinanziarie = posizioniFinanziarie.sort((a, b) => {
+                if (a.Ammin !== b.Ammin) {
+                    return this.sorterHVDomSStr(a.Ammin,b.Ammin);
+                } else if (a.Capitolo !== b.Capitolo) {
+                    return this.sorterHVDomSStr(a.Capitolo,b.Capitolo);
+                } else {
+                    return this.sorterHVDomSStr(a.Pg,b.Pg);
+                }
+            });
             var obj = [];
             var elLabel = {
                 Label_Fipex : this.getText("labelPosFin"),

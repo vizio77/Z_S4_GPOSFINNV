@@ -2968,6 +2968,13 @@ sap.ui.define([
 		onPosFinIRAP: function (oEvent) {
 			var oButton = oEvent.getSource(),
 			oView = this.getView();	
+			const modelPosFin = this.getView().getModel("modelPosFin");
+			let cuIrapNonCuSelected = modelPosFin.getProperty("/detailAnagrafica/CuIrapNoncu")
+
+			if(cuIrapNonCuSelected !== "1" && cuIrapNonCuSelected !== "3" ){
+				MessageBox.warning(this.recuperaTestoI18n("warningInsertIrap"))
+				return
+			}
 
 			// create popover
 			if (!this.popOverPosFinIRAP) {
@@ -3081,7 +3088,7 @@ sap.ui.define([
 			var obj = {
 				Fipex: sModelPosFinMC.getProperty("/FIPEX"),
 				CodificaRepPf: sModelPosFinMC.getProperty("/CODIFICA_REP_PF"),
-				DescriBreve: sModelPosFinMC.getProperty("/DESCR_PG"),
+				DescrBreve: sModelPosFinMC.getProperty("/DESCR_PG"),
 				ADDFE: true,
 				// "DESCR_ESTESA": sDescrIrap
 			};
@@ -3113,33 +3120,19 @@ sap.ui.define([
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact")
 				.length;
 			var that = this;
+			var obj = this.getView().getModel("modelPosFin").getProperty(sContextPath)
 			sap.m.MessageBox.warning(
 				that.recuperaTestoI18n("onDeleteDomandaIrap"), {
-					id: "messageWarning",
+					//id: "messageWarning",
 					title: that.recuperaTestoI18n("opWa"),
 					actions: [MessageBox.Action.OK, "Annulla"],
 					styleClass: bCompact ? "sapUiSizeCompact" : "",
 					onClose: function(sAction) {
-						if (sAction === "OK") {
-							var sInt = parseInt(
-								sContextPath.split("/detailAnagrafica/PosizioneFinanziariaIrap/")[1]
-							);
+						if (sAction === "OK") {							
 							var sModelPosFin = that.getView().getModel("modelPosFin");
 							var sArr = sModelPosFin.getProperty("/detailAnagrafica/PosizioneFinanziariaIrap/");
-							var sRecordSelected = that
-								.getView()
-								.getModel("modelPosFin")
-								.getProperty(sContextPath);
-							if (!sRecordSelected.ADDFE) {
-								sRecordSelected.ADDFE = false;
-								that
-									.getView()
-									.getModel("modelDeleteIrap")
-									.getData()
-									.push(sRecordSelected);
-							}
-							sArr.splice(sInt, 1);
-							sModelPosFin.setProperty("/NAV_POSFIN/0/NAV_IRAP", sArr);
+							const list = sArr.filter(el => el.Fipex !== obj.Fipex)
+							sModelPosFin.setProperty("/detailAnagrafica/PosizioneFinanziariaIrap/",list);
 						}
 					},
 				}
@@ -4877,6 +4870,28 @@ sap.ui.define([
 			const modelHana = oParam.modelHana
 			const that = oParam.that
 			
+			let modelPosFin = that.getView().getModel("modelPosFin")
+			let aFiltersIrap = [new Filter("Fikrs", FilterOperator.EQ, "S001"),
+								new Filter("Anno", FilterOperator.EQ, modelPosFin.getProperty("/infoSottoStrumento/AnnoSstr")),
+								new Filter("Capitolo", FilterOperator.EQ, oPosFin.Capitolo),
+								new Filter("Prctr", FilterOperator.EQ, oPosFin.Prctr),
+								new Filter("Eos", FilterOperator.EQ, oPosFin.Eos),
+								new Filter("Fase", FilterOperator.EQ, oPosFin.Fase),
+								// new Filter("Reale", FilterOperator.EQ, oPosFin.Reale)
+							]
+			if(modelPosFin.getProperty("/infoSottoStrumento/Reale") == "S")
+				aFiltersIrap.push(new Filter({
+					filters: [
+								new Filter("Reale", FilterOperator.EQ, "R"),
+								new Filter("Reale", FilterOperator.EQ, "S0001")
+							],
+					and : false
+				}))
+			else
+				aFiltersIrap.push(new Filter("Reale", FilterOperator.EQ, modelPosFin.getProperty("/infoSottoStrumento/Reale")))
+
+
+			
 			let aDBCall = [
 				that.__getDataPromise("/PosizioneFinanziariaSet", [
 																	new Filter("Fikrs", FilterOperator.EQ, oPosFin.Fikrs),
@@ -4924,7 +4939,8 @@ sap.ui.define([
 																new Filter("Anno", FilterOperator.EQ, oPosFin.Anno),
 																new Filter("Reale", FilterOperator.EQ,  oPosFin.Reale),
 																new Filter("Fipex", FilterOperator.EQ, oPosFin.Fipex.replaceAll(".", ""))
-																		], modelHana)
+																		], modelHana),
+				that.__getDataPromise("/PosizioneFinanziariaIrapSet", aFiltersIrap , modelHana)
 			]
 
 			return new Promise((resolve, reject) => {
@@ -4936,7 +4952,8 @@ sap.ui.define([
 									  oPosFin: res[0][0],
 									  oCapitoloPGOrigi: res[1][0],
 									  aElenchiOrigi : res[2],
-									  aCofogOrigi : res[3]
+									  aCofogOrigi : res[3],
+									  aIrapOrigi : res[4],
 									})
 						})
 						.catch(err => {
@@ -4954,6 +4971,7 @@ sap.ui.define([
 			const oPosFin = oParams.oPosFin
 			const that = oParams.that
 			const aElenchiOriginali = oParams.aElenchiOrigi
+			const aIrapOriginali = oParams.aIrapOrigi
 			const aCofogOriginali = oParams.aCofogOrigi
 			oParams.UpdateSstrLog = []
 			//Check Campi modificati
@@ -5026,6 +5044,30 @@ sap.ui.define([
 													oPosFin.Datbis, "ZKPOSFIN", "Cdr", "U", oDetailAnagrafica.CDR, oPosFin.Cdr]))
 				oParams.checkModifyCapitolo = true
 			}
+			//! controllo modifica IRAP
+			debugger 
+			//check Irap Modificati
+			for(let i = 0 ; i < oDetailAnagrafica.PosizioneFinanziariaIrap.length ; i++){
+				let currentIrap = oDetailAnagrafica.PosizioneFinanziariaIrap[i]
+				let oFindIrap = []
+				oFindIrap = aIrapOriginali.filter(el => (el.Fipex == currentIrap.Fipex )
+					)
+				if(oFindIrap.length === 0) {
+					oParams.checkModifyCapitolo = true
+					
+				}
+			}
+			for(let i = 0 ; i < aIrapOriginali.length ; i++){
+				let currentIrap = aIrapOriginali[i]
+				let oFindIrap = []
+				oFindIrap = oDetailAnagrafica.PosizioneFinanziariaIrap.filter(el => (el.Fipex == currentIrap.Fipex )
+					)
+				if(oFindIrap.length === 0) {
+					oParams.checkModifyCapitolo = true
+				}
+			}
+
+
 			//check Elenchi modificati
 			for(let i = 0 ; i < oDetailAnagrafica.elenchiCapitolo.length ; i++){
 				let currentElencoCap = oDetailAnagrafica.elenchiCapitolo[i]
@@ -5555,6 +5597,7 @@ sap.ui.define([
 			const oDetailAnagrafica = oParams.oDetailAnagrafica
 			let capitoliElenchi = JSON.parse(JSON.stringify(oDetailAnagrafica.elenchiCapitolo))
 			let aDistrCofog = JSON.parse(JSON.stringify(oDetailAnagrafica.elencoCOFOG))
+			let aPosFinIrap = JSON.parse(JSON.stringify(oDetailAnagrafica.PosizioneFinanziariaIrap))
 			const oPosFin = oParams.oPosFin
 			const isFromLastPg = oParams.isFromLastPg
 
@@ -5605,6 +5648,28 @@ sap.ui.define([
 						capElenchi.push(currentCapElenco)
 					}
 					return capElenchi
+				}(),
+				UpdatePosFinIrap : function () {
+					let aIrap = []
+					for(let i = 0 ; i < aPosFinIrap.length ; i ++){
+						let currentIrap = aPosFinIrap[i]
+						aIrap.push(
+							{
+								Fikrs : oPosFin.Fikrs,
+								Anno : oPosFin.Anno,
+								Eos : "S",
+								Fase : oPosFin.Fase,
+								Fipex : currentIrap.Fipex,
+								Versione : currentIrap.Versione ? currentIrap.Versione : "P",
+								Reale : "R",
+								Prctr : oPosFin.Prctr,
+								CodiceCapitolo : oPosFin.Capitolo,
+								Datbis : new Date(oPosFin.Datbis)
+							}
+						)
+						
+					}
+					return aIrap
 				}(),
 				DistribuzioneCofog: function () {
 					let aCofog = []
@@ -5699,8 +5764,9 @@ sap.ui.define([
 				delete oPayload.UpdateRelatedPosfin
 				delete oPayload.UpdateCambioPosfin
 				delete oPayload.UpdateSstrLog
+				delete oPayload.UpdatePosFinIrap
+				
 			}
-
 			return oPayload
 			
 		},
@@ -5782,8 +5848,27 @@ sap.ui.define([
 					"CDCHNGIND": "I",
 					"FIPEX" : currentIrap.Fipex
 				}	
+				aIrap.push(irap)
 				//CODIFICA_REP_PF: "5651.456.8465"
 			}
+
+				//controllo le irap eliminate
+				const aIrapOriginali = oParams.aIrapOrigi
+				for(let i = 0 ; i < aIrapOriginali.length ; i++){
+					let irapOrig = aIrapOriginali[i]
+					let oFindIrap = []
+					oFindIrap = aPosIrap.filter(el => (
+						el.Fipex === irapOrig.Fipex
+						)
+					)
+					if(oFindIrap.length === 0){
+						aCofog.push({
+							"CDCHNGIND": "D",
+							"FIPEX" : irapOrig.Fipex,
+							"LOEKZ":  "X", //se non + presente lo devo cancellare
+						}	)
+					}
+				}
 			
 			
 				let aCofog = []
@@ -5792,7 +5877,6 @@ sap.ui.define([
 					let cofog = that.__createCofogFoglio(currentCofog, sStringData, oPosFin.Fipex, oAnno)
 					aCofog.push(cofog)
 			}				 
-
 			//controllo cofog eliminati
 			const aCofogOriginali = oParams.aCofogOrigi
 			for(let i = 0 ; i < aCofogOriginali.length ; i++){
@@ -5972,7 +6056,7 @@ sap.ui.define([
 				"CDCHNGIND": "A",
 				"NAV_ELENCHI": aElenchi,
 				"NAV_COFOG": aCofog,
-				"NAV_IRAP" : [],
+				"NAV_IRAP" : aIrap,
 				"NAV_REVUFF": [
 						]
 					
