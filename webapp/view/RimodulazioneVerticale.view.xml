@@ -94,12 +94,12 @@
 											<m:FlexBox width="65%" alignItems="Center" justifyContent="SpaceBetween">
 												<m:items>
 													<m:Link text="{modelRimVerticali>CodificaRepPf}" press="onExpandPopOverPosFin"/>
-														<m:Button icon="sap-icon://inspection" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>capitolo}"  press="openquadroCont('CAP',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},'' )" visible="true" >
+														<m:Button icon="sap-icon://inspection" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>capitolo}"  press="openquadroCont('CAP',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},'','NV' )" visible="true" >
                               <m:customData>
                                 <core:CustomData key="from" value="capitolo" writeToDom="true"/>
                               </m:customData>
                             </m:Button>
-                            <m:Button icon="sap-icon://detail-view" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>posFin}"  press="openquadroCont('PF',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},'')" visible="true">
+                            <m:Button icon="sap-icon://detail-view" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>posFin}"  press="openquadroCont('PF',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},'','NV')" visible="true">
                               <m:customData>
                                 <core:CustomData key="from" value="posfin" writeToDom="true"/>
                                   </m:customData>
@@ -110,7 +110,7 @@
                         <m:items><!-- class="sapUiSmallMarginEnd" -->
 													<TooltipAutorizzazione:TooltipAutorizzazione  text="{= ${modelRimVerticali>ZzdescrEstesaFm} ? ${modelRimVerticali>ZzdescrEstesaFm} : 'NULL'}"
 													Fincode="{modelRimVerticali>IdAutorizzazione}" Fikrs="S001" espDescrizione=""/>
-													<m:Button icon="sap-icon://approvals" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>codingBlock}" press="openquadroCont('FN',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},${modelRimVerticali>IdAutorizzazione})" visible="true">
+													<m:Button icon="sap-icon://approvals" type="Emphasized" tooltip="{i18n>quadroContabile} {i18n>codingBlock}" press="openquadroCont('FN',$event,${modelRimVerticali>Fipex},${modelRimVerticali>Capitolo},${modelRimVerticali>IdAutorizzazione},'NV')" visible="true">
 														<m:customData>
 																<core:CustomData key="from" value="autorizzazione" writeToDom="true"/>
 														</m:customData>

@@ -10172,7 +10172,7 @@ sap.ui.define([
 			let dalAlCs = true
 			//! LT dal al quadro contabile capitolo
 			if(sValue === 'CAP' && exp === ""){
-				const entityDalAl = `/ZCOBI_I_CAP_DAL_AL(P_AnnoFase='${sAnno}',P_Fase='NV',P_Capitolo='${oModelPosFin.getProperty("/PosFin/Capitolo")}',P_Eos='S',P_Ammin='${oModelPosFin.getProperty("/strutturaAmminCentrale/Prctr").substr(1)}')/Set`
+				let entityDalAl = `/ZCOBI_I_CAP_DAL_AL(P_AnnoFase='${sAnno}',P_Fase='NV',P_Capitolo='${oModelPosFin.getProperty("/PosFin/Capitolo")}',P_Eos='S',P_Ammin='${oModelPosFin.getProperty("/strutturaAmminCentrale/Prctr").substr(1)}')/Set`
 				if(sFase === "NV")
 					entityDalAl = `/ZCOBI_I_CAP_DAL_AL_NV(P_AnnoFase='${sAnno}',P_Fase='NV',P_Capitolo='${oModelPosFin.getProperty("/PosFin/Capitolo")}',P_Eos='S',P_Ammin='${oModelPosFin.getProperty("/strutturaAmminCentrale/Prctr").substr(1)}')/Set`
 				var aReqDalAl = await this.__getDataPromise(entityDalAl, [], oModelQuadro);
