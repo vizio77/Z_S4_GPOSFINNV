@@ -1019,8 +1019,55 @@ sap.ui.define([
 
 			aFilters.push(...this.__setFiltersHVPosFin(oFormPosf))
 
+			let aFiltersDom = []
+			if (modelPosFin.getProperty("/infoSottoStrumento/DomAmministrazione/results").length > 0){
+				if(!oFormPosf.Prctr){
+					aFiltersDom.push(this.__setMultiFiltersMissione(modelPosFin.getProperty("/infoSottoStrumento/DomAmministrazione/results"), ["Prctr"]))
+				}
+			}
 
-			aFilters.push(...this.__setDomSStrFilters(aFilters))
+			if (modelPosFin.getProperty("/infoSottoStrumento/DomTitolo/results").length > 0){
+				let aProps = [];
+				if(!oFormPosf.Titolo){
+					aProps.push("Titolo");
+				}
+				if(!oFormPosf.Categoria){
+					aProps.push("Categoria");
+				}
+				if(!oFormPosf.Ce2){
+					aProps.push("Ce2");
+				}
+				if(!oFormPosf.Ce3){
+					aProps.push("Ce3");
+				}
+				if(aProps.length > 0){
+					aFiltersDom.push(this.__setMultiFiltersMissione(modelPosFin.getProperty("/infoSottoStrumento/DomTitolo/results"), aProps))
+				}
+
+			}
+
+			if (modelPosFin.getProperty("/infoSottoStrumento/DomMissione/results").length > 0){
+				let aProps = [];
+				if(!oFormPosf.Missione){
+					aProps.push("Missione");
+				}
+				if(!oFormPosf.Programma){
+					aProps.push("Programma");
+				}
+				if(!oFormPosf.Azione){
+					aProps.push("Azione");
+				}
+				if(!oFormPosf.Prctr){
+					aProps.push("Prctr");
+				}				
+				if(aProps.length > 0){
+					aFiltersDom.push(this.__setMultiFiltersMissione(modelPosFin.getProperty("/infoSottoStrumento/DomMissione/results"), aProps))
+				}
+			}
+
+			aFilters = aFilters.concat(aFiltersDom);
+
+			// aFilters.push(...this.__setDomSStrFilters(aFilters))
 
 			if (!this.oDialogTablePosFin) {
 				Fragment.load({
