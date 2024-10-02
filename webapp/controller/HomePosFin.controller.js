@@ -387,7 +387,7 @@ sap.ui.define([
 			//Filtro Posizione Finanziaria
 			if (modelPosFin.getProperty("/posFinHelp/posFin/Fipex")) {
 				aFilters.push(new Filter("Fipex", FilterOperator.EQ, modelPosFin.getProperty("/posFinHelp/posFin/Fipex")))
-				aFilters.push(new Filter("Versione", FilterOperator.EQ, modelPosFin.getProperty("/posFinHelp/posFin/Versione")))
+				// aFilters.push(new Filter("Versione", FilterOperator.EQ, modelPosFin.getProperty("/posFinHelp/posFin/Versione")))
 			}
 			oModel.read("/PosizioneFinanziariaSet", {
 				filters: aFilters,
