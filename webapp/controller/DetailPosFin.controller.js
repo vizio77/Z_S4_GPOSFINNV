@@ -3062,6 +3062,7 @@ sap.ui.define([
 					);
 				},
 			});
+			this.getView().setModel(new JSONModel({CodiceAmmin: modelPosFin.getProperty("/detailAnagrafica/AMMINISTAZIONE")}), "modelFiltriHome");
 			if (!this._handleAddIrap) {
 				this._handleAddIrap = sap.ui.xmlfragment(
 					"zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.HVPosFin.AddIrap",
