@@ -10,7 +10,7 @@
 					<core:Title/>
 					<Label text="{i18n>GestPosFin}" labelFor="idInputGestPosFin" required="{= !${modelPosFin>/onModify} }"/>
 					<zcontrol:InputPosizioneFinanziaria id="idInputGestPosFin" width="100%" fase="{modelPosFin>/PosFin/Fase}" spesa="X" fikrs="S001" reale="R"
-						anno="{modelPosFin>/PosFin/Anno}" FILTER_IRAP="X" bilancio="X" MODEL_SELECTED_POSFIN="fipexIrapSelected" maxSuggestionWidth="60%"
+						anno="{modelPosFin>/PosFin/Anno}" FILTER_IRAP="X" bilancio="X" MODEL_SELECTED_POSFIN="fipexIrapSelected" MODEL_FILTER_NAME="modelFiltriHome" maxSuggestionWidth="60%"
 						change="onChangeT" liveChange="onSelectPosFin" valueHelpOnly="true" visible="true"/>
 				</f:content>
 			</f:SimpleForm>
