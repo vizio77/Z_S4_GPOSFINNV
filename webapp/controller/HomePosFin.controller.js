@@ -194,8 +194,25 @@ sap.ui.define([
 				return this._messageBox(sCheckLock.MESSAGE, "error");
 			} */
 
+
+
+
 			this.getView().setBusy(true)
-			this._getEntitySet("/FasiAmminSStrSet", aFilters, this.getOwnerComponent().getModel("sapHanaS2"))
+
+			homeModel.setProperty("/onAvvio", true)
+			homeModel.setProperty("/tabAnagrafica", true)
+			homeModel.setProperty("/faseRicerca", false)
+			homeModel.setProperty("/onModify", true)
+			homeModel.setProperty("/onCreate", false)
+			homeModel.setProperty("/PosFin", homeModel.getProperty("/selectedPosFin"))
+			homeModel.setProperty("/idCompetenzaTab", true)
+			homeModel.setProperty("/idCassTab", true)
+
+			const oPosFin = homeModel.getProperty("/selectedPosFin")
+			this.getView().setBusy(false)
+			this.onNavTo();
+
+			/* this._getEntitySet("/FasiAmminSStrSet", aFilters, this.getOwnerComponent().getModel("sapHanaS2"))
 				.then(res => {
 					if (res['/FasiAmminSStrSet']) {
 						homeModel.setProperty("/onAvvio", true)
@@ -212,35 +229,11 @@ sap.ui.define([
 						this.onNavTo();
 
 						let sKeyCheckSstr = `/CheckSottostrumentoSet(Fikrs='${oPosFin.Fikrs}',Anno='${oPosFin.Anno}',Fase='${oPosFin.Fase}',Reale='${oPosFin.Reale}',Eos='${oPosFin.Eos}',Prctr='${oPosFin.Prctr}',CodiceCapitolo='${oPosFin.Capitolo}')`
-						/* this.__getKeyPromise(sKeyCheckSstr, this.getOwnerComponent().getModel("sapHanaS2"))
-							.then(async res => {
-								if(res.CodiceStrumento == oSottostrumento.CodiceStrumento && res.CodiceStrumentoOri == oSottostrumento.CodiceStrumentoOri &&
-									res.CodiceSottostrumento == oSottostrumento.CodiceSottostrumento) {
-										this.getView().setBusy(false)
-										this.onNavTo();
-								}
-								else {
-									let aFiltersSStr = [
-										new Filter("Fikrs", FilterOperator.EQ, res.Fikrs),
-										new Filter("CodiceStrumento", FilterOperator.EQ, res.CodiceStrumento),
-										new Filter("CodiceStrumentoOri", FilterOperator.EQ, res.CodiceStrumentoOri),
-										new Filter("CodiceSottostrumento", FilterOperator.EQ, res.CodiceSottostrumento),
-										new Filter("Datbis", FilterOperator.GE, new Date()),
-									]
-									//let sstrDiLavorazione = await this._getEntitySet('/SottostrumentoSet', aFiltersSStr, this.getOwnerComponent().getModel("sapHanaS2"))
-									//MessageBox.warning(`Il capitolo della posizione finanziaria selezionata è stato già lavorato dal sottostrumento ${sstrDiLavorazione['/SottostrumentoSet'].DescTipoSstr} - ${sstrDiLavorazione['/SottostrumentoSet'].NumeroSstr}`)
-									this.getView().setBusy(false)
-								}
-							})
-							.catch(err => {
-								this.getView().setBusy(false)
-								this.onNavTo();
-							}) */
 					} else {
 						this.getView().setBusy(false)
 						MessageBox.warning("Non si possono lavorare Posizioni Finanziarie di Amministrazioni con fase chiusa")
 					}
-				})
+				}) */
 
 		},
 		onCreaPosFin: function (oEvent) {
