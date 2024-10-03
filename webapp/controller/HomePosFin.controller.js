@@ -380,10 +380,56 @@ sap.ui.define([
 			// if(!(modelPosFin.getProperty("/posFinHelp/posFin/Fipex") || Object.values(oAdattaFiltri).find(item => !(item === undefined || item === null || item === "" )))) {
 			// 	aFilters = this.__setDomSStrFilters(aFilters)
 			// }
-			aFilters.push(...this.__setDomSStrFilters(aFilters))
+			// aFilters.push(...this.__setDomSStrFilters(aFilters))
 			//Se sono stati valorizzati gli adatta filtri
 			if (Object.values(oAdattaFiltri).find(item => !(item === undefined || item === null || item === "")))
 				aFilters.push(...this.__setFiltersHVPosFin(oAdattaFiltri))
+		
+			if (modelPosFin.getProperty("/infoSottoStrumento/DomAmministrazione/results").length > 0){
+				if(!oAdattaFiltri.Prctr){
+					aFilters.push(this.__setMultiFiltersMissione(modelPosFin.getProperty("/infoSottoStrumento/DomAmministrazione/results"), ["Prctr"]))
+				}
+			}
+
+			if (modelPosFin.getProperty("/infoSottoStrumento/DomTitolo/results").length > 0){
+				let aProps = [];
+				if(!oAdattaFiltri.Titolo){
+					aProps.push("Titolo");
+				}
+				if(!oAdattaFiltri.Categoria){
+					aProps.push("Categoria");
+				}
+				if(!oAdattaFiltri.Ce2){
+					aProps.push("Ce2");
+				}
+				if(!oAdattaFiltri.Ce3){
+					aProps.push("Ce3");
+				}
+				if(aProps.length > 0){
+					aFilters.push(this.__setMultiFiltersMissione(modelPosFin.getProperty("/infoSottoStrumento/DomTitolo/results"), aProps))
+				}
+
+			}
+
+			if (modelPosFin.getProperty("/infoSottoStrumento/DomMissione/results").length > 0){
+				let aProps = [];
+				if(!oAdattaFiltri.Missione){
+					aProps.push("Missione");
+				}
+				if(!oAdattaFiltri.Programma){
+					aProps.push("Programma");
+				}
+				if(!oAdattaFiltri.Azione){
+					aProps.push("Azione");
+				}
+				if(!oAdattaFiltri.Prctr){
+					aProps.push("Prctr");
+				}				
+				if(aProps.length > 0){
+					aFilters.push(this.__setMultiFiltersMissione(modelPosFin.getProperty("/infoSottoStrumento/DomMissione/results"), aProps))
+				}
+			}
+
 			//Filtro Posizione Finanziaria
 			if (modelPosFin.getProperty("/posFinHelp/posFin/Fipex")) {
 				aFilters.push(new Filter("Fipex", FilterOperator.EQ, modelPosFin.getProperty("/posFinHelp/posFin/Fipex")))
