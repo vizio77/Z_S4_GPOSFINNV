@@ -4641,7 +4641,7 @@ sap.ui.define([
 			// function pipe
 			this.pipeAsync(
 				this._checkAperturaLock,
-					this._checkFaseAmminAperta,
+					//this._checkFaseAmminAperta,
 					this.__checkObbligatoriValorizzati,
 					//this._checkEnableFPFO,
 					this.__getPosFinElenchiCofog,

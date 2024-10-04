@@ -996,6 +996,9 @@ sap.ui.define([
 		},
 
 		checkFaseAperta: async function(oFormCodingBlock){
+
+			//! LT LASCIO SEMPRE IL CONTROLLO CON ESITO POSITIVO PERCHE' NV NON HA QUESTO CONTROLLO. ERA PRESO DA DLB
+			return true
 			
 			let homeModel = this.getView().getModel("modelPosFin")
 			const oSottostrumento = homeModel.getProperty("/infoSottoStrumento")
