@@ -767,7 +767,7 @@ sap.ui.define([
 			//! LT dal al quadro contabile capitolo
 			if(sValue === 'CAP'){
                     
-				const entityDalAl = `/ZCOBI_I_CAP_DAL_AL(P_AnnoFase='${sAnno}',P_Fase='${sFase}',P_Capitolo='${sCP}',P_Eos='S',P_Ammin='${object.Ammin}')/Set`
+				let entityDalAl = `/ZCOBI_I_CAP_DAL_AL(P_AnnoFase='${sAnno}',P_Fase='${sFase}',P_Capitolo='${sCP}',P_Eos='S',P_Ammin='${object.Ammin}')/Set`
 				if(sFase === "NV")
 					entityDalAl = `/ZCOBI_I_CAP_DAL_AL_NV(P_AnnoFase='${sAnno}',P_Fase='${sFase}',P_Capitolo='${sCP}',P_Eos='S',P_Ammin='${object.Ammin}')/Set`
 				var aReqDalAl = await this.__getDataPromise(entityDalAl, [], oModelQuadro);
@@ -811,7 +811,10 @@ sap.ui.define([
 		}else if(sValue === 'FN'){
 			dalAlCs = false
 			//Coding Block
-      let sEntityCp = `/ZCOBI_I_QC_DAL_AL_DLB(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${sAnno}',P_PosFin='${sPF}',P_Autorizz='${object.IdAutorizzazione}',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
+      		let sEntityCp = `/ZCOBI_I_QC_DAL_AL_DLB(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${sAnno}',P_PosFin='${sPF}',P_Autorizz='${object.IdAutorizzazione}',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
+      		if(sFase === "NV"){
+				sEntityCp = `/ZCOBI_I_QC_DAL_AL(P_AnnoFase='${sAnno}',P_AnnoStr='${sAnno}',P_AnnoSstr='${sAnno}',P_PosFin='${sPF}',P_Autorizz='${object.IdAutorizzazione}',P_StruttAmm='${object.Fictr}')/Set?sap-client=100`
+			}
 		
 			if(sEntityCp){
 				var aReqDalAlCp = await this.__getDataPromise(sEntityCp, [], oModelQuadro);
