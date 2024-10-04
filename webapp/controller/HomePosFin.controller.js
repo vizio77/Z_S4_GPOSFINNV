@@ -384,9 +384,10 @@ sap.ui.define([
 			//Se sono stati valorizzati gli adatta filtri
 			if (Object.values(oAdattaFiltri).find(item => !(item === undefined || item === null || item === "")))
 				aFilters.push(...this.__setFiltersHVPosFin(oAdattaFiltri))
-		
+			let bPrctr = !!oAdattaFiltri.Prctr; 
 			if (modelPosFin.getProperty("/infoSottoStrumento/DomAmministrazione/results").length > 0){
-				if(!oAdattaFiltri.Prctr){
+				if(!bPrctr){
+					bPrctr = true;
 					aFilters.push(this.__setMultiFiltersMissione(modelPosFin.getProperty("/infoSottoStrumento/DomAmministrazione/results"), ["Prctr"]))
 				}
 			}
@@ -422,7 +423,8 @@ sap.ui.define([
 				if(!oAdattaFiltri.Azione){
 					aProps.push("Azione");
 				}
-				if(!oAdattaFiltri.Prctr){
+				if(!bPrctr){
+					bPrctr = true;
 					aProps.push("Prctr");
 				}				
 				if(aProps.length > 0){
@@ -1066,8 +1068,10 @@ sap.ui.define([
 			aFilters.push(...this.__setFiltersHVPosFin(oFormPosf))
 
 			let aFiltersDom = []
+			let bPrctr = !!oFormPosf.Prctr;
 			if (modelPosFin.getProperty("/infoSottoStrumento/DomAmministrazione/results").length > 0){
-				if(!oFormPosf.Prctr){
+				if(!bPrctr){
+					bPrctr = true;
 					aFiltersDom.push(this.__setMultiFiltersMissione(modelPosFin.getProperty("/infoSottoStrumento/DomAmministrazione/results"), ["Prctr"]))
 				}
 			}
@@ -1103,7 +1107,8 @@ sap.ui.define([
 				if(!oFormPosf.Azione){
 					aProps.push("Azione");
 				}
-				if(!oFormPosf.Prctr){
+				if(!bPrctr){
+					bPrctr = true;
 					aProps.push("Prctr");
 				}				
 				if(aProps.length > 0){
