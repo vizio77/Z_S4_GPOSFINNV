@@ -98,6 +98,7 @@ sap.ui.define([
                                         filters:[ new Filter("Tipologia", FilterOperator.NE, "83"),
                                                   new Filter("Tipologia", FilterOperator.NE, "53"),
                                                   new Filter("Tipologia", FilterOperator.NE, "51"),
+                                                  new Filter("Tipologia", FilterOperator.EQ, "54"),
                                                   new Filter("Esposizione", FilterOperator.NE, "E")
                                                 ],
                                         and: true
