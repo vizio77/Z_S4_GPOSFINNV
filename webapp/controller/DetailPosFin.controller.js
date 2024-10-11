@@ -4277,6 +4277,9 @@ sap.ui.define([
 			aFilters.push(new sap.ui.model.Filter("RecordType", sap.ui.model.FilterOperator.EQ, "CS"));
 			var aRes = await this.__getDataPromise(sEntityDA, aFilters, oModelQuadro);
 			this.formatterImporti(aRes, false, "Importo")
+			aRes = aRes.sort(
+				(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+			);
 			this.getView().setModel(new JSONModel(aRes), `modelTableCassaDA${exp}`);
 
 			this.getView().setBusy(false)
@@ -4389,7 +4392,6 @@ sap.ui.define([
 			let sAnno = this.getOwnerComponent().getModel("globalModel").getData().ANNO;
 			var sEntity =
 				`/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='${modelFilter.keyAnno}',P_AnnoMin='${modelFilter.keyAnno}',P_AnnoMax='${modelFilter.keyAnno + 2}',P_Fase='NV',P_Eos='S',P_PosFin='${modelFilter.posfin}',P_Autorizz='${modelFilter.fincode}',P_Capitolo='${modelFilter.codCap}',P_RecordType='CB')/Set`;
-			//var sEntity = "/QuadroContabile(P_Disp=true,P_AreaFin='S001',P_AnnoFase='" + sAnno + "',P_AnnoMin='" + sAnno + "',P_AnnoMax='" + (parseInt(sAnno) + 2) + "',P_Fase='NV',P_Eos='S',P_PosFin='" + oModelPosFin.getProperty("/posFin").replaceAll(".", "") + "',P_Autorizz='" + oAut.Auth.IdAutorizzazione + "',P_Capitolo='" + oModelPosFin.getProperty("/PosFin/Capitolo") + "',P_RecordType='CB')/Set"
 			var aRes = await this.__getDataPromise(sEntity, [], oModelQuadro);
 			this.formatterImporti(aRes, true)
 			this.splitTable(aRes, "COMP", `modelTable`, isForExport);
@@ -4401,12 +4403,15 @@ sap.ui.define([
 			this.getView().setModel(new JSONModel([]), "modelAppoggio");
 			
 			//this.byId("toolbarQuadro").setVisible(true);
-			//var sEntityDA = "/ZCOBI_I_QC_DAL_AL(P_AnnoFase='" + sAnno + "',P_AnnoStr='" + sAnno + "',P_AnnoSstr='" + (parseInt(sAnno) + 2) + "',P_PosFin='" + oModelPosFin.getProperty("/posFin").replaceAll(".", "") + "',P_Autorizz='',P_StruttAmm='" + oModelPosFin.getProperty("/strutturaAmminCentrale").Fictr + "')/Set";
 			var sEntityDA = "/ZCOBI_I_QC_DAL_AL(P_AnnoFase='" + sAnno + "',P_AnnoStr='" + sAnno + "',P_AnnoSstr='" + (parseInt(sAnno) + 2) + "',P_PosFin='" + modelFilter.posfin + "',P_Autorizz='" + modelFilter.fincode + "',P_StruttAmm='" + modelFilter.struttAmm + "')/Set";
 			var aFilters = [];
 			aFilters.push(new sap.ui.model.Filter("RecordType", sap.ui.model.FilterOperator.EQ, "CP"));
 			var aRes = await this.__getDataPromise(sEntityDA, aFilters, oModelQuadro);
 			this.formatterImporti(aRes, false, "Importo")
+			//! allineo gli importi
+			aRes = aRes.sort(
+				(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+			);
 			this.getView().setModel(new JSONModel(aRes), `modelTableComp${exp}`);
 			
 			this.getView().setBusy(false)
@@ -4480,12 +4485,14 @@ sap.ui.define([
 			this.getView().setModel(new JSONModel([]), "modelAppoggio");
 			
 			//this.byId("toolbarQuadroRim").setVisible(true);
-			//var sEntityDA = "/ZCOBI_I_QC_DAL_AL(P_AnnoFase='" + sAnno + "',P_AnnoStr='" + sAnno + "',P_AnnoSstr='" + (parseInt(sAnno) + 2) + "',P_PosFin='" + oModelPosFin.getProperty("/posFin").replaceAll(".", "") + "',P_Autorizz='',P_StruttAmm='" + oModelPosFin.getProperty("/strutturaAmminCentrale").Fictr + "')/Set";
 			var sEntityDA = "/ZCOBI_I_QC_DAL_AL(P_AnnoFase='" + sAnno + "',P_AnnoStr='" + sAnno + "',P_AnnoSstr='" + (parseInt(sAnno) + 2) + "',P_PosFin='" + modelFilter.posfin + "',P_Autorizz='" + modelFilter.fincode + "',P_StruttAmm='" + modelFilter.struttAmm + "')/Set";
 			var aFilters = [];
 			aFilters.push(new sap.ui.model.Filter("RecordType", sap.ui.model.FilterOperator.EQ, "CP"));
 			var aRes = await this.__getDataPromise(sEntityDA, aFilters, oModelQuadro);
 			this.formatterImporti(aRes, false, "Importo")
+			aRes = aRes.sort(
+				(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+			);
 			this.getView().setModel(new JSONModel(aRes), "modelTableComp");
 			
 			this.getView().setBusy(false)		
@@ -9764,6 +9771,9 @@ sap.ui.define([
 			try {
 				aFilter.push(new Filter("RecordType", FilterOperator.EQ, "CP"));
 				var aResult = await this.readFromDb("2", "/" + sEntity, aFilter, [], "", "");
+				aResult = aResult.sort(
+					(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+				);
 			} catch (e) {
 				var message = e.message + " per Dal - Al";
 				MessageBox.warning(message);
@@ -10178,6 +10188,9 @@ sap.ui.define([
 					entityDalAl = `/ZCOBI_I_CAP_DAL_AL_NV(P_AnnoFase='${sAnno}',P_Fase='${sFase}',P_Capitolo='${oModelPosFin.getProperty("/PosFin/Capitolo")}',P_Eos='S',P_Ammin='${oModelPosFin.getProperty("/strutturaAmminCentrale/Prctr").substr(1)}')/Set`
 				var aReqDalAl = await this.__getDataPromise(entityDalAl, [], oModelQuadro);
 				this.formatterImporti(aReqDalAl, false, "Importo")
+				aReqDalAl = aReqDalAl.sort(
+					(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+				);
 
 				let quadroDal = aReqDalAl.filter(el => el.RecordType === 'CP')
 				let quadroDalcs = aReqDalAl.filter(el => el.RecordType === 'CS')
@@ -10199,6 +10212,7 @@ sap.ui.define([
 			if(sEntityCp){  
 				var aReqDalAlCp = await this.__getDataPromise(sEntityCp, [], oModelQuadro);
 				this.formatterImporti(aReqDalAlCp, false, "Importo")
+				
 				aReqDalAlCp.forEach(el => {
 						el.RecordType = "CP"
 					});
@@ -10223,6 +10237,9 @@ sap.ui.define([
 					if(sEntityCp){
 						var aReqDalAlCp = await this.__getDataPromise(sEntityCp, [], oModelQuadro);
 						this.formatterImporti(aReqDalAlCp, false, "Importo")
+						aReqDalAlCp = aReqDalAlCp.sort(
+							(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+						);
 						aReqDalAlCp = aReqDalAlCp.filter(el => el.RecordType === "CP")
 						this.getView().setModel(new JSONModel(aReqDalAlCp), `modelTableQuadroDal`);
 					}

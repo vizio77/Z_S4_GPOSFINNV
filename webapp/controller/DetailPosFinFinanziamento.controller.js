@@ -1348,6 +1348,9 @@ sap.ui.define([
 			aFilters.push(new sap.ui.model.Filter("RecordType", sap.ui.model.FilterOperator.EQ, "CP"));
 			var aRes = await this.__getDataPromise(sEntityDA, aFilters, oModelQuadro);
 			this.formatterImporti(aRes, false, "Importo")
+			aRes = aRes.sort(
+				(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+			);
 			this.getView().setModel(new JSONModel(aRes), `modelTableComp${exp}`);
 			
 			this.getView().setBusy(false)

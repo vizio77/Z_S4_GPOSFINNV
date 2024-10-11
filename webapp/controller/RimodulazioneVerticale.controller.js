@@ -1706,6 +1706,9 @@ sap.ui.define([
           aFilters.push(new sap.ui.model.Filter("RecordType", sap.ui.model.FilterOperator.EQ, "CS"));
 					var aReqDalAlCs = await this.__getDataPromise(sEntityCs, aFilters, oModelQuadro);
 					this.formatterImporti(aReqDalAlCs, false, "Importo")
+					aReqDalAlCs = aReqDalAlCs.sort(
+						(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+					);
 					this.getView().setModel(new JSONModel(aReqDalAlCs), `modelTableQuadroDalCs`);
 			}
 		}else if(sValue === 'FN'){
@@ -1722,6 +1725,9 @@ sap.ui.define([
 				var aReqDalAlCp = await this.__getDataPromise(sEntityCp, [], oModelQuadro);
 				this.formatterImporti(aReqDalAlCp, false, "Importo")
 				aReqDalAlCp = aReqDalAlCp.filter(el => el.RecordType === "CP")
+				aReqDalAlCp = aReqDalAlCp.sort(
+					(a, b) => parseInt(a.YearLow) - parseInt(b.YearLow)
+				);
 				this.getView().setModel(new JSONModel(aReqDalAlCp), `modelTableQuadroDal`);
 			}
 		}
