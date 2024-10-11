@@ -41,7 +41,7 @@
 									<Input value="{modelPosFin>/Sottostrumento}" width="50%" showValueHelp="false" required="false"  editable="false" />
 								</fb:control>
 							</fb:FilterGroupItem> -->
-							<fb:FilterGroupItem mandatory="false" groupName="Essential" groupTitle="{i18n>ricercaStru}" id="filtrofilterBarPosFin" name="test" label="{i18n>posFin}"
+							<fb:FilterGroupItem mandatory="false" groupName="Essential" groupTitle="" id="filtrofilterBarPosFin" name="test" label="{i18n>posFin}"
 								visibleInFilterBar="true">
 								<fb:control>
 									<!-- <zcontrol:InputPosizioneFinanziaria id="filterBarPosFin" width="50%" semanticObject="ESAMINAMODIFICA" maxSuggestionWidth="60%"/> -->
