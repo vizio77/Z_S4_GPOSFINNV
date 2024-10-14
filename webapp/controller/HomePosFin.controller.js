@@ -1170,7 +1170,7 @@ sap.ui.define([
 			if (oFormPosf.Ce2)
 				aFilters.push(new Filter("Ce2", FilterOperator.EQ, oFormPosf.Ce2))
 			if (oFormPosf.Ce3)
-				aFilters.push(new Filter("Ce3", FilterOperator.EQ, oFormPosf.Ce3))
+				aFilters.push(new Filter("Ce3", FilterOperator.EQ, oFormPosf.Ce3	))
 			if (oFormPosf.fipex)
 				aFilters.push(new Filter("CodificaRepPf", FilterOperator.EQ, oFormPosf.fipex))
 			//aFilters.push(new Filter("Fipex", FilterOperator.EQ, oFormPosf.fipex))

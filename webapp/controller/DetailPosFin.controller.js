@@ -3245,7 +3245,7 @@ sap.ui.define([
 			
 				if(modelPosFin.getProperty("/detailAnagrafica/CuIrapNoncu") === "1" && modelPosFin.getProperty("/detailAnagrafica/tipoSpesaCapitolo") === "OBB"){
 					this.getView().getModel("modelPosFin").setProperty(`/detailAnagrafica/CuIrapNoncu`, "")
-					MessageBox.warning(this.recuperaTestoI18n("Il CU/IRAP/NON CU Non può avere valore Cedolino unico se il tipo spesa è Obbligatorio"))
+					MessageBox.warning(this.recuperaTestoI18n("Il CU/IRAP/NON CU Non può avere valore Cedolino Unico se il tipo spesa è Obbligatorio"))
 					return
 				}
 
