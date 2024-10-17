@@ -419,8 +419,11 @@ sap.ui.define([
                 let modelHome = this.getView().getModel("modelHome")
                 let oSottostrumento = modelHome.getProperty("/infoSottoStrumento")
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-                if(!oSottostrumento)
+                if(!oSottostrumento){
+                    MessageBox.warning("Per poter continuare selezionare lo strumento e il sottostrumento")
                     return
+                }
+
                 if(oSottostrumento.StatoSstr === '1') {
                     if(oSottostrumento.TipoEsposizione === "0" || oSottostrumento.TipoEsposizione === "2") {
                         oRouter.navTo("HomePosFin",{

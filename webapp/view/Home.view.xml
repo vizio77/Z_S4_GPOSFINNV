@@ -48,9 +48,9 @@
                                     <Text text="{modelHome>/formSottostrumento/processo}"/>
                                     <Label text="Macro Fase" />
                                     <Text text="{modelHome>/formSottostrumento/macroFase}"/>
-                                    <Label text="Strumento"/>
+                                    <Label text="Strumento" />
 									<Input value="{modelHome>/CodSTR}" showValueHelp="true" valueHelpRequest="onHelpValueStrumento"/>
-                                    <Label text="Sottostrumento"  />
+                                    <Label text="Sottostrumento" />
                                     <Input value="{modelHome>/Sottostrumento}" id="idSstr" showValueHelp="true" valueHelpRequest="onHelpValueSottoStrumento"/>
                                     <!-- <Label text="Autorizzazione"  id="labelAuth" visible="{modelFilterHome>/visibleAuth}"/>
                                     <Input value="{Street}" id="inputAuth" visible="{modelFilterHome>/visibleAuth}" showValueHelp="true" >
