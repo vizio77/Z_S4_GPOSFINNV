@@ -124,7 +124,7 @@ xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="h
 		</VBox>
 		<VBox>
 			<Table id="tableSacCa2" inset="false" items="{modelTableSacCaVaRes>/}" 
-				visible="{= ${modelVisQuadri>/Attivo} === true &amp;&amp; ${modelPosFin>/infoSottoStrumento/TipoSstr} === '52' &amp;&amp; ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '0' }"
+				visible="{= ${modelVisQuadri>/Attivo} === true &amp;&amp; ${modelPosFin>/infoSottoStrumento/TipoSstr} === '54' &amp;&amp; ${modelPosFin>/infoSottoStrumento/TipoEsposizione} === '0' }"
 				sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
 				<columns>
 					<Column width="40%">

@@ -23,14 +23,14 @@
 					<Column width="10rem" hAlign="Right">
 						<Text text="Competenza {labelQuadro>/annoCp3}" class="boldCss"/>
 					</Column>
-					<Column width="10rem" hAlign="Right" visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}">
+					<Column width="10rem" hAlign="Right" visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}">
 						<Text text="Cassa {labelQuadro>/annoCp1}" class="boldCss"/>
 					</Column>
 					<Column width="10rem" hAlign="Right">
-						<Text text="Cassa {labelQuadro>/annoCp2}" visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}" class="boldCss"/>
+						<Text text="Cassa {labelQuadro>/annoCp2}" visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}" class="boldCss"/>
 					</Column>
 					<Column width="10rem" hAlign="Right">
-						<Text text="Cassa {labelQuadro>/annoCp3}" visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}" class="boldCss"/>
+						<Text text="Cassa {labelQuadro>/annoCp3}" visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}" class="boldCss"/>
 					</Column>
 				</columns>
 				<items>
@@ -52,9 +52,9 @@
 							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno001}"></Text>
 							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno002}"></Text>
 							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno003}"></Text>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno001}"  visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}"></Text>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno002}"  visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}"></Text>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno003}"  visible="{= ${modelCheckCassa>FlagCassa} === 'X' ? true : false}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno001}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno002}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno003}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}"></Text>
 						</cells>
 					</ColumnListItem>
 				</items>

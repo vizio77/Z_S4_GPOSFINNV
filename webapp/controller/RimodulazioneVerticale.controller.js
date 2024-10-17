@@ -1434,10 +1434,11 @@ sap.ui.define([
 				return
 			}
 
+			let msg = modelRimData.AllineaCassa ? this.recuperaTestoI18n("confermaSalvataggio") : this.recuperaTestoI18n("confermaSalvataggioCassaWarning");
+
 			//! LT -> mando i $ nell'oData per imputare i dati
 			console.log(oPayload)
-			MessageBox.show(
-				this.recuperaTestoI18n("confermaSalvataggio"), {
+			MessageBox.show( msg , {
 					icon: MessageBox.Icon.INFORMATION,
 					title: "Salvataggio ",
 					actions: [MessageBox.Action.YES, MessageBox.Action.NO],

@@ -1766,8 +1766,8 @@ sap.ui.define([
                     { A: "", B: "Memoria", C: modelPosFin.detailAnagrafica.Memoria === true ? "Sì" : "NO" },
                     { A: "", B: "Capitolone", C: modelPosFin.detailAnagrafica.Capitolone === true ? "Sì" : "NO" },
                     {},
-                    { A: "", B: "CU/IRAP/NON CU", C: elCuIrap },
-                    { A: "", B: "NOIPA", C: elNoiPa },
+                    { A: "", B: "CU/IRAP/NON CU", C: elCuIrap.toUpperCase() },
+                    { A: "", B: "NOIPA", C: elNoiPa.toUpperCase() },
                     { A: "", B: "FO/FP", C: fofp },
 
                 ];

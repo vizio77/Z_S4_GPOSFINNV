@@ -164,7 +164,7 @@ sap.ui.define([
 					MessageBox.error("Errore nel recupero delle Autorizzazioni");
 					return Promise.resolve()
 				}
-				var aListAdministration = aResponse[1].value.filter((oAdministration) => {
+				/* var aListAdministration = aResponse[1].value.filter((oAdministration) => {
 					return oAdministration.FlagRevIgb01 == "1";
 				}).map((oAdministration) =>{
 					return oAdministration.Prctr;
@@ -175,8 +175,8 @@ sap.ui.define([
 						return aListAdministration.includes(oAmminCompetenza.Prctr)
 					})
 					return (record.AllPrctr === true && aListAdministration.length > 0 )  || iIndex !== -1
-				});      
-				modelPosFin.setProperty("/formAutorizzazione/resultsAuth", autFiltrateTest);
+				});       */
+				modelPosFin.setProperty("/formAutorizzazione/resultsAuth", aResponse[0].value);
 				return Promise.resolve()
 			}).finally(() => {
 				modelPosFin.setProperty("/busyAuth", false)

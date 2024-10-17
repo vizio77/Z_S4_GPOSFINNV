@@ -8029,6 +8029,8 @@ sap.ui.define([
 			const modelHana = this.getOwnerComponent().getModel("sapHanaS2")
 			modelPosFin.setProperty("/formAutorizzazione/resultsAuth", [])
 			modelPosFin.setProperty("/busyAuth", true)
+			this.getView().setBusy(true)
+			this.openHVAutorizzazione("TableRicercaAuth", "TableRicercaAuth")
 			let aFilters= [
 				new Filter("Fikrs", FilterOperator.EQ, "S001"),
 			]
@@ -8042,6 +8044,7 @@ sap.ui.define([
 														new Filter("Fipex", FilterOperator.EQ,modelPosFin.getProperty("/PosFin/Fipex"))
 													]
 															,modelHana)
+			this.getView().setBusy(false)
 			if(aAutorizzazioniAssociate.length > 0) {
 				aFilters.push(new Filter({
 					filters: function () {
@@ -8054,7 +8057,7 @@ sap.ui.define([
 					and: true,
 				  }))
 			}
-			this.openHVAutorizzazione("TableRicercaAuth", "TableRicercaAuth")
+			
 			modelHana.read("/NuovaAutorizzazioneSet", {
 				urlParameters: {
 					$expand: "AmminCompetenza"
@@ -9205,10 +9208,22 @@ sap.ui.define([
 				return
 			}
 
+			let msg = this.recuperaTestoI18n("confermaSalvataggio");
+
+			if(!isCassa){
+
+			const modelRow = !isCassa ? "modelTableSac" : "modelTableSacCa"
+			var modelPluri = this.getView().getModel("modelPluri");
+			var modelTSac = this.getView().getModel(modelRow);
+			var modelTSacData = modelTSac.getData()
+			var rowTriennio = modelTSacData[0]
+				msg = !rowTriennio.FLAG_ALLINEA_CS ? this.recuperaTestoI18n("confermaSalvataggioCassaWarning") : this.recuperaTestoI18n("confermaSalvataggio");
+			}
+
+
 			//! LT -> mando i $ nell'oData per imputare i dati
 			console.log(oPayload)
-			MessageBox.show(
-				this.recuperaTestoI18n("confermaSalvataggio"), {
+			MessageBox.show(msg, {
 					icon: MessageBox.Icon.INFORMATION,
 					title: "Salvataggio ",
 					actions: [MessageBox.Action.YES, MessageBox.Action.NO],
@@ -10260,7 +10275,7 @@ sap.ui.define([
 			let oModelPosFin = this.getView().getModel("modelPosFin");
 			let oAut = oModelPosFin.getProperty("/CompetenzaAuth");
 			if (oAut.Auth === "" || !oAut.Auth) {
-				MessageBox.error("Per avere l'export di competenza deve essere selezionata un' autorizzazione");
+				MessageBox.error("Per avere l'export di competenza deve essere selezionata un' autorizzazione nel tab Competenza");
 				//this.openMessageBox("Error", "Errore campo Obbligatorio", "Manca l'autorizzazione per la competenza");
 				this.getView().setBusy(false)
 				return;

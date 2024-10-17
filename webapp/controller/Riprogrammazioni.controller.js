@@ -210,9 +210,11 @@ sap.ui.define([
 
 			//TODO creo il payload per come lo vogliono
 
+			let msg = allineaCassa  ? this.recuperaTestoI18n("confermaSalvataggio") : this.recuperaTestoI18n("confermaSalvataggioCassaWarning");
+
 
 			MessageBox.show(
-				this.recuperaTestoI18n("confermaSalvataggio"), {
+				msg, {
 					icon: MessageBox.Icon.INFORMATION,
 					title: "Salvataggio ",
 					actions: [MessageBox.Action.YES, MessageBox.Action.NO],
