@@ -156,7 +156,7 @@
                     </customData>
                 </Input> -->
                 <Select selectedKey="{modelPosFin>/formAutorizzazione/Item/TipoAut}" items="{
-                    path:'sapHanaS2>/HVTipoAutorizzazioneSet/'}" forceSelection="false" >
+                    path:'sapHanaS2>/HVTipoAutorizzazioneSet/' , filters: [{ path: 'Tipo', operator: 'EQ', value1: 'Base' },{ path: 'Tipo', operator: 'EQ', value1: 'Rif' }] }" forceSelection="false" >
                     <c:Item key="{sapHanaS2>Tipo}" text="{sapHanaS2>DescTipoAuth}" />
                 </Select>
                 <Label text="{i18n>monitoraggio}"/>
