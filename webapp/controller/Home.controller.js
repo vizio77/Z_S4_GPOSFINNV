@@ -340,6 +340,11 @@ sap.ui.define([
                         success: (oData, response) => {
                             //Filtro per Dominio Sottostrumento
                             oData.results = oData.results.filter(sstr => sstr.TipoSstr !== "81")
+                            oData.results = oData.results.filter(sstr => sstr.NumeroSstr !== "000300")
+                            oData.results = oData.results.filter(sstr => sstr.NumeroSstr !== "000700")
+                            oData.results = oData.results.filter(sstr => sstr.NumeroSstr !== "000701")
+                            //! lt effettuo il check sul sottostrumento senza flag
+                            oData.results = oData.results.filter(sstr => !sstr.Flag_Pref) 
                             let arrDataResults = []
                                 //codice da buttare lt
                                 /* var sottostrumentiConDominio = []

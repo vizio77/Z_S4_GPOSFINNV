@@ -8018,7 +8018,9 @@ sap.ui.define([
 			if(itemFiltri.Monitoraggio)
 				aFilters.push(new Filter("IndicatMonit", FilterOperator.EQ, itemFiltri.Monitoraggio === "Mon" ? "X" : ""))
 			if(itemFiltri.DescCompatta)
-				aFilters.push(new Filter("ZzdescrEstesaFm", FilterOperator.Contains, itemFiltri.DescCompatta))
+				debugger
+				var descr = itemFiltri.DescCompatta;
+				aFilters.push(new Filter("DescrEstesaFm", FilterOperator.Contains,  window.location.href.includes("localhost") ? itemFiltri.DescCompatta  : descr ))
 			// if(itemFiltri.TipoAut)
 			// 	aFilters.push(new Filter("Tipo", FilterOperator.EQ, itemFiltri.TipoAut))
 
@@ -9183,6 +9185,7 @@ sap.ui.define([
 			const oModelVarCont = this.getOwnerComponent().getModel("modemVarCont")
 			const tabSelected = this.getView().byId("idIconTabBarMulti").getSelectedKey()
 			const isCassa = tabSelected === "people" ? true : false
+			
 
 			if(!this.checkDecVsPluri(isCassa)){
 				return
@@ -9191,6 +9194,74 @@ sap.ui.define([
 			//return
 
 			var oPayload = this.createPayloadBW(isCassa)
+
+			
+			if(tabSelected === "people" && oPayload && oPayload.UPDATEDEEPVARIAZIONI && oPayload.UPDATEDEEPVARIAZIONI.length > 0){
+				const modelRow = !isCassa ? "modelTableSac" : "modelTableSacCa"				
+				var modelTSac = this.getView().getModel(modelRow);
+				var modelTSacData = modelTSac.getData()
+				var rowTriennio = modelTSacData[0]				
+
+				let thereIsResidui = false
+				let thereIsImporti = false
+
+				if(rowTriennio.FLAG_A_DECORRERE){
+
+					
+					oPayload.UPDATEDEEPVARIAZIONI.forEach(row => {
+					if(row.Residui === "X"){
+						thereIsResidui = true
+					}else{
+						if(parseInt(row.Importo) !== 0 ){
+							thereIsImporti = true
+						}
+					}			
+				});
+
+					if(thereIsResidui && !thereIsImporti){
+						MessageBox.error(this.recuperaTestoI18n("erroreResSenzaCassa"))
+						return
+					}
+				
+				}
+			}
+
+
+			//controllo autorizzazione collegata
+			if(tabSelected === "attachments" && oPayload){
+				let oModelPosFin = this.getView().getModel("modelPosFin")
+				let oAutCollegata = oModelPosFin.getProperty("/CompetenzaAuth/AuthAssociata");
+				var erroreAut = false
+				
+					if(oAutCollegata){
+							const tipoLegame = oAutCollegata.TipoLegame
+							//1 = Rif
+							//1 !==   = Def
+							oPayload.UPDATEDEEPVARIAZIONI.forEach(row => {
+								switch (tipoLegame) {
+									case "1":
+										if(parseInt(row.Importo) < 0){
+											erroreAut = true
+										}
+										break;
+								
+									default:
+										if(parseInt(row.Importo) > 0){
+											erroreAut = true
+										}
+										break;
+								}
+							});
+					}
+
+					if(erroreAut){
+						const stringError = oAutCollegata.TipoLegame === 1 ? this.recuperaTestoI18n("erroreAutCollRif") : this.recuperaTestoI18n("erroreAutCollDef");;
+						MessageBox.error(stringError);
+						return;
+					}
+				
+			}
+
 
 			//se rimodulazioni orizzontali controllo che la somma di tutti i valori diano 0 altrimenti do errore
 			if(tabSelected === "RimOrizzontali"){

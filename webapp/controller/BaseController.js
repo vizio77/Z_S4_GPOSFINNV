@@ -1276,7 +1276,8 @@ sap.ui.define([
                 errori.push(`I'anno iniziale di un pluriennio non può essere inferiore o uguale all'anno ${esercizio -1}\n`)
                 errori.push(`\n`)
             }
-            
+
+
             var ricorrenze = []
             rows.forEach(row => {
                 if(!row.ricorrenza || parseInt(row.ricorrenza) === 0  ){
@@ -1305,11 +1306,19 @@ sap.ui.define([
             var yearInverted = []
             var noYearInsert = false
             rows.forEach(row => {
-                if(row.annoAl.length < 4 || row.annoDal.length < 4  ){
+                if(row.annoAl.length !== 4 || row.annoDal.length !== 4  ){
                     yearInverted.push(`Inserimento errato degli anni nella riga Anno Dal ${row.annoDal} Anno Al ${row.annoAl}\n`)
                     if(row.annoAl.length === 0 || row.annoDal.length === 0){
                         noYearInsert = true                       
                     }
+                }else if(row.annoAl.length === 4 && row.annoDal.length === 4 ){ 
+                    if(parseInt(row.annoAl) <= parseInt(row.annoDal)){
+                        yearInverted.push(`Anno Dal ${row.annoDal} non può essere maggiore di Anno al ${row.annoAl}\n`)
+                    }
+                    if(parseInt(row.annoAl) >= (parseInt(esercizio) + 100) || parseInt(row.annoDal) >= (parseInt(esercizio) + 100) ){
+                        yearInverted.push(`Anno Dal ${row.annoDal} e anno Al ${row.annoAl} non possono essere maggiorni di ${(parseInt(esercizio) + 100)}\n`)
+                    }
+
                 }
             });
 
