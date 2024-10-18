@@ -8017,10 +8017,11 @@ sap.ui.define([
 				aFilters.push(new Filter("AnnoScadenza", FilterOperator.EQ, itemFiltri.Scadenza.getFullYear().toString()))
 			if(itemFiltri.Monitoraggio)
 				aFilters.push(new Filter("IndicatMonit", FilterOperator.EQ, itemFiltri.Monitoraggio === "Mon" ? "X" : ""))
-			if(itemFiltri.DescCompatta)
-				debugger
+			if(itemFiltri.DescCompatta){
 				var descr = itemFiltri.DescCompatta;
 				aFilters.push(new Filter("DescrEstesaFm", FilterOperator.Contains,  window.location.href.includes("localhost") ? itemFiltri.DescCompatta  : descr ))
+			}
+				
 			// if(itemFiltri.TipoAut)
 			// 	aFilters.push(new Filter("Tipo", FilterOperator.EQ, itemFiltri.TipoAut))
 
