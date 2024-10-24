@@ -2393,7 +2393,7 @@ sap.ui.define([
             var stringDateDay = this.formatter.formatterDatePatter(new Date(), 0);
             const modelFoglioNotizie = this.getOwnerComponent().getModel("sapHanaS2FoglioNotizie")
             let filterFoglio = [
-                new Filter("STATO_FN", FilterOperator.EQ, "05"),
+                //new Filter("STATO_FN", FilterOperator.EQ, "05"),
                 new Filter("NUMERO_FN", FilterOperator.EQ, recPosFin[0].REALE), //.substr(1)
                 new Filter("VERSIONE", FilterOperator.EQ, 'B'),
                 new Filter("EOS", FilterOperator.EQ, 'S'),
@@ -2408,7 +2408,12 @@ sap.ui.define([
                 new Filter("REALE", FilterOperator.EQ, "R"),
                 new Filter("REALE", FilterOperator.Contains, "S"),
             ]
+            var fStato = [
+                new Filter("STATO_FN", FilterOperator.EQ, "05"),
+                new Filter("STATO_FN", FilterOperator.EQ, "04"),
+            ]
             filterFoglio.push(new Filter(f, false));
+            filterFoglio.push(new Filter(fStato, false));
             //lt usco l'expand altrimenti mi estra N fogli notizie
             const sExpand = { '$expand' :'NAV_POSFIN/NAV_ELENCHI,NAV_POSFIN/NAV_COFOG,NAV_POSFIN/NAV_REVUFF,NAV_POSFIN/NAV_IRAP'};
             let foglioNotizie = await this.__getDataPromisePerFoglio("/ZES_FN_PF_SET", filterFoglio , modelFoglioNotizie , sExpand)
