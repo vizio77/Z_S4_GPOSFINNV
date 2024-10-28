@@ -1151,7 +1151,8 @@ sap.ui.define([
 			const modelRimVerticali = this.getView().getModel("modelRimVerticali")
 			const modelPosFin = this.getOwnerComponent().getModel("modelPosFin")
 
-			let sPath= oEvent.getSource().getParent().getBindingContextPath()
+			//let sPath= oEvent.getSource().getParent().getBindingContextPath()
+			let sPath= e.getSource().getBindingContext("modelRimVerticali").getPath()
 			let oPosFin = modelRimVerticali.getProperty(sPath)
 			modelPosFin.setProperty("/PosFin", oPosFin)
 			// this.__getAttributiDescrPosFin(oPosFin, modelHana)
