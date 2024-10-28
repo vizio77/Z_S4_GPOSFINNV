@@ -1312,7 +1312,7 @@ sap.ui.define([
                         noYearInsert = true                       
                     }
                 }else if(row.annoAl.length === 4 && row.annoDal.length === 4 ){ 
-                    if(parseInt(row.annoAl) <= parseInt(row.annoDal)){
+                    if(parseInt(row.annoAl) < parseInt(row.annoDal)){
                         yearInverted.push(`Anno Dal ${row.annoDal} non può essere maggiore di Anno al ${row.annoAl}\n`)
                     }
                     if(parseInt(row.annoAl) >= (parseInt(esercizio) + 100) || parseInt(row.annoDal) >= (parseInt(esercizio) + 100) ){

@@ -40,6 +40,8 @@ xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:TooltipAutorizza
   <OverflowToolbar   visible="{modelVisQuadri>/quadroVisible}" class="sapUiSmallMarginBottom" style="Clear">
     <ToolbarSpacer/>
     <Button text="{i18n>QCCAPDLB}" type="Emphasized" press="openquadroCont('CAP',$event,null,null,null,null,null,'DLB')"/>
+    <Button text="{i18n>QCCAP}" type="Emphasized" press="openquadroCont('CAP',$event,null,null,null,null,null,'NV')"/>
+    <Button text="{i18n>QCCAPFDLB}" type="Emphasized" press="openquadroCont('PF',$event,null,null,null,null,null,'DLB')"/>
     <Button text="{i18n>QCCAPF}" type="Emphasized" press="openquadroCont('PF',$event,null,null,null,null,null,'NV')"/>
   </OverflowToolbar>
   
