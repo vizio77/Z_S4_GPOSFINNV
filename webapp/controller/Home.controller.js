@@ -1974,6 +1974,7 @@ sap.ui.define([
 
                 if(sItemSelected.StatoStr === "01"){
                     MessageBox.warning(this.getText("noStrumentoChiuso"))
+                    this.onResetSStr();
                     return;
                 }
 
