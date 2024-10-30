@@ -35,6 +35,11 @@ sap.ui.define([
 			this.open = false;
 			this.setModelFilter();								
 			variabGlobal = this;
+			var that = this;
+			window.addEventListener('beforeunload', async function(oEvent) {
+				console.log(`la proprietà unlock è: ${that.unlock} , arriva da addEventListener`);
+				if(that.unlock) await that.unLockPosFin();
+			});
 		},
 		setModelFilter: function() {
 			var oFilter = {
@@ -800,7 +805,7 @@ sap.ui.define([
 			var that = this;
 			return new Promise((resolve, reject) => {
 														 
-				oModelQuadroReis.read("/ZCOBI_I_SIT_AUT_CONS_04(P_PosFin='" + sFipex.replaceAll(".", "") + "',P_Autorizz='" + sAuth + "')/Set", {
+				oModelQuadroReis.read("/ZCOBI_I_SIT_AUT_CONS_02(P_PosFin='" + sFipex.replaceAll(".", "") + "',P_Autorizz='" + sAuth + "')/Set", {
 
 					success: (oData) => {
 						//debugger
@@ -939,8 +944,9 @@ sap.ui.define([
 				var modelFilterData = modelFilter.getData()
 				
 
-				// let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
-				let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
+				let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
+				//! LT 20241028 -> NON USO IL MODELLO NV PERFCHè NON HA L'ENTITY PRESENTE. BASTA USARE QUELLO DI DLB PASSANO NV COME FASE 
+				//let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_SRV")
 				//let sFase = this.getQCFase();
 				let oModelPosFin = this.getView().getModel("modelPosFin");
 				let sAnno = this.getOwnerComponent().getModel("globalModel").getData().ANNO;
@@ -978,6 +984,10 @@ sap.ui.define([
 				return
 			}
 
+
+			const modelPayloadData = this.getView().getModel("modelPayload").getData()
+
+			let msg = !modelPayloadData.AllineaCassa ? this.recuperaTestoI18n("confermaSalvataggioCassaWarning") : this.recuperaTestoI18n("confermaSalvataggio");
 			//se rimodulazioni orizzontali controllo che la somma di tutti i valori diano 0 altrimenti do errore
 			
 			if(!oPayload){
@@ -987,7 +997,7 @@ sap.ui.define([
 			//! LT -> mando i $ nell'oData per imputare i dati
 			console.log(oPayload)
 			MessageBox.show(
-				this.recuperaTestoI18n("confermaSalvataggio"), {
+				msg, {
 					icon: MessageBox.Icon.INFORMATION,
 					title: "Salvataggio ",
 					actions: [MessageBox.Action.YES, MessageBox.Action.NO],
@@ -1026,7 +1036,7 @@ sap.ui.define([
 			var modelPayloadData = modelPayload.getData()
 			const modelTableRes3 = this.getView().getModel("modelTableRes3")
 			var data = modelTableRes3.getData()
-			var rowTriennio = data[3]
+			var rowTriennio = data[data.length -1]
 
 			const flagADecorrere = false
 			const allineaCassa = modelPayloadData.AllineaCassa
@@ -1113,10 +1123,13 @@ sap.ui.define([
 
 				const modelTableRes2 = this.getView().getModel("modelTableRes2")
 				const modelTable2Data = modelTableRes2.getData()
-				let importoMax = parseInt(modelTable2Data[3].Importo.replaceAll(".",""))
+
+				let indexRow = modelTable2Data.length -1
+
+				let importoMax = parseInt(modelTable2Data[indexRow].Importo.replace(",00", "").replaceAll(".", ""))
 				
 				if(somma > importoMax){
-					MessageBox.warning("La somma è troppo grande")
+					MessageBox.warning(`L'importo inserito è maggiore dell'importo da reiscrivere (${modelTable2Data[indexRow].Importo})`)
 					return false
 				}
 

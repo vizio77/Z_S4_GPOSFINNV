@@ -1518,12 +1518,24 @@ sap.ui.define([
 
             let modelPosFin = this.getView().getModel("modelPosFin").getData();
             const esercizio = this.getView().getModel("globalModel").getProperty("/ANNO") 
+
+            
+            let modelTile = this.getView().getModel("modelTitle")
+            let modelTitleData = modelTile.getData()
             //! lt recupero i dati precedentemente raccolti e genero le tabelle
             // creazione testata 6 anni 3 CP 3 CS
             var anniMovPosFin = []
             var rowAnni = { "0": "","1": "","2": "" };
             var cpcsRow =[];
-            let cpcsLabel = ["Competenza","Cassa"]           
+            let cpcsLabel = ["Competenza","Cassa"]
+
+            let isCompetenza = null
+            
+            if(modelTitleData.From === 'CBREI' || modelTitleData.From === 'FN'){
+                isCompetenza = true
+                cpcsLabel = ["Competenza"]
+            }
+
             const wsCols = [];
             
             var exportModel = this.getView().getModel('exportModel');
@@ -1552,21 +1564,20 @@ sap.ui.define([
                 { TITOLO: title },
                 {}
             ]
-
             
 
             exportModel.setProperty("/merge" , [])
             exportModel.setProperty("/count" , 1)
             //if(from === "QC"){
-                var rowQuadroPF = this._creaExcelQuadroPF("modelTableQuadro", rowAnni , null)   
+                var rowQuadroPF = this._creaExcelQuadroPF("modelTableQuadro", rowAnni , isCompetenza ,null)   
                 obj = [...obj,...rowQuadroPF];
             //}
 
-            var rowTablePluriComp = this._creaExcelDaA("modelTableQuadroDal", null,  this.recuperaTestoI18n("StanzPluriComp"))            
+            var rowTablePluriComp = this._creaExcelDaA("modelTableQuadroDal", "Competenza",  this.recuperaTestoI18n("StanzPluriComp"))            
             obj = [...obj,...rowTablePluriComp];   
             //lt se CB sarà false e quindi non esporterò la cassa
             if(this.getView().getModel("modelTitle").getProperty("/DalAlCs")){
-                var rowTableCassa = this._creaExcelDaA("modelTableQuadroDalCs", true, this.recuperaTestoI18n("StanzPluriCassa"))            
+                var rowTableCassa = this._creaExcelDaA("modelTableQuadroDalCs", null, this.recuperaTestoI18n("StanzPluriCassa"))            
                 obj = [...obj,...rowTableCassa];            
             }         
             

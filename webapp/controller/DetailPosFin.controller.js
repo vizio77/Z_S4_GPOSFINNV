@@ -9413,8 +9413,11 @@ sap.ui.define([
 
 				if(rowResidui){
 					if(rowResidui.VAL_ANNO1 !== "0,00"){
-						var aDataRes = this.getView().getModel("modelRes").getData()[3] //prendo il totale
-						var iNum = parseFloat(aDataRes.ImportoCSAnno001.replaceAll(",","."))
+						const rowsModelRes = this.getView().getModel("modelRes").getData()
+
+
+						var aDataRes = rowsModelRes[rowsModelRes.length -1] //prendo il totale
+						var iNum = parseFloat(aDataRes.ImportoCSAnno001.replace(",00", "").replaceAll(".", ""))
 						var iRes = parseFloat(rowResidui.VAL_ANNO1.split(",")[0].replaceAll(".",""))
 						if(iNum + iRes < 0){
 							return MessageBox.error("Operazione non consentita!. L'operazione dei residui rende negativo il Totale Previsioni DLB Integrato (Sez. I + Sez. II)");	
@@ -9672,13 +9675,15 @@ sap.ui.define([
 			const modelTable = this.getView().getModel("modelTableRes3");
 			let modelData =  modelTable.getData()
 
-			if(modelData.length === 4){
+			if(modelData.length > 0){
 
-				modelData[3].ImportoAnno1 = "0.00"
-				modelData[3].ImportoAnno2 = "0.00"
-				modelData[3].ImportoAnno3 = "0.00"
+				let index = modelData.length -1
 
-				modelTable.setProperty("/3", modelData[3])
+				modelData[index].ImportoAnno1 = "0,00"
+				modelData[index].ImportoAnno2 = "0,00"
+				modelData[index].ImportoAnno3 = "0,00"
+
+				modelTable.setProperty(`/${index}`, modelData[index])
 				this.getView().setModel(new JSONModel({AllineaCassa : false}), "modelPayload")
 			}			
 

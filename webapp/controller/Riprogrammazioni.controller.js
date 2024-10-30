@@ -676,7 +676,7 @@ sap.ui.define([
 			
 		},
 
-		openquadroCont: async function (sValue, oEvent, sPF, sCP, sCB,sFase) {
+		openquadroCont: async function (sValue, oEvent, sPF, sCP, sCB,bCompOnly,sFase) {
 			this.getView().setBusy(true);
 			this.getView().setModel(new JSONModel([{}]), "modelTableQuadro");
 			let oModelQuadro = this.getOwnerComponent().getModel("ZSS4_COBI_QUADRO_CONTABILE_DLB_SRV")
@@ -746,22 +746,42 @@ sap.ui.define([
 			this.getView().setModel(new JSONModel([]), `modelTableQuadroDalCs`);
 
 			this.timeCreate = undefined;
-			if (!this.oDialogQuadro) {
-				this.oDialogQuadro = sap.ui.xmlfragment(
-					"zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.QuadroContabile",
-					this
-				);
-				this.getView().addDependent(this.oDialogQuadro);
-				this.timeCreate = "yes"
+
+			if(bCompOnly){
+				if (!this.oDialogQuadroComp) {
+					this.oDialogQuadroComp = sap.ui.xmlfragment(
+						"zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.QuadroContabileComp",
+						this
+					);
+					this.getView().addDependent(this.oDialogQuadroComp);
+					this.timeCreate = "yes"
+				}
+				this.oDialogQuadroComp.openBy(oEvent.getSource());
 			}
-			this.oDialogQuadro.openBy(oEvent.getSource());
-			
+			else{
+				if (!this.oDialogQuadro) {
+					this.oDialogQuadro = sap.ui.xmlfragment(
+						"zsap.com.r3.cobi.s4.gestposfinnv.view.fragment.QuadroContabile",
+						this
+					);
+					this.getView().addDependent(this.oDialogQuadro);
+					this.timeCreate = "yes"
+				}
+				this.oDialogQuadro.openBy(oEvent.getSource());
+			}
+
 			if (this.timeCreate) {
 		//		this.functionTemp("idTableyearQuadro", "idColumnListItemsYearQuadro", "modelTableQuadro", "ImportoCPAnno", "Competenza");
 		//		this.functionTemp("idTableyearQuadro", "idColumnListItemsYearQuadro", "modelTableQuadro", "ImportoCSAnno", "Cassa");
 			}
 
-			this.oDialogQuadro.setBusy(true);
+			if(bCompOnly){
+				this.oDialogQuadroComp.setBusy(true);
+			}else{
+				this.oDialogQuadro.setBusy(true);
+			}
+
+			//this.oDialogQuadro.setBusy(true);
 			var aRes = await this.__getDataPromise(sEntity, [], oModelQuadro);
 			this.formatterImporti(aRes, true)
 			this.splitTable(aRes, "COMP", "modelTableQuadro");
@@ -833,7 +853,11 @@ sap.ui.define([
 		}
 
 			this.getView().setModel(new JSONModel({ Title: sTitle, From: sValue, DalAlCs : dalAlCs  }), "modelTitle");
-			this.oDialogQuadro.setBusy(false);
+			if(bCompOnly){
+				this.oDialogQuadroComp.setBusy(false);
+			}else{
+				this.oDialogQuadro.setBusy(false);
+			}
 			this.getView().setBusy(false);
 		},
 
