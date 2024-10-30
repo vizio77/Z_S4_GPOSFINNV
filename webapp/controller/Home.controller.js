@@ -1971,6 +1971,12 @@ sap.ui.define([
 			},
 			onConfirmTableStrumento: function(oEvent) {
 				var sItemSelected = oEvent.getParameters().selectedItem.getBindingContext("modelHome").getObject();
+
+                if(sItemSelected.StatoStr === "01"){
+                    MessageBox.warning(this.getText("noStrumentoChiuso"))
+                    return;
+                }
+
 				var sNumeroStr = sItemSelected.NumeroStr;
 				var sNumeroStrCompleto = sItemSelected.CodiceStrumento;
 				var sModelReg = this.getView().getModel("modelHome");
