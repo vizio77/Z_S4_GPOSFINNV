@@ -20,4 +20,4 @@ builder:
           name: Z_S4_GPOSFINNV
           description: Gestione Posizione Finanziaria S NV
           package: Z_ALM_S4_COBI_FIORI
-          transport: S2SK950006 #S4SK976284 #
+          transport: S2SK950168 #S4SK976284 #

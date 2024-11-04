@@ -318,7 +318,7 @@ sap.ui.define([
 					let annoA = parseInt(row.annoAl)
 					let ricorrenza = parseInt(row.ricorrenza) 
 					if((annoDa - annoA) === 0) {
-						somma = somma + parseInt(row.importo)
+						somma = somma + parseInt(row.importo.replace(",00","").replaceAll(".", ""))
 						var valori = {
 							Importo : row.importo.replace(",00","").replaceAll(".", ""),
 							AnnoDa : annoDa.toString(),
