@@ -229,12 +229,12 @@ sap.ui.define([
                         ANNO : oData.results[0].ANNO,
                         //DDTEXT : oData.results[0].DDTEXT,
                         DDTEXT : oData.results[0].FASE === "F" ? "Formazione" : oData.results[0].DDTEXT,
-                        STAT_FASE : oData.results[0].STAT_FASE === "0" ? "Disegno di legge di bilancio" : "Note di variazione",
+                        STAT_FASE : oData.results[0].STAT_FASE === "0" ? "Disegno di legge di bilancio" : oData.results[0].DDTEXT,
                     })
                     that.getOwnerComponent().setModel(new JSONModel({
                         ANNO : oData.results[0].ANNO,
                         DDTEXT : oData.results[0].FASE === "F" ? "Formazione" : oData.results[0].DDTEXT,
-                        STAT_FASE : oData.results[0].STAT_FASE === "0" ? "Disegno di legge di bilancio" : "Note di variazione",
+                        STAT_FASE : oData.results[0].STAT_FASE === "0" ? "Disegno di legge di bilancio" : oData.results[0].DDTEXT,
                     }), "globalModel")
                     //resolve(ritorno)
                   },

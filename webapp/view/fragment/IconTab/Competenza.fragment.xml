@@ -75,7 +75,7 @@ xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:TooltipAutorizza
 											<Label text="A Decorrere"/>
 											<CheckBox selected="{modelTableSac>/0/FLAG_A_DECORRERE}"/>
 											<Button icon="sap-icon://delete" press="onDeleteValueComp" type="Emphasized"/>
-											<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennali"/>
+											<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennale"/>
 											<Button press="onSavePluriennale" type="Emphasized" text="Salva"/>
 										</OverflowToolbar>
 									</headerToolbar>

@@ -112,7 +112,7 @@
 		<Label text="Allinea Cassa"/>
 		<CheckBox selected="{modelPayload>/AllineaCassa}"/>
 		<Button icon="sap-icon://delete" press="onDeleteValue" type="Emphasized"/>
-		<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennali"/>
+		<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennale"/>
 		<Button press="onSaveReiscrizioni" type="Emphasized" text="Salva"/>
 	</OverflowToolbar>
 	<Table items="{path:'mTableQuadroDal>/'}">

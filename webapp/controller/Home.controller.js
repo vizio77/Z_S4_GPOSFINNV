@@ -110,9 +110,13 @@ sap.ui.define([
                                 let aTipologia = this.__removeDuplicate(oData.results, "tipologia")
                                 aTipologia.unshift({Esposizione: null, DescrEsposizione: "", Fase: null, Anno: null})
                                 modelHome.setProperty("/formSottostrumento/tipologieSet", aTipologia)
-                                // oData.results[0].ToSHTipologia.results.unshift({ TipoSstr: null, TipoSstrDescr: ""})
-                                // modelHome.setProperty("/formSottostrumento/tipologieSet", oData.results[0].ToSHTipologia.results)
-                                //lista esposizione contabile
+                                
+                                //! 20241105 -> autosetto la visualizzazione del tipo sottostrumento
+                                let tipologiaStrumento = modelHome.getProperty("/infoStrumento/TipoStr")
+                                //controllo che ci sia nella tipologia la lista. se esiste allora la setto altrimenti la setto vuota
+                                let tipoSottoStrumentoPresente = aTipologia.find((el)=> el.Tipologia === tipologiaStrumento)
+                                modelHome.setProperty("/formSottostrumento/tipologia", !tipoSottoStrumentoPresente ? "" : tipoSottoStrumentoPresente.Tipologia)
+
                                 let aEsposizioneContabile = this.__removeDuplicate(oData.results, "esposizione")
                                 aEsposizioneContabile = aEsposizioneContabile.filter(ec => ec.DescrEsposizione !== "")
                               

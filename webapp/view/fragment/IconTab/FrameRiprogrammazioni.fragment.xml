@@ -68,7 +68,7 @@ xmlns:zcontrollink="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink.controls"
 												<Input value="{modelRiprogrammazioni>VAL_ANNO1}" type="Text" textAlign="End" change="liveChangeimporti('modelRiprogrammazioni', 'VAL_ANNO1', '')"></Input>
 												<Input value="{modelRiprogrammazioni>VAL_ANNO2}" type="Text" textAlign="End" change="liveChangeimporti('modelRiprogrammazioni', 'VAL_ANNO2', '')" ></Input>
 												<Input value="{modelRiprogrammazioni>VAL_ANNO3}" type="Text" textAlign="End" change="liveChangeimporti('modelRiprogrammazioni', 'VAL_ANNO3', '')" ></Input>
-												<ToggleButton text="Pluriennali" type="Emphasized" press=".onPressPluriennaliRipr($event, true)" enabled="true"/>
+												<ToggleButton text="Pluriennale" type="Emphasized" press=".onPressPluriennaliRipr($event, true)" enabled="true"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -121,7 +121,7 @@ xmlns:zcontrollink="zsap.com.r3.cobi.s4.custposfin.z_s4_zposfinlink.controls"
 											<Label text="Allinea Cassa"/>
 											<CheckBox selected="{modelRiprogrammazioniSac>/0/FLAG_ALLINEA_CS}"/>
 											<Button icon="sap-icon://delete" press="onDeleteValue" type="Emphasized"/>
-											<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennali"/>
+											<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennale"/>
 											<Button press="onSavePluriennale" type="Emphasized" text="Salva"/>
 										</OverflowToolbar>
 									</headerToolbar>

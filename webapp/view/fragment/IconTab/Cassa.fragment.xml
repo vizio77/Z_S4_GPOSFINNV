@@ -172,7 +172,7 @@ xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="h
 						<Label text="A Decorrere"/>
 						<CheckBox selected="{modelTableSacCa>/0/FLAG_A_DECORRERE}"/>
 						<Button icon="sap-icon://delete" press=".onDeleteValueCassa" type="Emphasized"/>
-						<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennali"/>
+						<Button press=".onPressPluriennali($event, true)" type="Emphasized" text="Pluriennale"/>
 						<Button press="onSavePluriennale" type="Emphasized" text="Salva"/>
 					</OverflowToolbar>
 				</headerToolbar>
