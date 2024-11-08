@@ -35,7 +35,7 @@
                 this.setModel(models.createDeviceModel(), "device");
                 this.setModel(models.createIframeModel(), "iframe");
                 this.setModel(new JSONModel([]), "modelLockRecord");
-                this.createInfoUserModel()
+                //this.createInfoUserModel()
                 this._getConi();                
 
             },
@@ -45,12 +45,14 @@
                 var sAction = this.getDynamicAction();
                 try {
                     var sReturn = await oCostructor.getStructureConi("ZGESTPOSFINSPESA", sAction);
+                    
                     if (!sReturn.ReturnStatus) {
                         this.navToAppLaunchpad("");
                         this._messageBox(sReturn.Message, "error");
                     }else{
                         //console.log(sReturn)
                         this.setModel(models.createuserRoleModel(sReturn), "userRoleModel");
+                        this.getModel("userInfo").setData(sReturn)   
                     }
                 } catch (error) {
                     console.log(error)
@@ -119,7 +121,7 @@
                 }
             },
 
-            createInfoUserModel: function() {
+            /* createInfoUserModel: function() {
                 if (!window.location.href.includes("localhost")) {
                     var oUserInfo = new sap.ushell.services.UserInfo();
                     var oUser = oUserInfo.getUser();
@@ -138,7 +140,7 @@
                 this.setModel( new JSONModel(modello), "userInfo")
                 return modello
                 
-            },
+            }, */
         });
     }
 );

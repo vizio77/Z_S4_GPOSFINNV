@@ -185,7 +185,10 @@
 			},
 			"modemVarCont": {
 				"dataSource": "modemVarCont"
-			}
+			},
+      "userInfo" : {
+        "type": "sap.ui.model.json.JSONModel"
+      }
 		},
 		"resources": {
 			"css": [
