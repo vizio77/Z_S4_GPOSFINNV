@@ -45,22 +45,35 @@
                 var sAction = this.getDynamicAction();
                 try {
                     var sReturn = await oCostructor.getStructureConi("ZGESTPOSFINSPESA", sAction);
-                    
+                    this.getModel("userInfo").setData(sReturn) 
                     if (!sReturn.ReturnStatus) {
                         this.navToAppLaunchpad("");
                         this._messageBox(sReturn.Message, "error");
+                        
                     }else{
                         //console.log(sReturn)
                         this.setModel(models.createuserRoleModel(sReturn), "userRoleModel");
-                        this.getModel("userInfo").setData(sReturn)   
+                          
                     }
                 } catch (error) {
                     console.log(error)
                     this._messageBox("Errore Libreria Coni", "error");
                     this.navToAppLaunchpad();
                 }
+
+                this.setAppTitle(sReturn);
                 
                 
+            },
+
+            setAppTitle: function (sReturn) {
+                if (sReturn["AGR_NAME_COLL"].some(item => item.includes("GEST_TECNICA"))) {
+                    var sString = `${this.getModel("i18n").getResourceBundle().getText("appTitle")} Versione del 07.11.2024 17:40` //data dell'ultimo deploy
+                        this.getService("ShellUIService").then(
+                        function (oService) { oService.setTitle(sString); },
+                        function (oError) { console.error("Error while setting the title: " + oError); }
+                    );
+                }
             },
 
             getDynamicAction: function() {

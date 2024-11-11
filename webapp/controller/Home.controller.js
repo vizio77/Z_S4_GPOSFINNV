@@ -16,7 +16,7 @@ sap.ui.define([
         return BaseController.extend("zsap.com.r3.cobi.s4.gestposfinnv.controller.Home", {
             onInit: async function () {
 
-                this.setAppTitle();
+                
                 
                 this.getView().setBusy(true,0)
                 this.initModel();
@@ -26,17 +26,9 @@ sap.ui.define([
                     this.initModel();
     
                 }.bind(this), this);
-                
-            },
 
-            setAppTitle: function () {
-                if (this.getUserInfo("AGR_NAME_COLL").some(item => item.includes("GEST_TECNICA"))) {
-                    var sString = `${this.recuperaTestoI18n("appTitle")} Versione del 07.11.2024 17:40` //data dell'ultimo deploy
-                        this.getOwnerComponent().getService("ShellUIService").then(
-                        function (oService) { oService.setTitle(sString); },
-                        function (oError) { console.error("Error while setting the title: " + oError); }
-                    );
-                }
+                
+                
             },
 
             initModel: async function(){
