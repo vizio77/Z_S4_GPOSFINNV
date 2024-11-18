@@ -14,10 +14,10 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          url: http://10.38.125.62:8001 #http://l2vs2slass01.mef.gov.it:8000 #
+          url: http://l2vs2slass01.mef.gov.it:8000 #http://10.38.125.62:8001 #
           client: "100"
         app:
           name: Z_S4_GPOSFINNV
           description: Gestione Posizione Finanziaria S NV
           package: Z_ALM_S4_COBI_FIORI
-          transport: S4SK980964 #S2SK950857 #
+          transport: S2SK950951 #S4SK980964 #S2SK950951 #

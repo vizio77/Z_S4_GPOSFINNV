@@ -69,7 +69,7 @@ xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="h
 		<VBox class="sapUiSmallMargin">
 			<Table width="40%" inset="false" items="{modelRes>/}" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
 				<columns>
-					<Column width="30rem">
+					<Column hAlign="End">
 						<Text text="" class="boldCss"/>
 					</Column>
 					<Column >
