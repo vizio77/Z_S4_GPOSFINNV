@@ -3719,7 +3719,12 @@ sap.ui.define([
 		onDeleteElencoObb: function (oEvent) {
 			let modelPosFin = this.getView().getModel("modelPosFin")			
 			let aElenchi = modelPosFin.getProperty("/detailAnagrafica/elenchiCapitolo")
-			const elenchi = aElenchi.filter(el => el.PrctrElenco !== "A020" && el.NumeroElenco !== "001")
+			let elenchi = []
+			aElenchi.forEach(el => {
+				if(!(el.PrctrElenco === "A020" && el.NumeroElenco === "001")) {
+					elenchi.push(el)
+				}
+			}); 
 			modelPosFin.setProperty("/detailAnagrafica/elenchiCapitolo", elenchi)
 		},
 		handleAddCOFOG: function (oEvent) {
