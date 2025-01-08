@@ -15,9 +15,39 @@
 					<Text text="{i18n>Amministrazione}"/>
 				</header>
 			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>Capitolo}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="{i18n>Pg}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="Stato {i18n>Capitolo}"/>
+				</header>
+			</Column>
+			<Column width="5rem">
+				<header>
+					<Text text="Stato {i18n>Pg}"/>
+				</header>
+			</Column>
 			<Column width="12rem">
 				<header>
 					<Text text="{i18n>descAmm}"/>
+				</header>
+			</Column>
+			<Column width="20rem">
+				<header>
+					<Text text="{i18n>descrCapitolo}"/>
+				</header>
+			</Column>
+			<Column width="12rem">
+				<header>
+					<Text text="{i18n>descrPg}"/>
 				</header>
 			</Column>
 			<Column width="5rem">
@@ -72,26 +102,6 @@
 			</Column>
 			<Column width="5rem">
 				<header>
-					<Text text="{i18n>Capitolo}"/>
-				</header>
-			</Column>
-			<Column width="20rem">
-				<header>
-					<Text text="{i18n>descrCapitolo}"/>
-				</header>
-			</Column>
-			<Column width="5rem">
-				<header>
-					<Text text="{i18n>Pg}"/>
-				</header>
-			</Column>
-			<Column width="12rem">
-				<header>
-					<Text text="{i18n>descrPg}"/>
-				</header>
-			</Column>
-			<Column width="5rem">
-				<header>
 					<Text text="{i18n>dom_titolo}"/>
 				</header>
 			</Column>
@@ -135,7 +145,13 @@
 			<cells>
 				<Text text="{modelPosFin>CodificaRepPf}"/>
 				<Text text="{modelPosFin>Prctr}"/>
+				<Text text="{modelPosFin>Capitolo}"/>
+				<Text text="{modelPosFin>Pg}"/>
+				<Text text="{ parts: [ {path: 'modelPosFin>StatusCapitolo'}], formatter: '.formatter.StatoCapitoloPgTablePosFin' }"/>
+				<Text text="{ parts: [ {path: 'modelPosFin>StatusPg'}], formatter: '.formatter.StatoCapitoloPgTablePosFin' }"/>
 				<Text text="{modelPosFin>DescAmmin}"/>
+				<Text text="{modelPosFin>DescCapitolo}"/>
+				<Text text="{modelPosFin>DescPg}"/>
 				<Text text="{modelPosFin>Cdr}"/>
 				<Text text="{modelPosFin>DescCdr}"/>
 				<Text text="{modelPosFin>Ragioneria}"/>
@@ -144,12 +160,8 @@
 				<Text text="{modelPosFin>DescMissione}"/>
 				<Text text="{modelPosFin>Programma}"/>
 				<Text text="{modelPosFin>DescProgramma}"/>
-				<Text text="{modelPosFin>Azione}"/>
 				<Text text="{modelPosFin>DescAzione}"/>
-				<Text text="{modelPosFin>Capitolo}"/>
-				<Text text="{modelPosFin>DescCapitolo}"/>
-				<Text text="{modelPosFin>Pg}"/>
-				<Text text="{modelPosFin>DescPg}"/>
+				<Text text="{modelPosFin>Azione}"/>
 				<Text text="{modelPosFin>Titolo}"/>
 				<Text text="{modelPosFin>DescTitolo}"/>
 				<Text text="{modelPosFin>Categoria}"/>

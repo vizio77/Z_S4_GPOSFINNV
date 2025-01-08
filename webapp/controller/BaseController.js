@@ -6,17 +6,19 @@ sap.ui.define([
     "sap/ui/core/format/DateFormat",
     "sap/m/MessageBox",
     'sap/ui/export/Spreadsheet',
+    "../model/formatter",
     "sap/ui/core/routing/History",
     "z_s4_crosslock/crosslock/controls/Lock",
     "zsap/com/r3/cobi/s4/gestposfinnv/model/models",
     "zsap/com/r3/cobi/s4/gestposfinnv/extLib/xlsx.min"
 ], function(
-	Controller, JSONModel, Filter, FilterOperator, DateFormat, MessageBox, Spreadsheet, History, Lock, models
+	Controller, JSONModel, Filter, FilterOperator, DateFormat, MessageBox, Spreadsheet, formatter, History, Lock, models
 ) {
 	"use strict";
 
 	return Controller.extend("zsap.com.r3.cobi.s4.gestposfinnv.controller.BaseController", {
         Lock: Lock,
+        formatter: formatter,
         getRouter : function () {
             return this.getOwnerComponent().getRouter();
         },
@@ -710,50 +712,54 @@ sap.ui.define([
             });
             var obj = [];
             var elLabel = {
-                Label_Fipex : this.getText("labelPosFin"),
-                Label_Prctr : this.getText("Amministrazione"),
-                Label_DescAmmin : this.getText("descAmm"),
-                Label_Missione : this.getText("mission"),
-                Label_DescMissione : this.getText("descrMissione"),
-                Label_Programma : this.getText("programma"),
-                Label_DescProgramma : this.getText("descrProgramma"),
-                Label_Azione : this.getText("azione"),
-                Label_DescAzione : this.getText("descrAzione"),
-                Label_Capitolo : this.getText("Capitolo"),
-                Label_DescCapitolo : this.getText("descrCapitolo"),
-                Label_Pg : this.getText("Pg"),
-                Label_DescPg : this.getText("descrPg"),
-                Label_Categoria : this.getText("categoria"),
-                Label_DescCategoria : this.getText("descrCategoria"),
-                Label_Ce2 : this.getText("ce"),
-                Label_DescCe2 : this.getText("descrCe"),
-                Label_Ce3 : this.getText("ce3"),
-                Label_DescCe3 : this.getText("descrCe3"),
+                Label_Fipex: this.getText("labelPosFin"),
+                Label_Prctr: this.getText("Amministrazione"),
+                Label_Capitolo: this.getText("Capitolo"),
+                Label_Pg: this.getText("Pg"),
+                Label_StatusCapitolo: "Stato Capitolo",
+                Label_StatusPg: "Stato Pg",
+                Label_DescAmmin: this.getText("descAmm"),
+                Label_DescCapitolo: this.getText("descrCapitolo"),
+                Label_DescPg: this.getText("descrPg"),
+                Label_Missione: this.getText("mission"),
+                Label_DescMissione: this.getText("descrMissione"),
+                Label_Programma: this.getText("programma"),
+                Label_DescProgramma: this.getText("descrProgramma"),
+                Label_Azione: this.getText("azione"),
+                Label_DescAzione: this.getText("descrAzione"),
+                Label_Categoria: this.getText("categoria"),
+                Label_DescCategoria: this.getText("descrCategoria"),
+                Label_Ce2: this.getText("ce"),
+                Label_DescCe2: this.getText("descrCe"),
+                Label_Ce3: this.getText("ce3"),
+                Label_DescCe3: this.getText("descrCe3")
             }  
             obj.push(elLabel);
             //lo uso come matrice per essere trasportabile sulle nostre applicazioni
             posizioniFinanziarie.forEach(element => {
                 var el = {
-                    Fipex : element.CodificaRepPf,
-                    Prctr : element.Prctr,
-                    DescAmmin : element.DescAmmin,
-                    Missione : element.Missione,
-                    DescMissione : element.DescMissione,
-                    Programma : element.Programma,
-                    DescProgramma : element.DescProgramma,
-                    Azione : element.Azione,
-                    DescAzione : element.DescAzione,
-                    Capitolo : element.Capitolo,
-                    DescCapitolo : element.DescCapitolo,
-                    Pg : element.Pg,
-                    DescPg : element.DescPg,
-                    Categoria : element.Categoria,
-                    DescCategoria : element.DescCategoria,
-                    Ce2 : element.Ce2,
-                    DescCe2 : element.DescCe2,
-                    Ce3 : element.Ce3,
-                    DescCe3 : element.DescCe3
-                }                   
+                    Fipex: element.CodificaRepPf,
+                    Prctr: element.Prctr,
+                    Capitolo: element.Capitolo,
+                    Pg: element.Pg,
+                    StatusCapitolo: formatter.StatoCapitoloPgTablePosFin(element.StatusCapitolo),
+                    StatusPg: formatter.StatoCapitoloPgTablePosFin(element.StatusPg),
+                    DescAmmin: element.DescAmmin,
+                    DescCapitolo: element.DescCapitolo,
+                    DescPg: element.DescPg,
+                    Missione: element.Missione,
+                    DescMissione: element.DescMissione,
+                    Programma: element.Programma,
+                    DescProgramma: element.DescProgramma,
+                    Azione: element.Azione,
+                    DescAzione: element.DescAzione,
+                    Categoria: element.Categoria,
+                    DescCategoria: element.DescCategoria,
+                    Ce2: element.Ce2,
+                    DescCe2: element.DescCe2,
+                    Ce3: element.Ce3,
+                    DescCe3: element.DescCe3
+                }               
                 obj.push(el)
             });
             var rows = [];
@@ -810,25 +816,27 @@ sap.ui.define([
             const ws = XLSX.utils.aoa_to_sheet(rows);
             
             const wsCols = [
-                { width: '24' }, // Fipex      // A
-                { width: '20' }, // Prctr      // B
-                { width: '27' }, // DescAmmin      // C
-                { width: '8' },  // Missione     // D
-                { width: '27' }, // DescMissione      // E
-                { width: '8' },  // Programma     // F
-                { width: '27' }, // DescProgramma      // G
-                { width: '8' },  // Azione     // H
-                { width: '27' }, // DescAzione      // I
-                { width: '8' }, // Capitolo       // J
-                { width: '27' }, // DescCapitolo      // B
-                { width: '8' }, // Pg      // C
-                { width: '27' }, // DescPg      // D
-                { width: '8' }, // Categoria      // E
-                { width: '27' }, // DescCategoria      // F
-                { width: '8' }, // Ce2      // G
-                { width: '27' }, // DescCe2      // H
-                { width: '8' }, // Ce3      // I
-                { width: '27' }  // DescCe3      // J
+                { width: "24" }, // Fipex      // A
+                { width: "20" }, // Prctr      // B
+                { width: "8" }, // Capitolo       // J
+                { width: "8" }, // Pg      // C
+                { width: "12" }, // StatusCapitolo       
+                { width: "9" }, // StatusPg      
+                { width: "27" }, // DescAmmin      // C
+                { width: "27" }, // DescCapitolo      // B
+                { width: "27" }, // DescPg      // D
+                { width: "8" }, // Missione     // D
+                { width: "27" }, // DescMissione      // E
+                { width: "8" }, // Programma     // F
+                { width: "27" }, // DescProgramma      // G
+                { width: "8" }, // Azione     // H
+                { width: "27" }, // DescAzione      // I
+                { width: "8" }, // Categoria      // E
+                { width: "27" }, // DescCategoria      // F
+                { width: "8" }, // Ce2      // G
+                { width: "27" }, // DescCe2      // H
+                { width: "8" }, // Ce3      // I
+                { width: "27" } // DescCe3      // J
                 ];
             ws["!cols"] = wsCols;
 

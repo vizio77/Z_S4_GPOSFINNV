@@ -196,6 +196,23 @@ sap.ui.define(["sap/ui/core/format/DateFormat",
 				aRes = sVal;
 			}
 			return aRes;
-		}
+		},
+		StatoCapitoloPgTablePosFin: function(Status) {
+
+            switch (Status) {
+                case '0':
+                    return 'Attivo'
+                case '1':
+                    return 'Attivo'
+                case '3':
+                    return 'Disattivo'
+            
+                default:
+                    return ''
+            }
+            
+            
+        
+        }
 	};
 });

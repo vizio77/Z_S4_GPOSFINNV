@@ -5,16 +5,18 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"sap/ui/core/Fragment",
 	"sap/m/MessageBox",
+	"../model/formatter",
 	"z_s4_crosslock/crosslock/controls/Lock",
 	"./BaseController",
 	"sap/ui/core/routing/History"
-], function (Controller, JSONModel, Filter, FilterOperator, Fragment, MessageBox, Lock, BaseController, History) {
+], function (Controller, JSONModel, Filter, FilterOperator, Fragment, MessageBox, formatter, Lock, BaseController, History) {
 	"use strict";
 
 	return BaseController.extend("zsap.com.r3.cobi.s4.gestposfinnv.controller.HomePosFin", {
 		/**
 		 * @override
 		 */
+		formatter: formatter,
 		Lock: Lock,
 		
 		onInit: async function () {

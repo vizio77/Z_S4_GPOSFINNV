@@ -362,9 +362,39 @@
 								<Text text="{i18n>Amministrazione}" class="boldCss"/>
 							</header>
 						</Column>
+						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>Capitolo}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="{i18n>Pg}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="Stato {i18n>Capitolo}" class="boldCss"/>
+							</header>
+						</Column>							
+						<Column width="5rem" demandPopin="true" popinDisplay="Inline">
+							<header>
+								<Text text="Stato {i18n>Pg}" class="boldCss"/>
+							</header>
+						</Column>
 						<Column  width="15rem" demandPopin="true" popinDisplay="Inline">
 							<header>
 								<Text text="{i18n>descAmm}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="20rem">
+							<header>
+								<Text text="{i18n>descrCapitolo}" class="boldCss"/>
+							</header>
+						</Column>
+						<Column width="12rem">
+							<header>
+								<Text text="{i18n>descrPg}" class="boldCss"/>
 							</header>
 						</Column>
 						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
@@ -397,26 +427,7 @@
 								<Text text="{i18n>descrAzione}" class="boldCss"/>
 							</header>
 						</Column>
-						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
-							<header>
-								<Text text="{i18n>Capitolo}" class="boldCss"/>
-							</header>
-						</Column>
-						<Column width="20rem">
-							<header>
-								<Text text="{i18n>descrCapitolo}" class="boldCss"/>
-							</header>
-						</Column>
-						<Column  width="5rem" demandPopin="true" popinDisplay="Inline">
-							<header>
-								<Text text="{i18n>Pg}" class="boldCss"/>
-							</header>
-						</Column>
-						<Column width="12rem">
-							<header>
-								<Text text="{i18n>descrPg}" class="boldCss"/>
-							</header>
-						</Column>
+						
 						<Column width="5rem">
 							<header>
 								<Text text="{i18n>categoria}" class="boldCss"/>
@@ -453,17 +464,19 @@
 							<cells>
 									<Text text="{modelHomePosFin>CodificaRepPf}"/>
 									<Text text="{modelHomePosFin>Prctr}"/>
+									<Text text="{modelHomePosFin>Capitolo}"/>
+									<Text text="{modelHomePosFin>Pg}"/>
+									<Text text="{ parts: [ {path: 'modelHomePosFin>StatusCapitolo'}], formatter: '.formatter.StatoCapitoloPgTablePosFin' }"/>
+									<Text text="{ parts: [ {path: 'modelHomePosFin>StatusPg'}], formatter: '.formatter.StatoCapitoloPgTablePosFin' }"/>
 									<Text text="{modelHomePosFin>DescAmmin}"/>
+									<Text text="{modelHomePosFin>DescCapitolo}"/>
+									<Text text="{modelHomePosFin>DescPg}"/>
 									<Text text="{modelHomePosFin>Missione}"/>
 									<Text text="{modelHomePosFin>DescMissione}"/>
 									<Text text="{modelHomePosFin>Programma}"/>
 									<Text text="{modelHomePosFin>DescProgramma}"/>
 									<Text text="{modelHomePosFin>Azione}"/>
 									<Text text="{modelHomePosFin>DescAzione}"/>
-									<Text text="{modelHomePosFin>Capitolo}"/>
-									<Text text="{modelHomePosFin>DescCapitolo}"/>
-									<Text text="{modelHomePosFin>Pg}"/>
-									<Text text="{modelHomePosFin>DescPg}"/>
 									<Text text="{modelHomePosFin>Categoria}"/>
 									<Text text="{modelHomePosFin>DescCategoria}"/>
 									<Text text="{modelHomePosFin>Ce2}"/>

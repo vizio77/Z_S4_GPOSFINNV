@@ -68,7 +68,7 @@
 
             setAppTitle: function (sReturn) {
                 if (sReturn["AGR_NAME_COLL"].some(item => item.includes("GEST_TECNICA"))) {
-                    var sString = `${this.getModel("i18n").getResourceBundle().getText("appTitle")} Versione del 17.12.2024 17:10` //data dell'ultimo deploy
+                    var sString = `${this.getModel("i18n").getResourceBundle().getText("appTitle")} Versione del 08.01.2025 11:00` //data dell'ultimo deploy
                         this.getService("ShellUIService").then(
                         function (oService) { oService.setTitle(sString); },
                         function (oError) { console.error("Error while setting the title: " + oError); }
