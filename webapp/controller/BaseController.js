@@ -238,6 +238,7 @@ sap.ui.define([
                         DDTEXT : oData.results[0].FASE === "F" ? "Formazione" : oData.results[0].DDTEXT,
                         STAT_FASE : oData.results[0].STAT_FASE === "0" ? "Disegno di legge di bilancio" : oData.results[0].DDTEXT,
                     }), "globalModel")
+                    that.setLabelQuadroTabelleModel(oData.results[0].ANNO);
                     //resolve(ritorno)
                   },
                   error: (err) => {
@@ -245,6 +246,21 @@ sap.ui.define([
                   }
               })
             })
+          },
+          setLabelQuadroTabelleModel: function (anno) {
+            let annoParse =parseInt(
+                anno
+            ) 
+            const anni = {
+              annoCp1: annoParse.toString(),
+              annoCp2: (annoParse + 1).toString(),
+              annoCp3: (annoParse + 2).toString(),
+              annoCs1: annoParse.toString(),
+              annoCs2: (annoParse + 1).toString(),
+              annoCs3: (annoParse + 2).toString()
+            };
+            this.getOwnerComponent().setModel(new JSONModel(anni), "labelQuadroTabelle");
+    
           },
         __getAnnoFase: function () {
           let modelTopologiche = this.getOwnerComponent().getModel("sapHanaS2Tipologiche")  

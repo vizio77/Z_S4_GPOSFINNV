@@ -29,7 +29,7 @@ sap.ui.define([
 			oRouter.getRoute("DetailPosFinFinanziamento").attachPatternMatched(this._onObjectMatched, this);
 			this.firstTime = true;
 			this.createModelAnnoSelect();
-			this.functionTemp("idTableyearFin", "idColumnListItemsYearFin", "modelTable", "ImportoCPAnno", "Competenza");
+			//this.functionTemp("idTableyearFin", "idColumnListItemsYearFin", "modelTable", "ImportoCPAnno", "Competenza");
 
 			this.firstTime = false;
 			this.open = false;

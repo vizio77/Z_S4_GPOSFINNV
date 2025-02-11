@@ -10,6 +10,24 @@ xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:TooltipAutorizza
 										<Column width="40%">
 											<Text text="" class="boldCss"/>
 										</Column>
+										<Column width="20%" hAlign="Right">
+											<Text text="Competenza {labelQuadroTabelle>/annoCp1}" class="boldCss"/>
+										</Column>
+										<Column width="20%" hAlign="Right">
+											<Text text="Competenza {labelQuadroTabelle>/annoCp2}" class="boldCss"/>
+										</Column>
+										<Column width="20%" hAlign="Right">
+											<Text text="Competenza {labelQuadroTabelle>/annoCp3}" class="boldCss"/>
+										</Column>
+										<Column width="20%" hAlign="Right">
+											<Text text="Cassa {labelQuadroTabelle>/annoCp1}" class="boldCss"/>
+										</Column>
+										<Column width="20%" hAlign="Right">
+											<Text text="Cassa {labelQuadroTabelle>/annoCp2}" class="boldCss"/>
+										</Column>
+										<Column width="20%" hAlign="Right">
+											<Text text="Cassa {labelQuadroTabelle>/annoCp3}" class="boldCss"/>
+										</Column>
 									</columns>
 									<items>
 										<ColumnListItem id="idColumnListItemsYear">
@@ -21,6 +39,36 @@ xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f" xmlns:TooltipAutorizza
 													<Text text="{modelTable>ViewLabel}" visible="{= ${modelTable>FlagGriglia} === 'CHILD' ? true : false}" class="sapUiLargeMarginBegin boldAndSmallCss"/>
 													<Text text="{modelTable>ViewLabel}" visible="{= ${modelTable>FlagGriglia} === '' ? true : false}"/>
 												</VBox>
+												<Text text="{modelTable>ImportoCPAnno001}" textAlign="Right">
+													<customData>
+														<core:CustomData key="grassetto" value="{modelTable>FlagGriglia}" writeToDom="true"/>
+													</customData>
+												</Text>
+													<Text text="{modelTable>ImportoCPAnno002}" textAlign="Right">
+														<customData>
+															<core:CustomData key="grassetto" value="{modelTable>FlagGriglia}" writeToDom="true"/>
+														</customData>
+													</Text>
+													<Text text="{modelTable>ImportoCPAnno003}" textAlign="Right">
+														<customData>
+															<core:CustomData key="grassetto" value="{modelTable>FlagGriglia}" writeToDom="true"/>
+														</customData>
+													</Text>
+													<Text text="{modelTable>ImportoCSAnno001}" textAlign="Right">
+														<customData>
+															<core:CustomData key="grassetto" value="{modelTable>FlagGriglia}" writeToDom="true"/>
+														</customData>
+													</Text>
+													<Text text="{modelTable>ImportoCSAnno002}" textAlign="Right">
+														<customData>
+															<core:CustomData key="grassetto" value="{modelTable>FlagGriglia}" writeToDom="true"/>
+														</customData>
+													</Text>
+													<Text text="{modelTable>ImportoCSAnno003}" textAlign="Right">
+														<customData>
+															<core:CustomData key="grassetto" value="{modelTable>FlagGriglia}" writeToDom="true"/>
+														</customData>
+													</Text>
 											</cells>
 										</ColumnListItem>
 									</items>

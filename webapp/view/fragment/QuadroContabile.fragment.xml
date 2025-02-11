@@ -49,12 +49,36 @@
 								<!-- <Text text="{modelTableCassa>ViewLabel}"  class="{= ${modelTableCassa>FlagGriglia} === 'BOLD' ? boldCss' : ''}{= ${modelTableCassa>FlagGriglia} === 'ALIGNR_RIGHT' ? 'sapUiMediumMarginBegin' : ''}"> -->
 								<!-- </Text> -->
 							</VBox>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno001}"></Text>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno002}"></Text>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno003}"></Text>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno001}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}"></Text>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno002}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}"></Text>
-							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno003}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}"></Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno001}">
+								<customData>
+									<core:CustomData key="grassetto" value="{modelTableQuadro>FlagGriglia}" writeToDom="true"/>
+								</customData>
+							</Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno002}">
+								<customData>
+									<core:CustomData key="grassetto" value="{modelTableQuadro>FlagGriglia}" writeToDom="true"/>
+								</customData>
+							</Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCPAnno003}">
+								<customData>
+									<core:CustomData key="grassetto" value="{modelTableQuadro>FlagGriglia}" writeToDom="true"/>
+								</customData>
+							</Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno001}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}">
+								<customData>
+									<core:CustomData key="grassetto" value="{modelTableQuadro>FlagGriglia}" writeToDom="true"/>
+								</customData>
+							</Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno002}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}">
+								<customData>
+									<core:CustomData key="grassetto" value="{modelTableQuadro>FlagGriglia}" writeToDom="true"/>
+								</customData>
+							</Text>
+							<Text textAlign="End" text="{modelTableQuadro>ImportoCSAnno003}"  visible="{= ${modelCheckCassa>/FlagCassa} === 'X' ? true : false}">
+								<customData>
+									<core:CustomData key="grassetto" value="{modelTableQuadro>FlagGriglia}" writeToDom="true"/>
+								</customData>
+							</Text>
 						</cells>
 					</ColumnListItem>
 				</items>

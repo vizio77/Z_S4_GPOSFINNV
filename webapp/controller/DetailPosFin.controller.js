@@ -40,10 +40,10 @@ sap.ui.define([
 			this.createModelAnnoSelect();
 			this.setModelFilter();								
 			variabGlobal = this;
-			this.functionTemp("idTableyear", "idColumnListItemsYear", "modelTable", "ImportoCPAnno", "Competenza");
+			/* this.functionTemp("idTableyear", "idColumnListItemsYear", "modelTable", "ImportoCPAnno", "Competenza");
 			this.functionTemp("RimidTableyear", "RimidColumnListItemsYear", "modelTable", "ImportoCPAnno", "Competenza");
 			this.functionTemp("idTableyearCassa", "idColumnListItemsYearCassa", "modelTableCassa", "ImportoCPAnno", "Competenza");
-			this.functionTemp("idTableyearCassa", "idColumnListItemsYearCassa", "modelTableCassa", "ImportoCSAnno", "Cassa");
+			this.functionTemp("idTableyearCassa", "idColumnListItemsYearCassa", "modelTableCassa", "ImportoCSAnno", "Cassa"); */
 		//	this.functionTemp("idTableyearQuadro", "idColumnListItemsYearQuadro", "modelTableQuadro", "ImportoCPAnno", "Competenza");
 		//	this.functionTemp("idTableyearQuadro", "idColumnListItemsYearQuadro", "modelTableQuadro", "ImportoCSAnno", "Cassa");
 			this.firstTime = false;
@@ -4662,6 +4662,7 @@ sap.ui.define([
 					this.__checkChiaviModified,
 					this.__checkSumCofog,
 					this.__checkFoglioNotizie,
+					this.__messageTypeWFFoglio,
 					this.__getRelatedPosFin,
 					this.__checkLastPgAttivo,
 					this.__setVideoMessage,
@@ -5783,6 +5784,45 @@ sap.ui.define([
 			return oPayload
 			
 		},
+		__messageTypeWFFoglio: function (oParams) {
+			const that = oParams.that
+
+			if(oParams.state && oParams.isFoglioNotizie) {
+				return new Promise(function(resolve, reject) {
+					sap.m.MessageBox.confirm(
+								that.recuperaTestoI18n("whitchTyoeOdFN"), {
+																		actions: ["Standard", "Accelerato"],
+									onClose: function(oAction) {										
+										switch (oAction) {
+												case "Standard":
+													oParams.wfFoglio = {
+															TIPO_WF  : "1",
+															STATO_FN : "03"
+													}
+														break;
+												case "Standard":
+													oParams.wfFoglio = {
+														TIPO_WF  : "2",
+														STATO_FN : "04"
+												}
+												break;
+												
+												default:
+													break;
+												}
+												
+												resolve(oParams)
+									}
+							}
+					);
+				});
+			}else{
+				return {...oParams, 
+					wfFoglio : {TIPO_WF  : "1",	STATO_FN : "03"} 
+				}
+			
+			}
+		},
 		createPayloadFoglioNotizie: function (oParams) {
 			
 
@@ -5808,10 +5848,10 @@ sap.ui.define([
 				"VERSIONE": "B",
 				"DATBIS": "99991231",
 				"NUMERO_FN": "",
-				"STATO_FN": "02",
+				"STATO_FN": oParams.wfFoglio.STATO_FN,
 				"STATO_FN_DESC": "In Revisione",
 				"TIPO_OPERAZ": "M",
-				"TIPO_WF": "1",
+				"TIPO_WF": oParams.wfFoglio.TIPO_WF,
 				"CODICE_STRUMENTO": oInfoSttr.CodiceStrumento,
 				"CODICE_STRUMENTO_ORI":  oInfoSttr.CodiceStrumentoOri,
 				"CODICE_SOTTOSTRUMENTO":  oInfoSttr.CodiceSottostrumento,
@@ -5848,7 +5888,7 @@ sap.ui.define([
 				"NUMERO_FN": "",
 				"EOS": "S",
 				"DATBIS": "99991231",
-				"STATO_FN": "02"
+				"STATO_FN": oParams.wfFoglio.STATO_FN
 			}
 
 			/* 

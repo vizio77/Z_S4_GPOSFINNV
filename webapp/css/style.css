@@ -324,3 +324,13 @@ div[data-percentuale="Spesa"] > div:nth-child(2) > span::after  {
 div[data-bold="anno"] > div:nth-child(2) > span {
     font-weight: bold !important;
 }
+
+/* LT Css per rendere Bold gli importi sui quadri che hanno flag BOLD */
+span[data-grassetto="BOLD"]{
+    font-weight: bold !important;
+    color: #32363B;
+}
+span[data-grassetto="CHILD"]{
+    font-weight: bold !important;
+    color: #32363B;
+}
